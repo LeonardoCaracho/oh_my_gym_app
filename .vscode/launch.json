@@ -14,8 +14,8 @@
         "development",
         "--target",
         "lib/main_development.dart",
-        "--dart-define=SUPABASE_URL=url",
-        "--dart-define=SUPABASE_ANNON_KEY=key"
+        "--dart-define=SUPABASE_URL=https://jogksugnovtvlaklkwjy.supabase.co",
+        "--dart-define=SUPABASE_ANNON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvZ2tzdWdub3Z0dmxha2xrd2p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc4NjczOTYsImV4cCI6MjAwMzQ0MzM5Nn0.UwOQxFqexvp_g8qP8ck00dOCUYJjkZowtcoa8asqBjE"
       ]
     },
     {
