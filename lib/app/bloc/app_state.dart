@@ -1,5 +1,10 @@
 part of 'app_bloc.dart';
 
+extension AppStatusX on AppStatus {
+  bool get isAuthenticated => this == AppStatus.authenticated;
+  bool get isUnauthenticated => this == AppStatus.unauthenticated;
+}
+
 enum AppStatus {
   authenticated,
   unauthenticated,

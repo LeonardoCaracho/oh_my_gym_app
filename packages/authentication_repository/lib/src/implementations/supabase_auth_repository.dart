@@ -1,11 +1,10 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
-const googleAuthRedirectUrl =
-    'https://jogksugnovtvlaklkwjy.supabase.co/auth/v1/callback';
+const googleAuthRedirectUrl = 'io.supabase.ohmygymapp://login-callback/';
 
-class SupabaseAuth implements AuthenticationContract {
-  SupabaseAuth({required this.client});
+class SupabaseAuthRepository implements AuthenticationContract {
+  SupabaseAuthRepository({required this.client});
 
   final supabase.SupabaseClient client;
 
@@ -13,7 +12,7 @@ class SupabaseAuth implements AuthenticationContract {
   Future<void> loginWithGoogle() async {
     await client.auth.signInWithOAuth(
       supabase.Provider.google,
-      redirectTo: googleAuthRedirectUrl,
+      // redirectTo: googleAuthRedirectUrl,
     );
   }
 

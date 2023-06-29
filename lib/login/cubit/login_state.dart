@@ -1,33 +1,34 @@
 part of 'login_cubit.dart';
 
-/// {@template login}
-/// LoginState description
-/// {@endtemplate}
+extension StatusX on Status {
+  bool get isInital => this == Status.inital;
+  bool get isLoading => this == Status.loading;
+  bool get isSuccess => this == Status.success;
+  bool get isFailure => this == Status.failure;
+}
+
+enum Status {
+  inital,
+  loading,
+  success,
+  failure,
+}
+
 class LoginState extends Equatable {
-  /// {@macro login}
   const LoginState({
-    this.customProperty = 'Default Value',
+    this.status = Status.inital,
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final Status status;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [status];
 
-  /// Creates a copy of the current LoginState with property changes
   LoginState copyWith({
-    String? customProperty,
+    Status? status,
   }) {
     return LoginState(
-      customProperty: customProperty ?? this.customProperty,
+      status: status ?? this.status,
     );
   }
-}
-/// {@template login_initial}
-/// The initial state of LoginState
-/// {@endtemplate}
-class LoginInitial extends LoginState {
-  /// {@macro login_initial}
-  const LoginInitial() : super();
 }

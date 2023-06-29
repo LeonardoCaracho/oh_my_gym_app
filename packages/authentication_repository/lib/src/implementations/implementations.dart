@@ -1,1 +1,2 @@
-export 'supabase_auth.dart';
+export 'firebase_auth_repository.dart';
+export 'supabase_auth_repository.dart';
