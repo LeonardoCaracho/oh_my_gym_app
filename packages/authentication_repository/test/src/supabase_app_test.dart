@@ -16,7 +16,7 @@ void main() {
   group('Authentication', () {
     test('can be instantiated', () {
       expect(
-        SupabaseAuth(
+        SupabaseAuthRepository(
           client: client,
         ),
         isNotNull,

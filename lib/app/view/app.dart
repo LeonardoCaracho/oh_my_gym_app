@@ -1,11 +1,9 @@
-import 'package:authentication_repository/authentication_repository.dart'
-    as auth;
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
 import 'package:oh_my_gym_app/routing/routing.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -14,9 +12,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repo = auth.SupabaseAuth(client: Supabase.instance.client);
+    final repo = FirebaseAuthRepository();
 
-    return RepositoryProvider<auth.AuthenticationContract>.value(
+    return RepositoryProvider<AuthenticationContract>.value(
       value: repo,
       child: BlocProvider<AppBloc>(
         create: (context) => AppBloc(

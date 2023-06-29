@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '365206175432',
     projectId: 'oh-my-gym-app-52de9',
     storageBucket: 'oh-my-gym-app-52de9.appspot.com',
-    iosClientId: '365206175432-92ovlv3f885tf1spakp07lc114cls2e5.apps.googleusercontent.com',
+    iosClientId:
+        '365206175432-92ovlv3f885tf1spakp07lc114cls2e5.apps.googleusercontent.com',
     iosBundleId: 'com.example.verygoodcore.oh-my-gym-app.dev',
   );
 }
