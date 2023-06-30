@@ -5,23 +5,27 @@ import 'package:oh_my_gym_app/counter/counter.dart';
 import 'package:oh_my_gym_app/login/login.dart';
 
 class AppRouter {
+  AppRouter(this.context);
+
   static GoRouter get router => _goRouter;
 
+  final BuildContext context;
+
   static final GoRouter _goRouter = GoRouter(
+    redirect: (context, state) {
+      final state = context.watch<AppBloc>().state;
+
+      if (state.status.isAuthenticated) {
+        return '/home';
+      }
+
+      return '/login';
+    },
     routes: <RouteBase>[
       GoRoute(
         name: 'login',
         path: '/',
-        builder: (BuildContext context, _) => const LoginPage(),
-        redirect: (context, _) {
-          final state = context.read<AppBloc>().state;
-
-          if (state.status.isAuthenticated) {
-            return '/home';
-          }
-
-          return null;
-        },
+        builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
         name: 'home',

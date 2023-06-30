@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oh_my_gym_app/counter/counter.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
+import 'package:oh_my_gym_app/login/login.dart';
 
 class CounterPage extends StatelessWidget {
   const CounterPage({super.key});
@@ -23,7 +24,15 @@ class CounterView extends StatelessWidget {
     final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.counterAppBarTitle)),
-      body: const Center(child: CounterText()),
+      body: Column(
+        children: [
+          const Center(child: CounterText()),
+          ElevatedButton(
+            child: const Text('Logout!'),
+            onPressed: () => context.read<LoginCubit>().signOut(),
+          ),
+        ],
+      ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,

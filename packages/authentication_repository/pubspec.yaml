@@ -11,6 +11,8 @@ dev_dependencies:
   test: ^1.19.2
   very_good_analysis: ^5.0.0
 dependencies:
+  cache:
+    path: ../cache
   equatable: ^2.0.5
   firebase_auth: ^4.6.3
   firebase_auth_platform_interface: ^6.10.0

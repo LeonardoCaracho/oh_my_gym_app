@@ -16,10 +16,6 @@ class LoginBody extends StatelessWidget {
                 child: const Text('Login with google!'),
                 onPressed: () => context.read<LoginCubit>().loginWithGoogle(),
               ),
-              ElevatedButton(
-                child: const Text('Logout!'),
-                onPressed: () => context.read<LoginCubit>().signOut(),
-              ),
             ],
           ),
         );
