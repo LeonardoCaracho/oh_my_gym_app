@@ -28,9 +28,7 @@ void main() {
         'copies correctly '
         'when no argument specified',
         () {
-          const loginState = LoginState(
-            customProperty: 'My property',
-          );
+          const loginState = LoginState();
           expect(
             loginState.copyWith(),
             equals(loginState),
@@ -42,17 +40,15 @@ void main() {
         'copies correctly '
         'when all arguments specified',
         () {
-          const loginState = LoginState(
-            customProperty: 'My property',
-          );
+          const loginState = LoginState();
           final otherLoginState = LoginState(
-            customProperty: 'My property 2',
+            status: Status.loading,
           );
           expect(loginState, isNot(equals(otherLoginState)));
 
           expect(
             loginState.copyWith(
-              customProperty: otherLoginState.customProperty,
+              status: otherLoginState.status,
             ),
             equals(otherLoginState),
           );
