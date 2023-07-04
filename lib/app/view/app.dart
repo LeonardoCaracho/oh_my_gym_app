@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/app/app.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
 import 'package:oh_my_gym_app/login/cubit/cubit.dart';
 import 'package:oh_my_gym_app/routing/routing.dart';
@@ -12,25 +13,20 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repo = FirebaseAuthRepository();
-
-    return RepositoryProvider<AuthenticationContract>.value(
-      value: repo,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AppBloc>(
-            create: (context) => AppBloc(
-              authenticationRepository: repo,
-            ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AppBloc>(
+          create: (context) => AppBloc(
+            authenticationRepository: locator<AuthenticationContract>(),
           ),
-          BlocProvider<LoginCubit>(
-            create: (context) => LoginCubit(
-              authRepository: repo,
-            ),
-          )
-        ],
-        child: const AppView(),
-      ),
+        ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(
+            authRepository: locator<AuthenticationContract>(),
+          ),
+        )
+      ],
+      child: const AppView(),
     );
   }
 }

@@ -2,4 +2,4 @@
 library cache;
 
 export 'src/contracts/contracts.dart';
-export 'src/implementation/implementations.dart';
+export 'src/impl/impl.dart';
