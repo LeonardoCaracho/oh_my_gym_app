@@ -1,4 +1,3 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/login/cubit/cubit.dart';
 import 'package:oh_my_gym_app/login/widgets/login_body.dart';
@@ -8,10 +7,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(
-        authRepository: context.read<AuthenticationContract>(),
-      ),
+    return BlocProvider.value(
+      value: context.read<LoginCubit>(),
       child: const Scaffold(
         body: LoginView(),
       ),

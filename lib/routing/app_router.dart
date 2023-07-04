@@ -19,7 +19,7 @@ class AppRouter {
         return '/home';
       }
 
-      return '/login';
+      return '/';
     },
     routes: <RouteBase>[
       GoRoute(
