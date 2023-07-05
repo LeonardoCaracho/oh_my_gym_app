@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
 import 'package:oh_my_gym_app/counter/counter.dart';
 import 'package:oh_my_gym_app/login/login.dart';
+import 'package:oh_my_gym_app/routing/routing.dart';
 
 class AppRouter {
   AppRouter(this.context);
@@ -16,20 +17,20 @@ class AppRouter {
       final state = context.watch<AppBloc>().state;
 
       if (state.status.isAuthenticated) {
-        return '/home';
+        return RouteConstants.workoutsRoute;
       }
 
-      return '/';
+      return RouteConstants.homeRoute;
     },
     routes: <RouteBase>[
       GoRoute(
-        name: 'login',
-        path: '/',
+        name: RouteConstants.homeRouteName,
+        path: RouteConstants.homeRoute,
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        name: 'home',
-        path: '/home',
+        name: RouteConstants.workoutRouteName,
+        path: RouteConstants.workoutsRoute,
         builder: (context, state) => const CounterPage(),
       ),
     ],
