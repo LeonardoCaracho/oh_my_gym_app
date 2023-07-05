@@ -1,11 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'user.g.dart';
 
 /// {@template user}
 /// User model
 ///
 /// [User.empty] represents an unauthenticated user.
 /// {@endtemplate}
+@JsonSerializable()
 class User extends Equatable {
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+
   /// {@macro user}
   const User({
     required this.id,

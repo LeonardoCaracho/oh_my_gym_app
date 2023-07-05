@@ -1,4 +1,4 @@
 export 'contracts/contracts.dart';
 export 'exceptions/exceptions.dart';
-export 'implementations/implementations.dart';
+export 'impl/impl.dart';
 export 'models/models.dart';

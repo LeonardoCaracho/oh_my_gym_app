@@ -5,22 +5,22 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthRepository implements AuthenticationContract {
   FirebaseAuthRepository({
+    required this.cache,
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
-    CacheContract? cache,
-  })  : _cache = cache ?? CacheClient(),
-        _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
+  })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final CacheContract _cache;
+  final UserCacheContract cache;
 
   static const userCacheKey = '__user_cache_key__';
 
   @override
   User get currentUser {
-    return _cache.read<User>(key: userCacheKey) ?? User.empty;
+    final userMap = cache.read(key: userCacheKey);
+    return userMap != null ? User.fromJson(userMap) : User.empty;
   }
 
   @override
@@ -58,7 +58,7 @@ class FirebaseAuthRepository implements AuthenticationContract {
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-      _cache.write(key: userCacheKey, value: user);
+      cache.write(key: userCacheKey, value: user.toJson());
       return user;
     });
   }

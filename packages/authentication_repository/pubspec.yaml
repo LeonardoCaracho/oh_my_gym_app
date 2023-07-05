@@ -11,6 +11,7 @@ dev_dependencies:
   test: ^1.19.2
   very_good_analysis: ^5.0.0
 dependencies:
+  build_runner: ^2.4.6
   cache:
     path: ../cache
   equatable: ^2.0.5
@@ -19,5 +20,7 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_core_platform_interface: ^4.4.1
   google_sign_in: ^6.1.4
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
   plugin_platform_interface: ^2.1.4
   supabase_flutter: ^1.10.5
