@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oh_my_gym_app/counter/counter.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
 import 'package:oh_my_gym_app/login/login.dart';

@@ -10,15 +10,15 @@ part 'user.g.dart';
 /// {@endtemplate}
 @JsonSerializable()
 class User extends Equatable {
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
-
   /// {@macro user}
   const User({
     required this.id,
     this.email,
     this.name,
   });
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   /// The current user's email address.
   final String? email;
