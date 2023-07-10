@@ -4,7 +4,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:oh_my_gym_app/login/cubit/cubit.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
 
 class MockAuthenticationContract extends Mock
     implements AuthenticationContract {}

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
-import 'package:oh_my_gym_app/counter/counter.dart';
-import 'package:oh_my_gym_app/login/login.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
+import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
 import 'package:oh_my_gym_app/routing/routing.dart';
 
 class AppRouter {
@@ -31,7 +31,7 @@ class AppRouter {
       GoRoute(
         name: RouteConstants.workoutRouteName,
         path: RouteConstants.workoutsRoute,
-        builder: (context, state) => const CounterPage(),
+        builder: (context, state) => const WorkoutsPage(),
       ),
     ],
   );

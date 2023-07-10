@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oh_my_gym_app/login/cubit/cubit.dart';
-import 'package:oh_my_gym_app/login/widgets/login_body.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

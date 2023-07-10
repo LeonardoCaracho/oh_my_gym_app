@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oh_my_gym_app/login/cubit/cubit.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});

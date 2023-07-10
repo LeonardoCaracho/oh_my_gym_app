@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:oh_my_gym_app/login/cubit/cubit.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
 
 void main() {
   group('LoginState', () {

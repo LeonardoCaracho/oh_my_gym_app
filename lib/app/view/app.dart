@@ -2,8 +2,8 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
-import 'package:oh_my_gym_app/login/cubit/cubit.dart';
 import 'package:oh_my_gym_app/routing/routing.dart';
 
 class App extends StatelessWidget {

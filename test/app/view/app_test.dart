@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/core/core.dart';
-import 'package:oh_my_gym_app/login/login.dart';
+import 'package:oh_my_gym_app/features/login/login.dart';
 
 class MockAppBloc extends MockCubit<AppState> implements AppBloc {}
 
