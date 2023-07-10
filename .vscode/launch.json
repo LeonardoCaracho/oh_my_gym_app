@@ -14,7 +14,11 @@
         "development",
         "--target",
         "lib/main_development.dart"
-      ]
+      ],
+      "toolArgs": [
+        "--dart-define-from-file",
+        "config.json",
+      ],
     },
     {
       "name": "Launch staging",

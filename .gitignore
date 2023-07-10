@@ -112,8 +112,8 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Firebase generated file
-lib/firebase_options.dart
+# Hide config.json which holds env variables
+config.json
 
 # Exceptions to the above rules.
 !**/ios/**/default.mode1v3
