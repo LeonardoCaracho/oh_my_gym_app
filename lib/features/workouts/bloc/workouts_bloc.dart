@@ -13,7 +13,5 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
   FutureOr<void> _onCustomWorkoutsEvent(
     CustomWorkoutsEvent event,
     Emitter<WorkoutsState> emit,
-  ) {
-    // TODO: Add Logic
-  }
+  ) {}
 }

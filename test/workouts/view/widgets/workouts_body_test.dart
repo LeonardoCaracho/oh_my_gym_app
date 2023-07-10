@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 
 void main() {
   group('WorkoutsBody', () {

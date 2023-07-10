@@ -9,11 +9,6 @@ class WorkoutsPage extends StatelessWidget {
   /// {@macro workouts_page}
   const WorkoutsPage({super.key});
 
-  /// The static route for WorkoutsPage
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const WorkoutsPage());
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
