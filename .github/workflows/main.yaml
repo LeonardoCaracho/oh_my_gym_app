@@ -17,14 +17,10 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
   build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+    uses: build_workflow.yaml
     with:
       flutter_channel: stable
       min_coverage: 50
-
-  upload-coverage:
-    uses: codecov/codecov-action@v3
-    env: CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
