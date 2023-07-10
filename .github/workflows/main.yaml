@@ -22,6 +22,10 @@ jobs:
       flutter_channel: stable
       min_coverage: 50
 
+  upload-coverage:
+    uses: codecov/codecov-action@v3
+    env: CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
     with:
