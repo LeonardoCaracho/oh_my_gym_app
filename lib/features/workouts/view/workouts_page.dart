@@ -22,7 +22,7 @@ class WorkoutsPage extends StatelessWidget {
         body: WorkoutsView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template workouts_view}

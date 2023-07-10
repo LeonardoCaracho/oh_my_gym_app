@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 
 void main() {
-  group('WorkoutsEvent', () {  
+  group('WorkoutsEvent', () {
     group('CustomWorkoutsEvent', () {
       test('supports value equality', () {
         expect(
@@ -15,10 +15,7 @@ void main() {
     });
     group('constructor', () {
       test('can be instantiated', () {
-        expect(
-          const CustomWorkoutsEvent(),
-          isNotNull
-        );
+        expect(const CustomWorkoutsEvent(), isNotNull);
       });
     });
   });
