@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>365206175432-92ovlv3f885tf1spakp07lc114cls2e5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.365206175432-92ovlv3f885tf1spakp07lc114cls2e5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBpfC-CDHbIscOAN8mgd7PjaB6qU0Dv9Dw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>365206175432</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.verygoodcore.oh-my-gym-app.dev</string>
+	<key>PROJECT_ID</key>
+	<string>oh-my-gym-app-52de9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>oh-my-gym-app-52de9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:365206175432:ios:152db2ff3b1a9646cbaffd</string>
+</dict>
+</plist>

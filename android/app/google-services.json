@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "365206175432",
+    "project_id": "oh-my-gym-app-52de9",
+    "storage_bucket": "oh-my-gym-app-52de9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365206175432:android:f89223540c53be86cbaffd",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.oh_my_gym_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365206175432-bi4fjlcfop5hq9pia2jbkh248ei45k57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Z9nR7jHi2Rw7b-Ery2yqyTcw_hpw8Ig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365206175432-9rr4gs0aaki22ndjvaa7cd0rmg0ba63r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "365206175432-92ovlv3f885tf1spakp07lc114cls2e5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.oh-my-gym-app.dev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365206175432:android:887bcc76149c07c5cbaffd",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.oh_my_gym_app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365206175432-fcevn567f0cldlt9cgeubgevs0njffgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.oh_my_gym_app.dev",
+            "certificate_hash": "bf2590a68e22b456b798f72b0d689b071431e623"
+          }
+        },
+        {
+          "client_id": "365206175432-bi4fjlcfop5hq9pia2jbkh248ei45k57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Z9nR7jHi2Rw7b-Ery2yqyTcw_hpw8Ig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365206175432-9rr4gs0aaki22ndjvaa7cd0rmg0ba63r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "365206175432-92ovlv3f885tf1spakp07lc114cls2e5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.oh-my-gym-app.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

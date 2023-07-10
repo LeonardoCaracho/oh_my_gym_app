@@ -52,5 +52,35 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>FlutterDeepLinkingEnabled</key> 
+	<true/> 
+	<key>CFBundleURLTypes</key> 
+	<array> 
+		<dict> 
+		<key>CFBundleTypeRole</key> 
+		<string>Editor</string> 
+		<key>CFBundleURLName</key> 
+		<string>flutterbooksample.com</string> 
+		<key>CFBundleURLSchemes</key> 
+		<array> 
+		<string>customscheme</string> 
+		</array> 
+		</dict>
+	</array>
+	<!-- Google Sign-In section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- TODO Replace this value: -->
+				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.365206175432-92ovlv3f885tf1spakp07lc114cls2e5</string>
+			</array>
+		</dict>
+	</array>
+	<!-- End of the Google Sign-In section -->
 </dict>
 </plist>
