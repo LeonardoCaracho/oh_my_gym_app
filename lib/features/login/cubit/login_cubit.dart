@@ -23,16 +23,4 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(status: Status.failure));
     }
   }
-
-  FutureOr<void> signOut() async {
-    try {
-      emit(state.copyWith(status: Status.loading));
-
-      await authRepository.logout();
-
-      emit(state.copyWith(status: Status.success));
-    } catch (_) {
-      emit(state.copyWith(status: Status.failure));
-    }
-  }
 }

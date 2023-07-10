@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oh_my_gym_app/features/login/login.dart';
+import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 
 /// {@template workouts_body}
@@ -18,7 +18,9 @@ class WorkoutsBody extends StatelessWidget {
         return Center(
           child: ElevatedButton(
             child: const Text('Logout!'),
-            onPressed: () => context.read<LoginCubit>().signOut(),
+            onPressed: () => context.read<AppBloc>().add(
+                  const AppLogoutRequested(),
+                ),
           ),
         );
       },
