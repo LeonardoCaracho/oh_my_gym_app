@@ -17,10 +17,9 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
   build:
-    uses: build_workflow.yaml
+    uses: ./build_workflow.yaml
     with:
       flutter_channel: stable
-      min_coverage: 50
 
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
