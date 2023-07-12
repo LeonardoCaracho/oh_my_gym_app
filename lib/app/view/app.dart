@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/app/app.dart';
@@ -38,16 +39,14 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = UITheme();
+
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         return MaterialApp.router(
           routerConfig: AppRouter.router,
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-            colorScheme: ColorScheme.fromSwatch(
-              accentColor: const Color(0xFF13B9FF),
-            ),
-          ),
+          theme: theme.lightTheme,
+          darkTheme: theme.darkTheme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         );
