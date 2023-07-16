@@ -11,6 +11,10 @@ dev_dependencies:
   test: ^1.19.2
   very_good_analysis: ^5.0.0
 dependencies:
+  authentication_repository:
+    path: ../authentication_repository
   build_runner: ^2.4.6
+  cloud_firestore: ^4.8.3
+  firebase_core: ^2.14.0
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1

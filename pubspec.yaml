@@ -25,6 +25,8 @@ dependencies:
   go_router: ^9.0.0
   hive_flutter: ^1.1.0
   intl: ^0.18.0
+  workout_repository:
+    path: ./packages/workout_repository
 
 dev_dependencies:
   bloc_test: ^9.1.2
