@@ -22,7 +22,7 @@ class AddWorkoutPage extends StatelessWidget {
         body: AddWorkoutView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template add_workout_view}
@@ -34,6 +34,8 @@ class AddWorkoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddWorkoutBody();
+    return const SafeArea(
+      child: AddWorkoutBody(),
+    );
   }
 }

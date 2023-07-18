@@ -32,7 +32,7 @@ abstract class UIColors {
   static const Color darkPurple = Color(0xFF231942);
 
   /// The light purple color.
-  static const Color lightPurple = Color(0xFF9F86C0);
+  static const Color lightPurple = Color.fromARGB(154, 200, 184, 222);
 
   /// The ocean blue color.
   static const Color oceanBlue = Color(0xFF02569B);
