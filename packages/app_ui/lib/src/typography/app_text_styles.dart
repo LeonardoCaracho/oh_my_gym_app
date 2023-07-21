@@ -84,6 +84,14 @@ abstract class UITextStyle {
     letterSpacing: 0.25,
   );
 
+  /// Body Text 3 Text Style (the default)
+  static final TextStyle bodyText3 = _baseTextStyle.copyWith(
+    fontSize: 14,
+    height: 1.42,
+    letterSpacing: 0.25,
+    fontWeight: UIFontWeight.bold,
+  );
+
   /// Caption Text Style
   static final TextStyle caption = _baseTextStyle.copyWith(
     fontSize: 12,
