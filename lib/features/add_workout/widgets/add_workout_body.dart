@@ -1,6 +1,6 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 
 class AddWorkoutBody extends StatefulWidget {
   const AddWorkoutBody({super.key});
@@ -19,62 +19,44 @@ class _AddWorkoutBodyState extends State<AddWorkoutBody> {
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: UISpacing.lg,
-              bottom: UISpacing.xxlg,
-            ),
-            child: Text(
-              'Add my Workout',
-              style: UITextStyle.headline3,
-            ),
-          ),
-          TextField(
-            style: UITextStyle.headline4,
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              hintText: 'Workout name',
-              filled: true,
-              fillColor: Colors.black12,
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(1),
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-              ),
-              onPressed: () {
-                setState(() {});
-                list.add(1);
-              },
-              child: SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Add Set',
-                      style: UITextStyle.bodyText3,
-                    ),
-                    const Icon(Icons.add)
-                  ],
-                ),
-              ),
-            ),
-          ),
+          const AddWorkoutHeader(),
+          const SizedBox(height: 30),
+          const WorkoutNameInput(),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: list.length,
+              itemCount: list.length + 1,
               itemBuilder: (_, index) {
+                if (index == list.length) {
+                  return DefaultButton(
+                    text: 'Add Exercise',
+                    icon: Icons.add,
+                    onPressed: () => setState(() {
+                      list.add(1);
+                    }),
+                  );
+                }
+
                 return const ExerciseCard();
               },
             ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: DefaultButton(
+                  text: 'Cancel',
+                  onPressed: () {},
+                ),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: DefaultButton(
+                  text: 'Save Workout',
+                  onPressed: () {},
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -10,12 +10,14 @@ class ExerciseSetRow extends StatelessWidget {
   });
 
   final int index;
-  final Function deleteCallback;
+  final VoidCallback? deleteCallback;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -24,43 +26,24 @@ class ExerciseSetRow extends StatelessWidget {
               style: UITextStyle.bodyText2,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 2,
-            child: Row(
-              children: [
-                Text(
-                  'Reps',
-                  style: UITextStyle.bodyText2,
-                ),
-                const SizedBox(width: UISpacing.md),
-                const SizedBox(
-                  width: 60,
-                  child: ExerciseSetRowInput(),
-                ),
-              ],
+            child: ExerciseSetRowInput(
+              label: 'Reps: ',
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 2,
-            child: Row(
-              children: [
-                Text(
-                  'Weight',
-                  style: UITextStyle.bodyText2,
-                ),
-                const SizedBox(width: UISpacing.md),
-                const SizedBox(
-                  width: 60,
-                  child: ExerciseSetRowInput(),
-                ),
-              ],
+            child: ExerciseSetRowInput(
+              label: 'Weight: ',
             ),
           ),
           IconButton(
-            onPressed: () => deleteCallback(),
+            onPressed: deleteCallback,
             icon: const Icon(
               Icons.delete,
-              color: UIColors.darkPurple,
+              size: 20,
+              color: UIColors.white,
             ),
           ),
         ],

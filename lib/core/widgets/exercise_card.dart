@@ -21,47 +21,23 @@ class _ExerciseCardState extends State<ExerciseCard> {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: TextField(
-                    style: UITextStyle.bodyText3,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 5,
-                      ),
-                      isDense: true,
-                      hintText: 'Exercise name',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
+                  child: ExerciseCardInput(
+                    hintText: 'Exercise name',
                   ),
                 ),
+                SizedBox(width: 16),
                 Expanded(
-                  child: TextField(
-                    style: UITextStyle.bodyText3,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 5,
-                      ),
-                      isDense: true,
-                      hintText: 'Observations',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
+                  child: ExerciseCardInput(
+                    hintText: 'Observations',
                   ),
                 ),
               ],
@@ -83,28 +59,12 @@ class _ExerciseCardState extends State<ExerciseCard> {
           ),
           Padding(
             padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(1),
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-              ),
-              onPressed: () {
-                setState(() {});
+            child: DefaultButton(
+              text: 'Add Set',
+              icon: Icons.add,
+              onPressed: () => setState(() {
                 list.add(1);
-              },
-              child: SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Add Set',
-                      style: UITextStyle.bodyText3,
-                    ),
-                    const Icon(Icons.add)
-                  ],
-                ),
-              ),
+              }),
             ),
           )
         ],
