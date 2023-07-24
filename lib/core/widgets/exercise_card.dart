@@ -2,15 +2,15 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 
-class ExerciseCard extends StatefulWidget {
-  const ExerciseCard({super.key});
+import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 
-  @override
-  State<ExerciseCard> createState() => _ExerciseCardState();
-}
+class ExerciseCard extends StatelessWidget {
+  const ExerciseCard({
+    required this.workoutIndex,
+    super.key,
+  });
 
-class _ExerciseCardState extends State<ExerciseCard> {
-  final list = [1];
+  final int workoutIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +43,23 @@ class _ExerciseCardState extends State<ExerciseCard> {
               ],
             ),
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: list.length,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (_, index) {
-              return ExerciseSetRow(
-                index: index + 1,
-                deleteCallback: () {
-                  list.removeLast();
-                  setState(() {});
+          BlocBuilder<AddWorkoutCubit, AddWorkoutState>(
+            builder: (context, state) {
+              final exerciseSets = state.exercises[workoutIndex].sets;
+
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: exerciseSets.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (_, index) {
+                  return ExerciseSetRow(
+                    index: index + 1,
+                    deleteCallback: () =>
+                        context.read<AddWorkoutCubit>().deleteSet(
+                              workoutIndex,
+                              index,
+                            ),
+                  );
                 },
               );
             },
@@ -62,9 +69,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
             child: DefaultButton(
               text: 'Add Set',
               icon: Icons.add,
-              onPressed: () => setState(() {
-                list.add(1);
-              }),
+              onPressed: () => context.read<AddWorkoutCubit>().addSet(
+                    workoutIndex,
+                  ),
             ),
           )
         ],

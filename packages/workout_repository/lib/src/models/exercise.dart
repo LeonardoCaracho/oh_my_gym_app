@@ -20,4 +20,14 @@ class Exercise {
   factory Exercise.fromJson(Map<String, dynamic> json) =>
       _$ExerciseFromJson(json);
   Map<String, dynamic> toJson() => _$ExerciseToJson(this);
+
+  static Exercise get empty => Exercise(
+        name: '',
+        sets: [
+          ExerciseSet(
+            reps: 0,
+            weight: 0,
+          ),
+        ],
+      );
 }

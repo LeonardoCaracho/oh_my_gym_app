@@ -1,33 +1,29 @@
 part of 'add_workout_cubit.dart';
 
-/// {@template add_workout}
-/// AddWorkoutState description
-/// {@endtemplate}
 class AddWorkoutState extends Equatable {
-  /// {@macro add_workout}
   const AddWorkoutState({
-    this.customProperty = 'Default Value',
+    this.status = Status.inital,
+    this.workoutName = '',
+    this.exercises = const [],
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final Status status;
+
+  final String workoutName;
+  final List<Exercise> exercises;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [status, workoutName, exercises];
 
-  /// Creates a copy of the current AddWorkoutState with property changes
   AddWorkoutState copyWith({
-    String? customProperty,
+    Status? status,
+    String? workoutName,
+    List<Exercise>? exercises,
   }) {
     return AddWorkoutState(
-      customProperty: customProperty ?? this.customProperty,
+      status: status ?? this.status,
+      exercises: exercises ?? this.exercises,
+      workoutName: workoutName ?? this.workoutName,
     );
   }
-}
-/// {@template add_workout_initial}
-/// The initial state of AddWorkoutState
-/// {@endtemplate}
-class AddWorkoutInitial extends AddWorkoutState {
-  /// {@macro add_workout_initial}
-  const AddWorkoutInitial() : super();
 }
