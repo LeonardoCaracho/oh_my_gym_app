@@ -12,7 +12,7 @@ class UIOutlinedButton extends StatelessWidget {
     this.borderColor,
     this.icon,
   });
-  
+
   /// Primary button which background color is the primary color of the theme
   const UIOutlinedButton.primary({
     super.key,
