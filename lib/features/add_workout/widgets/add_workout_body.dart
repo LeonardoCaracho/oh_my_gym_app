@@ -13,7 +13,7 @@ class AddWorkoutBody extends StatelessWidget {
         children: [
           const AddWorkoutHeader(),
           const SizedBox(height: 30),
-          const WorkoutNameInput(),
+          WorkoutNameInput(),
           const SizedBox(height: 20),
           Expanded(
             child: BlocBuilder<AddWorkoutCubit, AddWorkoutState>(
