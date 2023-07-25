@@ -5,10 +5,12 @@ import 'package:oh_my_gym_app/core/core.dart';
 class ExerciseSetRowInput extends StatelessWidget {
   const ExerciseSetRowInput({
     this.label,
+    this.onChanged,
     super.key,
   });
 
   final String? label;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,11 @@ class ExerciseSetRowInput extends StatelessWidget {
           label != null ? label! : '',
           style: UITextStyle.bodyText2,
         ),
-        const SizedBox(
+        SizedBox(
           width: 60,
           child: ExerciseCardInput(
             hintText: '0',
+            onChanged: onChanged,
           ),
         ),
       ],

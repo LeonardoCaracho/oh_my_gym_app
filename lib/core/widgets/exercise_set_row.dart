@@ -26,10 +26,11 @@ class ExerciseSetRow extends StatelessWidget {
               style: UITextStyle.bodyText2,
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: ExerciseSetRowInput(
               label: 'Reps: ',
+              onChanged: (text) {},
             ),
           ),
           const Expanded(

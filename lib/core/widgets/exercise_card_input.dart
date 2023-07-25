@@ -5,13 +5,16 @@ class ExerciseCardInput extends StatelessWidget {
   const ExerciseCardInput({
     super.key,
     this.hintText,
+    this.onChanged,
   });
 
   final String? hintText;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       style: UITextStyle.bodyText3,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,

@@ -8,7 +8,9 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
   AddWorkoutCubit() : super(const AddWorkoutState());
 
   void updateName(String name) {
-    state.copyWith(workoutName: name);
+    emit(
+      state.copyWith(workoutName: name),
+    );
   }
 
   void addExercise() {
