@@ -6,10 +6,12 @@ class ExerciseSetRowInput extends StatelessWidget {
   const ExerciseSetRowInput({
     this.label,
     this.onChanged,
+    this.value,
     super.key,
   });
 
   final String? label;
+  final String? value;
   final ValueChanged<String>? onChanged;
 
   @override
@@ -25,6 +27,7 @@ class ExerciseSetRowInput extends StatelessWidget {
           child: ExerciseCardInput(
             hintText: '0',
             onChanged: onChanged,
+            value: value,
           ),
         ),
       ],

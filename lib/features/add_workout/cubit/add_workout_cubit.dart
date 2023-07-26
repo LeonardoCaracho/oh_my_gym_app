@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workout_repository/workout_repository.dart';
 part 'add_workout_state.dart';
@@ -14,46 +15,48 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
   }
 
   void addExercise() {
-    final currentExercices = [...state.exercises, Exercise.empty];
-
     emit(
       state.copyWith(
-        exercises: currentExercices,
+        exercises: [...state.exercises, Exercise.empty],
       ),
     );
   }
 
-  void addSet(int exerciseIndex) {
-    final allExercises = [...state.exercises];
-    final exercise = allExercises.elementAt(exerciseIndex);
-
+  void addSet(Exercise exercise) {
     exercise.sets.add(ExerciseSet.empty);
 
     emit(
-      state.copyWith(exercises: []),
-    );
-
-    emit(
       state.copyWith(
-        exercises: allExercises,
+        exercises: [...state.exercises],
+        timestamp: DateTime.now().millisecondsSinceEpoch,
       ),
     );
   }
 
-  void deleteSet(int exerciseIndex, int setIndex) {
-    final allExercises = [...state.exercises];
-    final exercise = allExercises.elementAt(exerciseIndex);
-
-    exercise.sets.removeAt(setIndex);
-
-    emit(
-      state.copyWith(exercises: []),
-    );
+  void deleteSet(Exercise exercise, int index) {
+    exercise.sets.removeAt(index);
 
     emit(
       state.copyWith(
-        exercises: allExercises,
+        exercises: [...state.exercises],
+        timestamp: DateTime.now().millisecondsSinceEpoch,
       ),
     );
+  }
+
+  void saveWorkout() {
+    final json = state.exercises.map(
+      (e) => e.toJson(),
+    );
+
+    print('Exercises to be saved: $json');
+
+    final workout = Workout(
+      id: '1',
+      name: state.workoutName,
+      exercises: state.exercises,
+    );
+
+    print('\n\n\nWorkout to be saved: ${workout.toJson()}');
   }
 }

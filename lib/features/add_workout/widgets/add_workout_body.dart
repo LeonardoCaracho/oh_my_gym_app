@@ -31,7 +31,7 @@ class AddWorkoutBody extends StatelessWidget {
                     }
 
                     return ExerciseCard(
-                      workoutIndex: index,
+                      exercise: state.exercises[index],
                     );
                   },
                 );
@@ -50,7 +50,9 @@ class AddWorkoutBody extends StatelessWidget {
               Expanded(
                 child: DefaultButton(
                   text: 'Save Workout',
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AddWorkoutCubit>().saveWorkout();
+                  },
                 ),
               ),
             ],

@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 
 import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
-    required this.workoutIndex,
+    required this.exercise,
     super.key,
   });
 
-  final int workoutIndex;
+  final Exercise exercise;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class ExerciseCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 8,
             ),
@@ -32,35 +33,32 @@ class ExerciseCard extends StatelessWidget {
                 Expanded(
                   child: ExerciseCardInput(
                     hintText: 'Exercise name',
+                    onChanged: (text) {
+                      exercise.name = text;
+                    },
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: ExerciseCardInput(
                     hintText: 'Observations',
+                    onChanged: (text) {
+                      exercise.observation = text;
+                    },
                   ),
                 ),
               ],
             ),
           ),
-          BlocBuilder<AddWorkoutCubit, AddWorkoutState>(
-            builder: (context, state) {
-              final exerciseSets = state.exercises[workoutIndex].sets;
-
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: exerciseSets.length,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (_, index) {
-                  return ExerciseSetRow(
-                    index: index + 1,
-                    deleteCallback: () =>
-                        context.read<AddWorkoutCubit>().deleteSet(
-                              workoutIndex,
-                              index,
-                            ),
-                  );
-                },
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: exercise.sets.length,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (_, index) {
+              return ExerciseSetRow(
+                key: UniqueKey(),
+                index: index,
+                exercise: exercise,
               );
             },
           ),
@@ -69,9 +67,7 @@ class ExerciseCard extends StatelessWidget {
             child: DefaultButton(
               text: 'Add Set',
               icon: Icons.add,
-              onPressed: () => context.read<AddWorkoutCubit>().addSet(
-                    workoutIndex,
-                  ),
+              onPressed: () => context.read<AddWorkoutCubit>().addSet(exercise),
             ),
           )
         ],
