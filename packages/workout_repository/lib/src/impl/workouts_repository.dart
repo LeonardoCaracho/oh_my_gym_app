@@ -16,8 +16,7 @@ class WorkoutRepository implements WorkoutsContract {
   @override
   Future<void> saveWorkout(Workout workout) async {
     final user = authRepository.currentUser;
-    final collectionPath = 'users/${user.id}';
 
-    await _firebaseFirestore.collection(collectionPath).add(workout.toJson());
+    await _firebaseFirestore.collection(user.id).add(workout.toJson());
   }
 }

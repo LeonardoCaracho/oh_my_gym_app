@@ -1,12 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workout_repository/workout_repository.dart';
 part 'add_workout_state.dart';
 
 class AddWorkoutCubit extends Cubit<AddWorkoutState> {
-  AddWorkoutCubit() : super(const AddWorkoutState());
+  AddWorkoutCubit({
+    required this.workoutsRepository,
+  }) : super(const AddWorkoutState());
+
+  final WorkoutsContract workoutsRepository;
 
   void updateName(String name) {
     emit(
@@ -36,6 +39,8 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
   void deleteSet(Exercise exercise, int index) {
     exercise.sets.removeAt(index);
 
+    if (exercise.sets.isEmpty) {}
+
     emit(
       state.copyWith(
         exercises: [...state.exercises],
@@ -44,19 +49,22 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
     );
   }
 
-  void saveWorkout() {
-    final json = state.exercises.map(
-      (e) => e.toJson(),
-    );
+  Future<void> saveWorkout() async {
+    try {
+      emit(state.copyWith(status: Status.loading));
 
-    print('Exercises to be saved: $json');
+      final workout = Workout(
+        id: '1',
+        name: state.workoutName,
+        exercises: state.exercises,
+      );
 
-    final workout = Workout(
-      id: '1',
-      name: state.workoutName,
-      exercises: state.exercises,
-    );
+      await workoutsRepository.saveWorkout(workout);
 
-    print('\n\n\nWorkout to be saved: ${workout.toJson()}');
+      emit(state.copyWith(status: Status.success));
+    } catch (e) {
+      print('Error saving workout. $e');
+      emit(state.copyWith(status: Status.failure));
+    }
   }
 }
