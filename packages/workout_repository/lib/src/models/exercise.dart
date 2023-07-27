@@ -1,7 +1,8 @@
-// ignore_for_file: sort_constructors_first
+// ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
 import 'package:workout_repository/src/models/exercise_set.dart';
 
 part 'exercise.g.dart';
@@ -9,20 +10,23 @@ part 'exercise.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Exercise extends Equatable {
   Exercise({
+    required this.id,
     required this.name,
     required this.sets,
     this.observation,
   });
 
+  factory Exercise.fromJson(Map<String, dynamic> json) =>
+      _$ExerciseFromJson(json);
+
+  String id;
   String name;
   String? observation;
   List<ExerciseSet> sets;
-
-  factory Exercise.fromJson(Map<String, dynamic> json) =>
-      _$ExerciseFromJson(json);
   Map<String, dynamic> toJson() => _$ExerciseToJson(this);
 
-  static Exercise get empty => Exercise(
+  Exercise get empty => Exercise(
+        id: const Uuid().v4(),
         name: '',
         sets: [
           ExerciseSet(
@@ -33,5 +37,5 @@ class Exercise extends Equatable {
       );
 
   @override
-  List<Object?> get props => [name, observation, sets];
+  List<Object?> get props => [name, observation, sets, id];
 }
