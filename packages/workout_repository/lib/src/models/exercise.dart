@@ -19,15 +19,10 @@ class Exercise extends Equatable {
   factory Exercise.fromJson(Map<String, dynamic> json) =>
       _$ExerciseFromJson(json);
 
-  String id;
-  String name;
-  String? observation;
-  List<ExerciseSet> sets;
-  Map<String, dynamic> toJson() => _$ExerciseToJson(this);
-
-  Exercise get empty => Exercise(
+  factory Exercise.empty() => Exercise(
         id: const Uuid().v4(),
         name: '',
+        observation: '',
         sets: [
           ExerciseSet(
             reps: 0,
@@ -35,6 +30,12 @@ class Exercise extends Equatable {
           ),
         ],
       );
+
+  String id;
+  String name;
+  String? observation;
+  List<ExerciseSet> sets;
+  Map<String, dynamic> toJson() => _$ExerciseToJson(this);
 
   @override
   List<Object?> get props => [name, observation, sets, id];

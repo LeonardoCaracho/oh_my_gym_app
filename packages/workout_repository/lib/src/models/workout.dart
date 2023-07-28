@@ -1,6 +1,7 @@
 // ignore_for_file: sort_constructors_first
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
 import 'package:workout_repository/src/models/exercise.dart';
 
 part 'workout.g.dart';
@@ -16,6 +17,12 @@ class Workout {
   final String id;
   final String name;
   final List<Exercise> exercises;
+
+  factory Workout.create(String name, List<Exercise> exercises) => Workout(
+        id: const Uuid().v4(),
+        name: name,
+        exercises: exercises,
+      );
 
   factory Workout.fromJson(Map<String, dynamic> json) =>
       _$WorkoutFromJson(json);

@@ -1,4 +1,4 @@
-// ignore_for_file: sort_constructors_first
+// ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,17 +12,17 @@ class ExerciseSet extends Equatable {
     this.weight,
   });
 
-  int? reps;
-  double? weight;
-
   factory ExerciseSet.fromJson(Map<String, dynamic> json) =>
       _$ExerciseSetFromJson(json);
-  Map<String, dynamic> toJson() => _$ExerciseSetToJson(this);
 
-  static ExerciseSet get empty => ExerciseSet(
+  factory ExerciseSet.empty() => ExerciseSet(
         reps: 0,
         weight: 0,
       );
+
+  int? reps;
+  double? weight;
+  Map<String, dynamic> toJson() => _$ExerciseSetToJson(this);
 
   @override
   List<Object?> get props => [reps, weight];
