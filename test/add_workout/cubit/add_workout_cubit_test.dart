@@ -73,7 +73,7 @@ void main() {
               sets: [ExerciseSet.empty(), ExerciseSet.empty()],
             )
           ],
-          timestamp: 1690686000000,
+          timestamp: DateTimeMock.current.millisecondsSinceEpoch,
         ),
       ],
     );
@@ -89,7 +89,7 @@ void main() {
       },
       expect: () => [
         AddWorkoutState(
-          timestamp: 1690686000000,
+          timestamp: DateTimeMock.current.millisecondsSinceEpoch,
         ),
       ],
     );
