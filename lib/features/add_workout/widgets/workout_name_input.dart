@@ -4,6 +4,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 
+// ignore: must_be_immutable
 class WorkoutNameInput extends StatelessWidget {
   WorkoutNameInput({
     super.key,
