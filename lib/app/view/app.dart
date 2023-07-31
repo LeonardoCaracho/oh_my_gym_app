@@ -5,7 +5,6 @@ import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
-import 'package:oh_my_gym_app/routing/routing.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -41,16 +40,14 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = UITheme();
 
-    return BlocBuilder<AppBloc, AppState>(
-      builder: (context, state) {
-        return MaterialApp.router(
-          routerConfig: AppRouter.router,
-          theme: theme.lightTheme,
-          darkTheme: theme.darkTheme,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-        );
-      },
+    AppRouter(context);
+
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
+      theme: theme.lightTheme,
+      darkTheme: theme.darkTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

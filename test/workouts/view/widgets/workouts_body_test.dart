@@ -14,7 +14,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(Text), findsOneWidget);
+      expect(find.byType(Text), findsNWidgets(2));
     });
   });
 }

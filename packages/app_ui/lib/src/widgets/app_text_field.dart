@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:app_ui/app_ui.dart';
 
 class UITextField extends StatelessWidget {
-
-    const UITextField({
+  const UITextField({
     super.key,
     this.initialValue,
     this.autoFillHints,
@@ -25,7 +24,7 @@ class UITextField extends StatelessWidget {
 
   /// A text field component based on material [TextFormField] widget which
   /// extends TextField with email icon and validates input type.
-   const UITextField.emailTextField({
+  const UITextField.emailTextField({
     super.key,
     this.initialValue,
     this.controller,
@@ -52,9 +51,9 @@ class UITextField extends StatelessWidget {
         ),
         autocorrect = false;
 
-    /// A password text field component based on material [TextFormField] widget which
-    /// extends TextField which obscures the text
-   const UITextField.passwordTextField({
+  /// A password text field component based on material [TextFormField] widget which
+  /// extends TextField which obscures the text
+  const UITextField.passwordTextField({
     super.key,
     this.initialValue,
     this.controller,
@@ -72,8 +71,7 @@ class UITextField extends StatelessWidget {
         obscureText = true,
         autocorrect = false;
 
-
- /// A value to initialize the field to.
+  /// A value to initialize the field to.
   final String? initialValue;
 
   /// List of auto fill hints.

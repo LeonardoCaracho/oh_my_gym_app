@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_ui/app_ui.dart';
 
-
 //extension for font weights
 
 abstract class UITextStyle {
@@ -50,6 +49,13 @@ abstract class UITextStyle {
     height: 1.28,
   );
 
+  /// Headline 3 Text Style
+  static final TextStyle headline4 = _baseTextStyle.copyWith(
+    fontSize: 24,
+    fontWeight: UIFontWeight.semiBold,
+    height: 1.28,
+  );
+
   /// Subtitle 1 Text Style
   static final TextStyle subtitle1 = _baseTextStyle.copyWith(
     fontSize: 16,
@@ -76,6 +82,14 @@ abstract class UITextStyle {
     fontSize: 14,
     height: 1.42,
     letterSpacing: 0.25,
+  );
+
+  /// Body Text 3 Text Style (the default)
+  static final TextStyle bodyText3 = _baseTextStyle.copyWith(
+    fontSize: 14,
+    height: 1.42,
+    letterSpacing: 0.25,
+    fontWeight: UIFontWeight.bold,
   );
 
   /// Caption Text Style
@@ -105,5 +119,4 @@ abstract class UITextStyle {
     height: 1.45,
     letterSpacing: 0.5,
   );
-
 }

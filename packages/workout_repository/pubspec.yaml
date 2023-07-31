@@ -1,0 +1,22 @@
+name: workout_repository
+description: A Very Good Project created by Very Good CLI.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dev_dependencies:
+  mocktail: ^0.3.0
+  test: ^1.19.2
+  very_good_analysis: ^5.0.0
+dependencies:
+  authentication_repository:
+    path: ../authentication_repository
+  build_runner: ^2.4.6
+  cloud_firestore: ^4.8.3
+  equatable: ^2.0.5
+  firebase_core: ^2.14.0
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
+  uuid: ^3.0.7

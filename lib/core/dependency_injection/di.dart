@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 const userBoxName = '__user_box__';
 
@@ -23,6 +24,12 @@ Future<void> initLocator() async {
         cache: locator<UserCacheContract>(),
       ),
       dependsOn: [UserCacheContract],
+    )
+    ..registerSingletonAsync<WorkoutsContract>(
+      () async => WorkoutRepository(
+        authRepository: locator<AuthenticationContract>(),
+      ),
+      dependsOn: [AuthenticationContract],
     );
 
   await locator.allReady();
