@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/core/core.dart';
@@ -32,6 +33,38 @@ void main() {
 
     test('initial state has default value for customProperty', () {
       expect(loginCubit.state.status, Status.inital);
+    });
+
+    group('loginWithGoogle', () {
+      blocTest<LoginCubit, LoginState>(
+        'should log in succesfully',
+        build: () {
+          when(() => authRepository.loginWithGoogle()).thenAnswer(
+            (_) => Future.value(),
+          );
+
+          return loginCubit;
+        },
+        act: (bloc) => bloc.loginWithGoogle(),
+        expect: () => [
+          LoginState(status: Status.loading),
+          LoginState(status: Status.success),
+        ],
+      );
+
+      blocTest<LoginCubit, LoginState>(
+        'should not login successfuly',
+        build: () {
+          when(() => authRepository.loginWithGoogle()).thenThrow(Error());
+
+          return loginCubit;
+        },
+        act: (bloc) => bloc.loginWithGoogle(),
+        expect: () => [
+          LoginState(status: Status.loading),
+          LoginState(status: Status.failure),
+        ],
+      );
     });
   });
 }

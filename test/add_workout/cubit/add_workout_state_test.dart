@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oh_my_gym_app/core/enums/enums.dart';
 import 'package:oh_my_gym_app/features/add_workout/cubit/cubit.dart';
 
 void main() {
@@ -29,7 +30,7 @@ void main() {
         'when no argument specified',
         () {
           const addWorkoutState = AddWorkoutState(
-            customProperty: 'My property',
+            status: Status.failure,
           );
           expect(
             addWorkoutState.copyWith(),
@@ -43,16 +44,16 @@ void main() {
         'when all arguments specified',
         () {
           const addWorkoutState = AddWorkoutState(
-            customProperty: 'My property',
+            status: Status.failure,
           );
           final otherAddWorkoutState = AddWorkoutState(
-            customProperty: 'My property 2',
+            status: Status.loading,
           );
           expect(addWorkoutState, isNot(equals(otherAddWorkoutState)));
 
           expect(
             addWorkoutState.copyWith(
-              customProperty: otherAddWorkoutState.customProperty,
+              status: otherAddWorkoutState.status,
             ),
             equals(otherAddWorkoutState),
           );

@@ -32,7 +32,7 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
     emit(
       state.copyWith(
         exercises: [...state.exercises],
-        timestamp: DateTime.now().millisecondsSinceEpoch,
+        timestamp: DateTimeMock.current.millisecondsSinceEpoch,
       ),
     );
   }
@@ -49,7 +49,7 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
     emit(
       state.copyWith(
         exercises: exercises,
-        timestamp: DateTime.now().millisecondsSinceEpoch,
+        timestamp: DateTimeMock.current.millisecondsSinceEpoch,
       ),
     );
   }

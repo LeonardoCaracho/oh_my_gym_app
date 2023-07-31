@@ -16,10 +16,10 @@ class AddWorkoutBody extends StatelessWidget {
           const SizedBox(height: 30),
           WorkoutNameInput(),
           const SizedBox(height: 20),
-          Expanded(
-            child: BlocBuilder<AddWorkoutCubit, AddWorkoutState>(
-              builder: (context, state) {
-                return ListView.builder(
+          BlocBuilder<AddWorkoutCubit, AddWorkoutState>(
+            builder: (context, state) {
+              return Expanded(
+                child: ListView.builder(
                   itemCount: state.exercises.length + 1,
                   itemBuilder: (_, index) {
                     if (index == state.exercises.length) {
@@ -35,9 +35,9 @@ class AddWorkoutBody extends StatelessWidget {
                       exercise: state.exercises[index],
                     );
                   },
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
           BlocListener<AddWorkoutCubit, AddWorkoutState>(
             listener: (context, state) {

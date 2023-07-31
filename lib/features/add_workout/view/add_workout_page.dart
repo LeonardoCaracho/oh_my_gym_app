@@ -7,10 +7,6 @@ import 'package:workout_repository/workout_repository.dart';
 class AddWorkoutPage extends StatelessWidget {
   const AddWorkoutPage({super.key});
 
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const AddWorkoutPage());
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
