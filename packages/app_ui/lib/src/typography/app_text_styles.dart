@@ -51,7 +51,7 @@ abstract class UITextStyle {
 
   /// Headline 3 Text Style
   static final TextStyle headline4 = _baseTextStyle.copyWith(
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: UIFontWeight.semiBold,
     height: 1.28,
   );
