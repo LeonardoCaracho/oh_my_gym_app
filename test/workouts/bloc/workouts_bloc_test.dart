@@ -29,7 +29,7 @@ void main() {
     });
 
     blocTest<WorkoutsBloc, WorkoutsState>(
-      'emits [WorkoutsIsLoading, WorkoutsIsLoadSuccess] when WorkoutsRequested event is added',
+      'emits [WorkoutsIsLoading, WorkoutsIsLoadSuccess] when event is added',
       build: () {
         when(() => mockWorkoutsRepository.getWorkouts()).thenAnswer(
           (_) => Future.value([workoutMock]),
@@ -44,7 +44,7 @@ void main() {
     );
 
     blocTest<WorkoutsBloc, WorkoutsState>(
-      'emits [WorkoutsIsLoading, WorkoutsIsLoadFailure] when WorkoutsRequested event fails',
+      'emits [WorkoutsIsLoading, WorkoutsIsLoadFailure] when event fails',
       build: () {
         when(() => mockWorkoutsRepository.getWorkouts())
             .thenThrow(Exception('Failed to load workouts'));

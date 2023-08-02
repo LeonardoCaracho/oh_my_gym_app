@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 import '../../helpers/mocks/mocks.dart';
 
@@ -33,10 +34,13 @@ void main() {
 
     // Test props method for all states
     test('props should return an empty list for all states', () {
-      expect(const WorkoutsInitial().props, []);
-      expect(const WorkoutsIsLoading().props, []);
-      expect(const WorkoutsIsLoadSuccess(workouts: []).props, []);
-      expect(const WorkoutsIsLoadFailure().props, []);
+      expect(const WorkoutsInitial().props, empty);
+      expect(const WorkoutsIsLoading().props, empty);
+      expect(const WorkoutsIsLoadSuccess(workouts: []).props, workouts);
+      expect(const WorkoutsIsLoadFailure().props, empty);
     });
   });
 }
+
+final List<Object> empty = [];
+final List<Workout> workouts = [];

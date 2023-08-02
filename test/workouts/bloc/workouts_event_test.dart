@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 
+import 'workouts_state_test.dart';
+
 void main() {
   group('WorkoutsEvent', () {
     // Test the WorkoutsEvent class
@@ -10,7 +12,7 @@ void main() {
 
     // Test props method for WorkoutsEvent
     test('props should return an empty list for WorkoutsEvent', () {
-      expect(const WorkoutsEvent().props, []);
+      expect(const WorkoutsEvent().props, empty);
     });
   });
 
@@ -22,7 +24,7 @@ void main() {
 
     // Test props method for WorkoutsRequested
     test('props should return an empty list for WorkoutsRequested', () {
-      expect(const WorkoutsRequested().props, []);
+      expect(const WorkoutsRequested().props, empty);
     });
   });
 }
