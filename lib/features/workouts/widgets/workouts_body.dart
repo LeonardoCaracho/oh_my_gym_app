@@ -16,6 +16,12 @@ class WorkoutsBody extends StatelessWidget {
           Expanded(
             child: BlocBuilder<WorkoutsBloc, WorkoutsState>(
               builder: (context, state) {
+                if (state is WorkoutsIsLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
                 if (state is WorkoutsIsLoadSuccess) {
                   return GridView.builder(
                     gridDelegate:
@@ -34,6 +40,12 @@ class WorkoutsBody extends StatelessWidget {
                         workout: state.workouts[index - 1],
                       );
                     },
+                  );
+                }
+
+                if (state is WorkoutsIsLoadFailure) {
+                  return const Center(
+                    child: Text('Error loading workouts!'),
                   );
                 }
 

@@ -1,63 +1,42 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 
+import '../../helpers/mocks/mocks.dart';
+
 void main() {
   group('WorkoutsState', () {
-    test('supports value equality', () {
+    // Test the WorkoutsInitial state
+    test('WorkoutsInitial should be equatable', () {
+      expect(const WorkoutsInitial(), const WorkoutsInitial());
+    });
+
+    // Test the WorkoutsIsLoading state
+    test('WorkoutsIsLoading should be equatable', () {
+      expect(const WorkoutsIsLoading(), const WorkoutsIsLoading());
+    });
+
+    // Test the WorkoutsIsLoadSuccess state
+    test('WorkoutsIsLoadSuccess should be equatable', () {
+      final workouts1 = [workoutMock];
+      final workouts2 = [workoutMock];
+
       expect(
-        WorkoutsState(),
-        equals(
-          const WorkoutsState(),
-        ),
+        WorkoutsIsLoadSuccess(workouts: workouts1),
+        WorkoutsIsLoadSuccess(workouts: workouts2),
       );
     });
 
-    group('constructor', () {
-      test('can be instantiated', () {
-        expect(
-          const WorkoutsState(),
-          isNotNull,
-        );
-      });
+    // Test the WorkoutsIsLoadFailure state
+    test('WorkoutsIsLoadFailure should be equatable', () {
+      expect(const WorkoutsIsLoadFailure(), const WorkoutsIsLoadFailure());
     });
 
-    group('copyWith', () {
-      test(
-        'copies correctly '
-        'when no argument specified',
-        () {
-          const workoutsState = WorkoutsState(
-            customProperty: 'My property',
-          );
-          expect(
-            workoutsState.copyWith(),
-            equals(workoutsState),
-          );
-        },
-      );
-
-      test(
-        'copies correctly '
-        'when all arguments specified',
-        () {
-          const workoutsState = WorkoutsState(
-            customProperty: 'My property',
-          );
-          final otherWorkoutsState = WorkoutsState(
-            customProperty: 'My property 2',
-          );
-          expect(workoutsState, isNot(equals(otherWorkoutsState)));
-
-          expect(
-            workoutsState.copyWith(
-              customProperty: otherWorkoutsState.customProperty,
-            ),
-            equals(otherWorkoutsState),
-          );
-        },
-      );
+    // Test props method for all states
+    test('props should return an empty list for all states', () {
+      expect(const WorkoutsInitial().props, []);
+      expect(const WorkoutsIsLoading().props, []);
+      expect(const WorkoutsIsLoadSuccess(workouts: []).props, []);
+      expect(const WorkoutsIsLoadFailure().props, []);
     });
   });
 }

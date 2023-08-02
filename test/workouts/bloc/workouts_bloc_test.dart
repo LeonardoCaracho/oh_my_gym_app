@@ -2,29 +2,59 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
+import 'package:workout_repository/workout_repository.dart';
+
+import '../../helpers/mocks/mocks.dart';
+
+class MockWorkoutsContract extends Mock implements WorkoutsContract {}
 
 void main() {
   group('WorkoutsBloc', () {
-    group('constructor', () {
-      test('can be instantiated', () {
-        expect(
-          WorkoutsBloc(),
-          isNotNull,
-        );
-      });
+    late WorkoutsBloc workoutsBloc;
+    late WorkoutsContract mockWorkoutsRepository;
+
+    setUp(() {
+      mockWorkoutsRepository = MockWorkoutsContract();
+      workoutsBloc = WorkoutsBloc(workoutsRepository: mockWorkoutsRepository);
     });
 
-    test('initial state has default value for customProperty', () {
-      final workoutsBloc = WorkoutsBloc();
-      expect(workoutsBloc.state.customProperty, equals('Default Value'));
+    tearDown(() {
+      workoutsBloc.close();
+    });
+
+    test('initial state should be WorkoutsInitial', () {
+      expect(workoutsBloc.state, const WorkoutsInitial());
     });
 
     blocTest<WorkoutsBloc, WorkoutsState>(
-      'CustomWorkoutsEvent emits nothing',
-      build: WorkoutsBloc.new,
-      act: (bloc) => bloc.add(const CustomWorkoutsEvent()),
-      expect: () => <WorkoutsState>[],
+      'emits [WorkoutsIsLoading, WorkoutsIsLoadSuccess] when WorkoutsRequested event is added',
+      build: () {
+        when(() => mockWorkoutsRepository.getWorkouts()).thenAnswer(
+          (_) => Future.value([workoutMock]),
+        );
+        return workoutsBloc;
+      },
+      act: (bloc) => bloc.add(WorkoutsRequested()),
+      expect: () => [
+        const WorkoutsIsLoading(),
+        WorkoutsIsLoadSuccess(workouts: [workoutMock]),
+      ],
+    );
+
+    blocTest<WorkoutsBloc, WorkoutsState>(
+      'emits [WorkoutsIsLoading, WorkoutsIsLoadFailure] when WorkoutsRequested event fails',
+      build: () {
+        when(() => mockWorkoutsRepository.getWorkouts())
+            .thenThrow(Exception('Failed to load workouts'));
+        return workoutsBloc;
+      },
+      act: (bloc) => bloc.add(WorkoutsRequested()),
+      expect: () => [
+        const WorkoutsIsLoading(),
+        const WorkoutsIsLoadFailure(),
+      ],
     );
   });
 }
