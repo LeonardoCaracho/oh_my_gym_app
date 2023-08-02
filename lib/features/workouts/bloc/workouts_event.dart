@@ -7,10 +7,6 @@ abstract class WorkoutsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-/// {@template custom_workouts_event}
-/// Event added when some custom logic happens
-/// {@endtemplate}
-class CustomWorkoutsEvent extends WorkoutsEvent {
-  /// {@macro custom_workouts_event}
-  const CustomWorkoutsEvent();
+class WorkoutsRequested extends WorkoutsEvent {
+  const WorkoutsRequested();
 }

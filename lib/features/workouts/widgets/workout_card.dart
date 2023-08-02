@@ -1,8 +1,23 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 class WorkoutCard extends StatelessWidget {
-  const WorkoutCard({super.key});
+  const WorkoutCard({
+    required this.workout,
+    super.key,
+  });
+
+  final Workout workout;
+
+  String _getTotalSets() {
+    return workout.exercises
+        .fold(
+          0,
+          (previousValue, element) => previousValue + element.sets.length,
+        )
+        .toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +32,16 @@ class WorkoutCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Workout A',
+              workout.name,
               style: UITextStyle.headline4,
             ),
             const SizedBox(height: UISpacing.lg),
             Text(
-              'Total Exercises: 20',
+              'Total Exercises: ${workout.exercises.length}',
               style: UITextStyle.bodyText2,
             ),
             Text(
-              'Total Sets: 20',
+              'Total Sets: ${_getTotalSets()}',
               style: UITextStyle.bodyText2,
             ),
             Expanded(
