@@ -13,3 +13,7 @@ Future<void> initLocatorTesting() async {
 
   await locator.allReady();
 }
+
+Future<void> clearLocatorTesting() async {
+  await locator.reset();
+}

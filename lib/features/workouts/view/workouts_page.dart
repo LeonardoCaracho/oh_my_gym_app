@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 import 'package:oh_my_gym_app/features/workouts/widgets/workouts_body.dart';
+import 'package:workout_repository/workout_repository.dart';
 
-/// {@template workouts_page}
-/// A description for WorkoutsPage
-/// {@endtemplate}
 class WorkoutsPage extends StatelessWidget {
-  /// {@macro workouts_page}
   const WorkoutsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WorkoutsBloc(),
+      create: (context) => WorkoutsBloc(
+        workoutsRepository: locator<WorkoutsContract>(),
+      )..add(const WorkoutsRequested()),
       child: const Scaffold(
         body: WorkoutsView(),
       ),
@@ -20,15 +20,13 @@ class WorkoutsPage extends StatelessWidget {
   }
 }
 
-/// {@template workouts_view}
-/// Displays the Body of WorkoutsView
-/// {@endtemplate}
 class WorkoutsView extends StatelessWidget {
-  /// {@macro workouts_view}
   const WorkoutsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const WorkoutsBody();
+    return const SafeArea(
+      child: WorkoutsBody(),
+    );
   }
 }

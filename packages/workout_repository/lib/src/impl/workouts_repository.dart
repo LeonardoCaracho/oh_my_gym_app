@@ -19,4 +19,18 @@ class WorkoutRepository implements WorkoutsContract {
 
     await _firebaseFirestore.collection(user.id).add(workout.toJson());
   }
+
+  @override
+  Future<List<Workout>> getWorkouts() async {
+    final user = authRepository.currentUser;
+    final snapshot = await _firebaseFirestore.collection(user.id).get();
+
+    return snapshot.docs
+        .map(
+          (doc) => Workout.fromJson(
+            doc.data(),
+          ),
+        )
+        .toList();
+  }
 }

@@ -42,7 +42,7 @@ class AddWorkoutBody extends StatelessWidget {
           BlocListener<AddWorkoutCubit, AddWorkoutState>(
             listener: (context, state) {
               if (state.status.isSuccess) {
-                context.pop();
+                context.pop(true);
               }
             },
             child: Row(
