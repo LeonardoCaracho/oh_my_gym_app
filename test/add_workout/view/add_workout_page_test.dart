@@ -9,6 +9,8 @@ import '../../helpers/helpers.dart';
 void main() {
   setUpAll(() async => initLocatorTesting());
 
+  tearDownAll(clearLocatorTesting);
+
   group('AddWorkoutPage', () {
     testWidgets('renders AddWorkoutView', (tester) async {
       await tester.pumpWidget(MaterialApp(home: AddWorkoutPage()));
