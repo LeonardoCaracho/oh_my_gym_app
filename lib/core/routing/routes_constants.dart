@@ -7,4 +7,7 @@ class RouteConstants {
 
   static String get addWorkoutsRoute => 'add-workouts';
   static String get addWorkoutRouteName => 'add workout';
+
+  static String get editWorkoutsRoute => 'edit-workouts';
+  static String get editWorkoutRouteName => 'edit workout';
 }

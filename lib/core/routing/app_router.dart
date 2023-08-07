@@ -4,6 +4,7 @@ import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
+import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
 
@@ -61,6 +62,11 @@ class AppRouter {
               name: RouteConstants.addWorkoutRouteName,
               path: RouteConstants.addWorkoutsRoute,
               builder: (context, state) => const AddWorkoutPage(),
+            ),
+            GoRoute(
+              name: RouteConstants.editWorkoutRouteName,
+              path: RouteConstants.editWorkoutsRoute,
+              builder: (context, state) => const EditWorkoutPage(),
             ),
           ],
         ),
