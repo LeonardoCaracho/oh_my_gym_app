@@ -5,16 +5,32 @@ import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 
 // ignore: must_be_immutable
-class WorkoutNameInput extends StatelessWidget {
-  WorkoutNameInput({
+class WorkoutNameInput extends StatefulWidget {
+  const WorkoutNameInput({
     super.key,
+    this.value,
   });
 
+  final String? value;
+
+  @override
+  State<WorkoutNameInput> createState() => _WorkoutNameInputState();
+}
+
+class _WorkoutNameInputState extends State<WorkoutNameInput> {
   Timer? _timer;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    _controller.text = widget.value ?? '';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: _controller,
       style: UITextStyle.button,
       textAlign: TextAlign.center,
       onChanged: (text) {

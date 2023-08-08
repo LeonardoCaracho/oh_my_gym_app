@@ -25,12 +25,12 @@ class WorkoutRepository implements WorkoutsContract {
     final user = authRepository.currentUser;
     final snapshot = await _firebaseFirestore.collection(user.id).get();
 
-    return snapshot.docs
-        .map(
-          (doc) => Workout.fromJson(
-            doc.data(),
-          ),
-        )
-        .toList();
+    return snapshot.docs.map(
+      (doc) {
+        return Workout.fromJson(
+          doc.data(),
+        );
+      },
+    ).toList();
   }
 }

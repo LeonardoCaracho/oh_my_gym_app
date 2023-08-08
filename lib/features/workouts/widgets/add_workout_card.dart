@@ -15,8 +15,8 @@ class AddWorkoutCard extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        final shouldUpdate = await context.push<bool>(
-          '/${RouteConstants.addWorkoutsRoute}',
+        final shouldUpdate = await context.pushNamed<bool>(
+          RouteConstants.addWorkoutRouteName,
         );
 
         if (shouldUpdate ?? false) {

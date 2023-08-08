@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
@@ -7,6 +9,7 @@ import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -66,7 +69,11 @@ class AppRouter {
             GoRoute(
               name: RouteConstants.editWorkoutRouteName,
               path: RouteConstants.editWorkoutsRoute,
-              builder: (context, state) => const EditWorkoutPage(),
+              builder: (context, state) {
+                return EditWorkoutPage(
+                  workout: state.extra! as Workout,
+                );
+              },
             ),
           ],
         ),

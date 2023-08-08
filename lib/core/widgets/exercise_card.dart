@@ -33,6 +33,7 @@ class ExerciseCard extends StatelessWidget {
                 Expanded(
                   child: ExerciseCardInput(
                     hintText: 'Exercise name',
+                    value: exercise.name,
                     onChanged: (text) {
                       exercise.name = text;
                     },
@@ -41,6 +42,7 @@ class ExerciseCard extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ExerciseCardInput(
+                    value: exercise.observation,
                     hintText: 'Observations',
                     onChanged: (text) {
                       exercise.observation = text;

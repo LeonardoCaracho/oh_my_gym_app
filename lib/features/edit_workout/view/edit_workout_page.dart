@@ -1,39 +1,41 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
 import 'package:oh_my_gym_app/features/edit_workout/widgets/edit_workout_body.dart';
+import 'package:workout_repository/workout_repository.dart';
 
-/// {@template edit_workout_page}
-/// A description for EditWorkoutPage
-/// {@endtemplate}
 class EditWorkoutPage extends StatelessWidget {
-  /// {@macro edit_workout_page}
-  const EditWorkoutPage({super.key});
+  const EditWorkoutPage({
+    required this.workout,
+    super.key,
+  });
 
-  /// The static route for EditWorkoutPage
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const EditWorkoutPage());
-  }
+  final Workout workout;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EditWorkoutCubit(),
-      child: const Scaffold(
-        body: EditWorkoutView(),
+      create: (context) => EditWorkoutCubit()..startEditWorkout(workout),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'OH MY WORKOUT!',
+            style: UITextStyle.headline3,
+          ),
+        ),
+        body: const EditWorkoutView(),
       ),
     );
-  }    
+  }
 }
 
-/// {@template edit_workout_view}
-/// Displays the Body of EditWorkoutView
-/// {@endtemplate}
 class EditWorkoutView extends StatelessWidget {
-  /// {@macro edit_workout_view}
   const EditWorkoutView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const EditWorkoutBody();
+    return const SafeArea(
+      child: EditWorkoutBody(),
+    );
   }
 }
