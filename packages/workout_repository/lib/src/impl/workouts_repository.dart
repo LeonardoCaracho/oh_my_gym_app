@@ -29,8 +29,28 @@ class WorkoutRepository implements WorkoutsContract {
       (doc) {
         return Workout.fromJson(
           doc.data(),
-        );
+        )..docId = doc.id;
       },
     ).toList();
+  }
+
+  @override
+  Future<void> updateWorkout(Workout workout) async {
+    final user = authRepository.currentUser;
+
+    // var test = await _firebaseFirestore
+    //     .collection(user.id)
+    //     .where('id', isEqualTo: workout.id)
+    //     .get();
+
+    await _firebaseFirestore.collection(user.id).doc(workout.docId).set(
+          workout.toJson(),
+        );
+  }
+
+  @override
+  Future<void> deleteWorkout(String docId) async {
+    final user = authRepository.currentUser;
+    await _firebaseFirestore.collection(user.id).doc(docId).delete();
   }
 }

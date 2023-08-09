@@ -12,19 +12,42 @@ class Workout {
     required this.id,
     required this.name,
     required this.exercises,
+    this.docId,
   });
 
   final String id;
   final String name;
   final List<Exercise> exercises;
+  String? docId;
 
-  factory Workout.create(String name, List<Exercise> exercises) => Workout(
-        id: const Uuid().v4(),
-        name: name,
-        exercises: exercises,
+  factory Workout.create({
+    String? name,
+    List<Exercise>? exercises,
+    String? docId,
+    String? id,
+  }) =>
+      Workout(
+        id: id ?? const Uuid().v4(),
+        name: name ?? '',
+        exercises: exercises ?? [],
+        docId: docId ?? '',
       );
 
   factory Workout.fromJson(Map<String, dynamic> json) =>
       _$WorkoutFromJson(json);
   Map<String, dynamic> toJson() => _$WorkoutToJson(this);
+
+  Workout copyWith({
+    String? name,
+    List<Exercise>? exercises,
+    String? docId,
+    String? id,
+  }) {
+    return Workout(
+      name: name ?? this.name,
+      exercises: exercises ?? this.exercises,
+      docId: docId ?? this.docId,
+      id: id ?? this.id,
+    );
+  }
 }

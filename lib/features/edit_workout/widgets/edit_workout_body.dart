@@ -12,26 +12,32 @@ class EditWorkoutBody extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
         builder: (context, state) {
+          final exercises = state.workout.exercises;
+
           return Column(
             children: [
               WorkoutNameInput(
-                value: state.workoutName,
+                value: state.workout!.name,
               ),
               const SizedBox(height: 20),
               Expanded(
                 child: ListView.builder(
-                  itemCount: state.exercises.length + 1,
+                  itemCount: exercises.length + 1,
                   itemBuilder: (_, index) {
-                    if (index == state.exercises.length) {
+                    if (index == exercises.length) {
                       return DefaultButton(
                         text: 'Add Exercise',
                         icon: Icons.add,
-                        onPressed: () => {},
+                        onPressed: () =>
+                            context.read<EditWorkoutCubit>().addExercise(),
                       );
                     }
 
                     return ExerciseCard(
-                      exercise: state.exercises[index],
+                      exercise: exercises[index],
+                      onAddSet: () => context
+                          .read<EditWorkoutCubit>()
+                          .addSet(exercises[index].id),
                     );
                   },
                 ),
@@ -45,7 +51,12 @@ class EditWorkoutBody extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 20),
-                  BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
+                  BlocConsumer<EditWorkoutCubit, EditWorkoutState>(
+                    listener: (context, state) {
+                      if (state.status.isSuccess) {
+                        context.pop(true);
+                      }
+                    },
                     builder: (context, state) {
                       return Expanded(
                         child: LoadingButton(
@@ -53,9 +64,8 @@ class EditWorkoutBody extends StatelessWidget {
                           textOnLoading: 'SAVING',
                           icon: const Icon(Icons.save),
                           isLoading: state.status.isLoading,
-                          onPressed: () {
-                            // context.read<AddWorkoutCubit>().saveWorkout();
-                          },
+                          onPressed: () =>
+                              context.read<EditWorkoutCubit>().updateWorkout(),
                         ),
                       );
                     },

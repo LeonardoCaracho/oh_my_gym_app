@@ -2,6 +2,8 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
+import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 class WorkoutCard extends StatelessWidget {
@@ -23,17 +25,25 @@ class WorkoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void updateWorkouts() {
+      context.read<WorkoutsBloc>().add(const WorkoutsRequested());
+    }
+
     return Card(
       color: UIColors.lightPurple,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () {
-          context.pushNamed(
+        onTap: () async {
+          final shouldUpdate = await context.pushNamed<bool>(
             RouteConstants.editWorkoutRouteName,
             extra: workout,
           );
+
+          if (shouldUpdate ?? false) {
+            updateWorkouts();
+          }
         },
         child: Padding(
           padding: const EdgeInsets.all(8),

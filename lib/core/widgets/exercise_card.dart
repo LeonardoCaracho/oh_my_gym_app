@@ -2,16 +2,17 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 
-import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     required this.exercise,
+    required this.onAddSet,
     super.key,
   });
 
   final Exercise exercise;
+  final VoidCallback onAddSet;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class ExerciseCard extends StatelessWidget {
             child: DefaultButton(
               text: 'Add Set',
               icon: Icons.add,
-              onPressed: () => context.read<AddWorkoutCubit>().addSet(exercise),
+              onPressed: onAddSet,
             ),
           )
         ],

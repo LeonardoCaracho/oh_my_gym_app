@@ -1,37 +1,31 @@
 part of 'edit_workout_cubit.dart';
 
+// class EditWorkoutState extends Equatable {
+//   const EditWorkoutState();
+
+//   @override
+//   List<Object> get props => [];
+// }
+
 class EditWorkoutState extends Equatable {
   const EditWorkoutState({
+    required this.workout,
     this.status = Status.inital,
-    this.workoutName = '',
-    this.exercises = const [],
-    this.timestamp = 0,
-    this.id = '',
-  });
+  }) : super();
 
   final Status status;
-
-  final String workoutName;
-  final List<Exercise> exercises;
-  final String id;
-  final int timestamp;
+  final Workout workout;
 
   @override
-  List<Object> get props => [status, workoutName, exercises, timestamp, id];
+  List<Object> get props => [status, workout];
 
   EditWorkoutState copyWith({
     Status? status,
-    String? workoutName,
-    List<Exercise>? exercises,
-    int? timestamp,
-    String? id,
+    Workout? workout,
   }) {
     return EditWorkoutState(
       status: status ?? this.status,
-      exercises: exercises ?? this.exercises,
-      workoutName: workoutName ?? this.workoutName,
-      timestamp: timestamp ?? this.timestamp,
-      id: id ?? this.id,
+      workout: workout ?? this.workout,
     );
   }
 }

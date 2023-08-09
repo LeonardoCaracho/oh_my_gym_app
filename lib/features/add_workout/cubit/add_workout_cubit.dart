@@ -59,8 +59,8 @@ class AddWorkoutCubit extends Cubit<AddWorkoutState> {
       emit(state.copyWith(status: Status.loading));
 
       final workout = Workout.create(
-        state.workoutName,
-        state.exercises,
+        name: state.workoutName,
+        exercises: state.exercises,
       );
 
       await workoutsRepository.saveWorkout(workout);
