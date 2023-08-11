@@ -8,16 +8,21 @@ import 'package:workout_repository/workout_repository.dart';
 class EditWorkoutPage extends StatelessWidget {
   const EditWorkoutPage({
     required this.workout,
+    this.isEditMode = false,
     super.key,
   });
 
   final Workout workout;
+  final bool isEditMode;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => EditWorkoutCubit(
-        EditWorkoutState(workout: workout),
+        EditWorkoutState(
+          workout: workout,
+          isEditMode: isEditMode,
+        ),
         workoutsRepository: locator<WorkoutsContract>(),
       ),
       child: Scaffold(

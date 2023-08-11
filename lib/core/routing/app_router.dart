@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
 import 'package:oh_my_gym_app/core/core.dart';
-import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
@@ -64,7 +61,9 @@ class AppRouter {
             GoRoute(
               name: RouteConstants.addWorkoutRouteName,
               path: RouteConstants.addWorkoutsRoute,
-              builder: (context, state) => const AddWorkoutPage(),
+              builder: (context, state) => EditWorkoutPage(
+                workout: Workout.create(),
+              ),
             ),
             GoRoute(
               name: RouteConstants.editWorkoutRouteName,
@@ -72,6 +71,7 @@ class AppRouter {
               builder: (context, state) {
                 return EditWorkoutPage(
                   workout: state.extra! as Workout,
+                  isEditMode: true,
                 );
               },
             ),

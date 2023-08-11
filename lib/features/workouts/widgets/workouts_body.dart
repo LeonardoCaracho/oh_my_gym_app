@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 
 class WorkoutsBody extends StatelessWidget {
@@ -44,8 +45,13 @@ class WorkoutsBody extends StatelessWidget {
                 }
 
                 if (state is WorkoutsIsLoadFailure) {
-                  return const Center(
-                    child: Text('Error loading workouts!'),
+                  return Center(
+                    child: InkWell(
+                      child: const Text('Error loading workouts!'),
+                      onTap: () {
+                        context.read<AppBloc>().add(const AppLogoutRequested());
+                      },
+                    ),
                   );
                 }
 

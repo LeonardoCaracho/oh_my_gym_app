@@ -8,11 +8,13 @@ class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     required this.exercise,
     required this.onAddSet,
+    this.onDelete,
     super.key,
   });
 
   final Exercise exercise;
   final VoidCallback onAddSet;
+  final void Function(String exerciseId, int setIndex)? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,7 @@ class ExerciseCard extends StatelessWidget {
                 key: UniqueKey(),
                 index: index,
                 exercise: exercise,
+                onDelete: onDelete,
               );
             },
           ),

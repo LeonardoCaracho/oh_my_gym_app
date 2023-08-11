@@ -69,4 +69,17 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
       );
     }
   }
+
+  Future<void> saveWorkout() async {
+    try {
+      emit(state.copyWith(status: Status.loading));
+
+      await workoutsRepository.saveWorkout(state.workout);
+
+      emit(state.copyWith(status: Status.success));
+    } catch (e) {
+      debugPrint('Error saving workout. $e');
+      emit(state.copyWith(status: Status.failure));
+    }
+  }
 }

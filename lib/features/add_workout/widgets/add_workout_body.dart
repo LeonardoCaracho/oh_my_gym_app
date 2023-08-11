@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
-import 'package:workout_repository/workout_repository.dart';
+import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 
 class AddWorkoutBody extends StatelessWidget {
   const AddWorkoutBody({super.key});
@@ -15,7 +15,7 @@ class AddWorkoutBody extends StatelessWidget {
         children: [
           const AddWorkoutHeader(),
           const SizedBox(height: 30),
-          const WorkoutNameInput(),
+          // const WorkoutNameInput(),
           const SizedBox(height: 20),
           BlocBuilder<AddWorkoutCubit, AddWorkoutState>(
             builder: (context, state) {
@@ -34,6 +34,11 @@ class AddWorkoutBody extends StatelessWidget {
 
                     return ExerciseCard(
                       exercise: state.exercises[index],
+                      onDelete: (exerciseId, setIndex) =>
+                          context.read<EditWorkoutCubit>().deleteSet(
+                                exerciseId,
+                                setIndex,
+                              ),
                       onAddSet: () => context
                           .read<AddWorkoutCubit>()
                           .addSet(state.exercises[index]),

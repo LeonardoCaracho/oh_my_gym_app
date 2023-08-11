@@ -7,11 +7,13 @@ import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 // ignore: must_be_immutable
 class WorkoutNameInput extends StatefulWidget {
   const WorkoutNameInput({
+    required this.onChanged,
     super.key,
     this.value,
   });
 
   final String? value;
+  final ValueChanged<String> onChanged;
 
   @override
   State<WorkoutNameInput> createState() => _WorkoutNameInputState();
@@ -36,7 +38,7 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
       onChanged: (text) {
         if (_timer?.isActive ?? false) _timer?.cancel();
         _timer = Timer(const Duration(milliseconds: 500), () {
-          context.read<AddWorkoutCubit>().updateName(text);
+          widget.onChanged(text);
         });
       },
       decoration: InputDecoration(
