@@ -1,15 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
+import 'package:workout_repository/workout_repository.dart';
+
+class FakeWorkout extends Fake implements Workout {}
+
+final mockWorkout = Workout.create();
 
 void main() {
+  setUpAll(() => registerFallbackValue(FakeWorkout()));
   group('EditWorkoutState', () {
     test('supports value equality', () {
       expect(
-        EditWorkoutState(),
+        EditWorkoutState(workout: mockWorkout),
         equals(
-          const EditWorkoutState(),
+          EditWorkoutState(workout: mockWorkout),
         ),
       );
     });
@@ -17,7 +25,7 @@ void main() {
     group('constructor', () {
       test('can be instantiated', () {
         expect(
-          const EditWorkoutState(),
+          EditWorkoutState(workout: mockWorkout),
           isNotNull,
         );
       });
@@ -28,8 +36,8 @@ void main() {
         'copies correctly '
         'when no argument specified',
         () {
-          const editWorkoutState = EditWorkoutState(
-            customProperty: 'My property',
+          final editWorkoutState = EditWorkoutState(
+            workout: mockWorkout,
           );
           expect(
             editWorkoutState.copyWith(),
@@ -42,17 +50,19 @@ void main() {
         'copies correctly '
         'when all arguments specified',
         () {
-          const editWorkoutState = EditWorkoutState(
-            customProperty: 'My property',
+          final editWorkoutState = EditWorkoutState(
+            workout: mockWorkout,
           );
           final otherEditWorkoutState = EditWorkoutState(
-            customProperty: 'My property 2',
+            workout: mockWorkout,
+            status: Status.loading,
           );
           expect(editWorkoutState, isNot(equals(otherEditWorkoutState)));
 
           expect(
             editWorkoutState.copyWith(
-              customProperty: otherEditWorkoutState.customProperty,
+              workout: mockWorkout,
+              status: Status.loading,
             ),
             equals(otherEditWorkoutState),
           );
