@@ -1,18 +1,19 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
-import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 class ExerciseSetRow extends StatelessWidget {
   const ExerciseSetRow({
     required this.index,
     required this.exercise,
+    this.onDelete,
     super.key,
   });
 
   final int index;
   final Exercise exercise;
+  final void Function(String exerciseId, int setIndex)? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +48,9 @@ class ExerciseSetRow extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => context.read<AddWorkoutCubit>().deleteSet(
-                  exercise,
-                  index,
-                ),
+            onPressed: () {
+              onDelete?.call(exercise.id, index);
+            },
             icon: const Icon(
               Icons.delete,
               size: 20,

@@ -2,16 +2,19 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 
-import 'package:oh_my_gym_app/features/add_workout/add_workout.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     required this.exercise,
+    required this.onAddSet,
+    this.onDelete,
     super.key,
   });
 
   final Exercise exercise;
+  final VoidCallback onAddSet;
+  final void Function(String exerciseId, int setIndex)? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,7 @@ class ExerciseCard extends StatelessWidget {
                 Expanded(
                   child: ExerciseCardInput(
                     hintText: 'Exercise name',
+                    value: exercise.name,
                     onChanged: (text) {
                       exercise.name = text;
                     },
@@ -41,6 +45,7 @@ class ExerciseCard extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ExerciseCardInput(
+                    value: exercise.observation,
                     hintText: 'Observations',
                     onChanged: (text) {
                       exercise.observation = text;
@@ -59,6 +64,7 @@ class ExerciseCard extends StatelessWidget {
                 key: UniqueKey(),
                 index: index,
                 exercise: exercise,
+                onDelete: onDelete,
               );
             },
           ),
@@ -67,7 +73,7 @@ class ExerciseCard extends StatelessWidget {
             child: DefaultButton(
               text: 'Add Set',
               icon: Icons.add,
-              onPressed: () => context.read<AddWorkoutCubit>().addSet(exercise),
+              onPressed: onAddSet,
             ),
           )
         ],
