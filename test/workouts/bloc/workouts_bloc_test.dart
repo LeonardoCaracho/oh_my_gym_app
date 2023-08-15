@@ -6,7 +6,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 import 'package:workout_repository/workout_repository.dart';
 
-import '../../edit_workout/cubit/edit_workout_state_test.dart';
 import '../../helpers/mocks/mocks.dart';
 
 class MockWorkoutsContract extends Mock implements WorkoutsContract {}
