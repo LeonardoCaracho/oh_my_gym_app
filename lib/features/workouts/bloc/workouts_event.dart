@@ -10,3 +10,12 @@ class WorkoutsEvent extends Equatable {
 class WorkoutsRequested extends WorkoutsEvent {
   const WorkoutsRequested();
 }
+
+class WorkoutRemoved extends WorkoutsEvent {
+  const WorkoutRemoved({required this.workout});
+
+  final Workout workout;
+
+  @override
+  List<Object> get props => [workout];
+}

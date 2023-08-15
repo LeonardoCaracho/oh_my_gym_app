@@ -15,6 +15,10 @@ class WorkoutsIsLoading extends WorkoutsState {
   const WorkoutsIsLoading() : super();
 }
 
+class WorkoutRemoveIsLoading extends WorkoutsState {
+  const WorkoutRemoveIsLoading() : super();
+}
+
 class WorkoutsIsLoadSuccess extends WorkoutsState {
   const WorkoutsIsLoadSuccess({required this.workouts}) : super();
 

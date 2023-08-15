@@ -38,11 +38,6 @@ class WorkoutRepository implements WorkoutsContract {
   Future<void> updateWorkout(Workout workout) async {
     final user = authRepository.currentUser;
 
-    // var test = await _firebaseFirestore
-    //     .collection(user.id)
-    //     .where('id', isEqualTo: workout.id)
-    //     .get();
-
     await _firebaseFirestore.collection(user.id).doc(workout.docId).set(
           workout.toJson(),
         );
