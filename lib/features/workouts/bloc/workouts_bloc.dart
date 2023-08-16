@@ -10,6 +10,7 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
   WorkoutsBloc({required this.workoutsRepository})
       : super(const WorkoutsInitial()) {
     on<WorkoutsRequested>(_onWorkoutsRequestedEvent);
+    on<WorkoutRemoved>(_onWorkoutRemovedEvent);
   }
   final WorkoutsContract workoutsRepository;
 
@@ -19,10 +20,29 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
   ) async {
     try {
       emit(const WorkoutsIsLoading());
-      final workouts = await workoutsRepository.getWorkouts();
-      emit(WorkoutsIsLoadSuccess(workouts: workouts));
+      await _fetchWorkouts(emit);
     } catch (e) {
       emit(const WorkoutsIsLoadFailure());
     }
+  }
+
+  FutureOr<void> _onWorkoutRemovedEvent(
+    WorkoutRemoved event,
+    Emitter<WorkoutsState> emit,
+  ) async {
+    try {
+      emit(const WorkoutRemoveIsLoading());
+      await workoutsRepository.deleteWorkout(event.workout.docId ?? '');
+      await _fetchWorkouts(emit);
+    } catch (e) {
+      emit(const WorkoutsIsLoadFailure());
+    }
+  }
+
+  FutureOr<void> _fetchWorkouts(
+    Emitter<WorkoutsState> emit,
+  ) async {
+    final workouts = await workoutsRepository.getWorkouts();
+    emit(WorkoutsIsLoadSuccess(workouts: workouts));
   }
 }

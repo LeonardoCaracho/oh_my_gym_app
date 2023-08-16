@@ -27,6 +27,13 @@ void main() {
       );
     });
 
+    test('WorkoutRemoveIsLoading should be equatable', () {
+      expect(
+        const WorkoutRemoveIsLoading(),
+        const WorkoutRemoveIsLoading(),
+      );
+    });
+
     // Test the WorkoutsIsLoadFailure state
     test('WorkoutsIsLoadFailure should be equatable', () {
       expect(const WorkoutsIsLoadFailure(), const WorkoutsIsLoadFailure());

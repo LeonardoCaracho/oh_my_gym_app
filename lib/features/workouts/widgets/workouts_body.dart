@@ -30,7 +30,7 @@ class WorkoutsBody extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,
-                      childAspectRatio: 1.1,
+                      childAspectRatio: 1.4,
                     ),
                     itemCount: state.workouts.length + 1,
                     itemBuilder: (context, index) {

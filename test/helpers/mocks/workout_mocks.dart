@@ -1,6 +1,7 @@
 import 'package:workout_repository/workout_repository.dart';
 
-final workoutMock = Workout(id: 'id', name: 'name', exercises: [exerciseMock]);
+final workoutMock =
+    Workout(id: 'id', docId: 'docId', name: 'name', exercises: [exerciseMock]);
 
 final exerciseMock = Exercise(id: 'id', name: 'name', sets: [exerciseSetMock]);
 
