@@ -1,20 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
+import 'package:workout_repository/workout_repository.dart';
 
-/// {@template start_workout_body}
-/// Body of the StartWorkoutPage.
-///
-/// Add what it does
-/// {@endtemplate}
 class StartWorkoutBody extends StatelessWidget {
-  /// {@macro start_workout_body}
-  const StartWorkoutBody({super.key});
+  const StartWorkoutBody({
+    required this.workout,
+    super.key,
+  });
+
+  final Workout workout;
 
   @override
   Widget build(BuildContext context) {
+    final exercises = workout.exercises;
+
     return BlocBuilder<StartWorkoutCubit, StartWorkoutState>(
       builder: (context, state) {
-        return Center(child: Text(state.customProperty));
+        return Column(
+          children: [
+            CommonHeader(
+              title: workout.name,
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: exercises.length,
+                itemBuilder: (_, index) {
+                  return ExerciseCard(
+                    exercise: exercises[index],
+                  );
+                },
+              ),
+            ),
+          ],
+        );
       },
     );
   }

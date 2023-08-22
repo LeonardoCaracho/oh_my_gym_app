@@ -80,7 +80,9 @@ class AppRouter {
               name: RouteConstants.startWorkoutRouteName,
               path: RouteConstants.startWorkoutsRoute,
               builder: (context, state) {
-                return const StartWorkoutPage();
+                return StartWorkoutPage(
+                  workout: state.extra! as Workout,
+                );
               },
             ),
           ],

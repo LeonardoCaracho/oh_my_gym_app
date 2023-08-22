@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/app/app.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 
 class WorkoutsBody extends StatelessWidget {
@@ -12,7 +13,9 @@ class WorkoutsBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const MyWorkoutsHeader(),
+          const CommonHeader(
+            title: 'OH MY WORKOUT',
+          ),
           const SizedBox(height: 30),
           Expanded(
             child: BlocBuilder<WorkoutsBloc, WorkoutsState>(

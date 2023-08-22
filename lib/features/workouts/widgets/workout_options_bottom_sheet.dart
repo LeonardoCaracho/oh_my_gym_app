@@ -27,7 +27,10 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.play_arrow),
           title: const Text('Start'),
-          onTap: () => context.goNamed(RouteConstants.startWorkoutRouteName),
+          onTap: () => context.goNamed(
+            RouteConstants.startWorkoutRouteName,
+            extra: workout,
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.edit),

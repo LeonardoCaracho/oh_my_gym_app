@@ -7,13 +7,13 @@ import 'package:workout_repository/workout_repository.dart';
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     required this.exercise,
-    required this.onAddSet,
+    this.onAddSet,
     this.onDelete,
     super.key,
   });
 
   final Exercise exercise;
-  final VoidCallback onAddSet;
+  final VoidCallback? onAddSet;
   final void Function(String exerciseId, int setIndex)? onDelete;
 
   @override
@@ -68,14 +68,15 @@ class ExerciseCard extends StatelessWidget {
               );
             },
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: DefaultButton(
-              text: 'Add Set',
-              icon: Icons.add,
-              onPressed: onAddSet,
-            ),
-          )
+          if (onAddSet != null)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: DefaultButton(
+                text: 'Add Set',
+                icon: Icons.add,
+                onPressed: onAddSet,
+              ),
+            )
         ],
       ),
     );

@@ -1,15 +1,18 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
-class MyWorkoutsHeader extends StatelessWidget {
-  const MyWorkoutsHeader({
+class CommonHeader extends StatelessWidget {
+  const CommonHeader({
+    required this.title,
     super.key,
   });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      'MY WORKOUTS',
+      title,
       style: UITextStyle.headline3,
     );
   }

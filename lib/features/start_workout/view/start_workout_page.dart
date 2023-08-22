@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
 import 'package:oh_my_gym_app/features/start_workout/widgets/start_workout_body.dart';
+import 'package:workout_repository/workout_repository.dart';
 
-/// {@template start_workout_page}
-/// A description for StartWorkoutPage
-/// {@endtemplate}
 class StartWorkoutPage extends StatelessWidget {
-  /// {@macro start_workout_page}
-  const StartWorkoutPage({super.key});
+  const StartWorkoutPage({
+    required this.workout,
+    super.key,
+  });
 
-  /// The static route for StartWorkoutPage
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const StartWorkoutPage());
-  }
+  final Workout workout;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => StartWorkoutCubit(),
-      child: const Scaffold(
-        body: StartWorkoutView(),
+      child: Scaffold(
+        body: StartWorkoutView(
+          workout: workout,
+        ),
       ),
     );
-  }    
+  }
 }
 
-/// {@template start_workout_view}
-/// Displays the Body of StartWorkoutView
-/// {@endtemplate}
 class StartWorkoutView extends StatelessWidget {
-  /// {@macro start_workout_view}
-  const StartWorkoutView({super.key});
+  const StartWorkoutView({
+    required this.workout,
+    super.key,
+  });
+
+  final Workout workout;
 
   @override
   Widget build(BuildContext context) {
-    return const StartWorkoutBody();
+    return SafeArea(
+      child: StartWorkoutBody(
+        workout: workout,
+      ),
+    );
   }
 }
