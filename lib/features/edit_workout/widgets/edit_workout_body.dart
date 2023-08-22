@@ -53,7 +53,7 @@ class EditWorkoutBody extends StatelessWidget {
               if (state.isEditMode)
                 const BottomSectionUpdateWorkout()
               else
-                const BottomSectionSaveWorkout()
+                const BottomSectionSaveWorkout(),
             ],
           );
         },

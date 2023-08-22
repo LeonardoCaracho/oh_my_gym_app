@@ -59,7 +59,7 @@ class ExerciseSetRow extends StatelessWidget {
               onTap: () {
                 onDelete?.call(exercise.id, index);
               },
-            )
+            ),
         ],
       ),
     );

@@ -82,7 +82,7 @@ class ExerciseCard extends StatelessWidget {
                 icon: Icons.add,
                 onPressed: onAddSet,
               ),
-            )
+            ),
         ],
       ),
     );
