@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
 import 'package:oh_my_gym_app/features/start_workout/widgets/start_workout_body.dart';
@@ -16,6 +17,12 @@ class StartWorkoutPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => StartWorkoutCubit(),
       child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'START MY WORKOUT!',
+            style: UITextStyle.headline3,
+          ),
+        ),
         body: StartWorkoutView(
           workout: workout,
         ),

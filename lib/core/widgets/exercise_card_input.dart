@@ -7,11 +7,13 @@ class ExerciseCardInput extends StatefulWidget {
     this.hintText,
     this.onChanged,
     this.value,
+    this.isReadOnly = false,
   });
 
   final String? hintText;
   final String? value;
   final ValueChanged<String>? onChanged;
+  final bool isReadOnly;
 
   @override
   State<ExerciseCardInput> createState() => _ExerciseCardInputState();
@@ -31,6 +33,7 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: widget.isReadOnly,
       controller: _controller,
       onChanged: widget.onChanged,
       style: UITextStyle.bodyText3,

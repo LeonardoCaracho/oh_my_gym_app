@@ -17,23 +17,27 @@ class StartWorkoutBody extends StatelessWidget {
 
     return BlocBuilder<StartWorkoutCubit, StartWorkoutState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            CommonHeader(
-              title: workout.name,
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: exercises.length,
-                itemBuilder: (_, index) {
-                  return ExerciseCard(
-                    exercise: exercises[index],
-                  );
-                },
+        return Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              CommonHeader(
+                title: workout.name,
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: exercises.length,
+                  itemBuilder: (_, index) {
+                    return ExerciseCard(
+                      exercise: exercises[index],
+                      isEditMode: false,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
