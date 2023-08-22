@@ -27,15 +27,19 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.play_arrow),
           title: const Text('Start'),
-          onTap: () => context.goNamed(
-            RouteConstants.startWorkoutRouteName,
-            extra: workout,
-          ),
+          onTap: () {
+            closeBottomSheet();
+            context.goNamed(
+              RouteConstants.startWorkoutRouteName,
+              extra: workout,
+            );
+          },
         ),
         ListTile(
           leading: const Icon(Icons.edit),
           title: const Text('Edit'),
           onTap: () async {
+            closeBottomSheet();
             final shouldUpdate = await context.pushNamed<bool>(
               RouteConstants.editWorkoutRouteName,
               extra: workout,
@@ -44,8 +48,6 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
             if (shouldUpdate ?? false) {
               updateWorkouts();
             }
-
-            closeBottomSheet();
           },
         ),
         ListTile(

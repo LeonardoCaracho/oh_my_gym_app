@@ -24,6 +24,7 @@ class StartWorkoutState extends Equatable {
     );
   }
 }
+
 /// {@template start_workout_initial}
 /// The initial state of StartWorkoutState
 /// {@endtemplate}

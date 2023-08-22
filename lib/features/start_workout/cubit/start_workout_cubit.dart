@@ -7,8 +7,5 @@ part 'start_workout_state.dart';
 class StartWorkoutCubit extends Cubit<StartWorkoutState> {
   StartWorkoutCubit() : super(const StartWorkoutInitial());
 
-  /// A description for yourCustomFunction 
-  FutureOr<void> yourCustomFunction() {
-    // TODO: Add Logic
-  }
+  FutureOr<void> yourCustomFunction() {}
 }
