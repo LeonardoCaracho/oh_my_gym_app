@@ -24,7 +24,7 @@ class App extends StatelessWidget {
           create: (context) => LoginCubit(
             authRepository: locator<AuthenticationContract>(),
           ),
-        )
+        ),
       ],
       child: const AppView(),
     );

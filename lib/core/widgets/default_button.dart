@@ -30,7 +30,7 @@ class DefaultButton extends StatelessWidget {
               text,
               style: UITextStyle.bodyText3,
             ),
-            if (icon != null) const Icon(Icons.add)
+            if (icon != null) const Icon(Icons.add),
           ],
         ),
       ),

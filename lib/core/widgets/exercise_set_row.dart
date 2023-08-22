@@ -8,18 +8,21 @@ class ExerciseSetRow extends StatelessWidget {
     required this.index,
     required this.exercise,
     this.onDelete,
+    this.showDelete = true,
     super.key,
   });
 
   final int index;
   final Exercise exercise;
   final void Function(String exerciseId, int setIndex)? onDelete;
+  final bool showDelete;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 8,
+        vertical: 4,
       ),
       child: Row(
         children: [
@@ -47,16 +50,16 @@ class ExerciseSetRow extends StatelessWidget {
                   exercise.sets[index].weight = double.tryParse(text) ?? 0,
             ),
           ),
-          IconButton(
-            onPressed: () {
-              onDelete?.call(exercise.id, index);
-            },
-            icon: const Icon(
-              Icons.delete,
-              size: 20,
-              color: UIColors.white,
+          if (showDelete)
+            InkWell(
+              child: const Icon(
+                Icons.remove_circle,
+                color: UIColors.white,
+              ),
+              onTap: () {
+                onDelete?.call(exercise.id, index);
+              },
             ),
-          ),
         ],
       ),
     );

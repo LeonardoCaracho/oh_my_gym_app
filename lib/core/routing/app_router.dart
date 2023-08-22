@@ -5,6 +5,7 @@ import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
+import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
 import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
 import 'package:workout_repository/workout_repository.dart';
 
@@ -72,6 +73,15 @@ class AppRouter {
                 return EditWorkoutPage(
                   workout: state.extra! as Workout,
                   isEditMode: true,
+                );
+              },
+            ),
+            GoRoute(
+              name: RouteConstants.startWorkoutRouteName,
+              path: RouteConstants.startWorkoutsRoute,
+              builder: (context, state) {
+                return StartWorkoutPage(
+                  workout: state.extra! as Workout,
                 );
               },
             ),

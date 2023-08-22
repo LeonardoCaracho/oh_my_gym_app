@@ -7,14 +7,16 @@ import 'package:workout_repository/workout_repository.dart';
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     required this.exercise,
-    required this.onAddSet,
+    this.onAddSet,
     this.onDelete,
+    this.isEditMode = true,
     super.key,
   });
 
   final Exercise exercise;
-  final VoidCallback onAddSet;
+  final VoidCallback? onAddSet;
   final void Function(String exerciseId, int setIndex)? onDelete;
+  final bool isEditMode;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class ExerciseCard extends StatelessWidget {
                 Expanded(
                   child: ExerciseCardInput(
                     hintText: 'Exercise name',
+                    isReadOnly: !isEditMode,
                     value: exercise.name,
                     onChanged: (text) {
                       exercise.name = text;
@@ -45,6 +48,7 @@ class ExerciseCard extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ExerciseCardInput(
+                    isReadOnly: !isEditMode,
                     value: exercise.observation,
                     hintText: 'Observations',
                     onChanged: (text) {
@@ -62,20 +66,23 @@ class ExerciseCard extends StatelessWidget {
             itemBuilder: (_, index) {
               return ExerciseSetRow(
                 key: UniqueKey(),
+                showDelete: isEditMode,
                 index: index,
                 exercise: exercise,
                 onDelete: onDelete,
               );
             },
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: DefaultButton(
-              text: 'Add Set',
-              icon: Icons.add,
-              onPressed: onAddSet,
+          const SizedBox(height: 8),
+          if (isEditMode)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: DefaultButton(
+                text: 'Add Set',
+                icon: Icons.add,
+                onPressed: onAddSet,
+              ),
             ),
-          )
         ],
       ),
     );
