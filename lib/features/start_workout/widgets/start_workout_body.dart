@@ -17,20 +17,25 @@ class StartWorkoutBody extends StatelessWidget {
 
     return BlocBuilder<StartWorkoutCubit, StartWorkoutState>(
       builder: (context, state) {
-        return Stack(
+        return Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
+            Expanded(
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
                   Expanded(
                     child: ListView.builder(
                       itemCount: exercises.length,
                       itemBuilder: (_, index) {
-                        return ExerciseCard(
-                          exercise: exercises[index],
-                          isEditMode: false,
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 8,
+                            right: 8,
+                            top: 4,
+                          ),
+                          child: ExerciseCard(
+                            exercise: exercises[index],
+                            isEditMode: false,
+                          ),
                         );
                       },
                     ),
@@ -38,13 +43,7 @@ class StartWorkoutBody extends StatelessWidget {
                 ],
               ),
             ),
-            const Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              height: 150,
-              child: BottomWorkoutStart(),
-            ),
+            const BottomWorkoutStart(),
           ],
         );
       },
