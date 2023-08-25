@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
 
 class BottomWorkoutStart extends StatefulWidget {
   const BottomWorkoutStart({
@@ -76,28 +75,7 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
               Expanded(
                 child: DefaultButton(
                   text: 'FINISH',
-                  onPressed: () {
-                    showDialog<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: UIColors.liver,
-                          title: const Text('FINISH WORKOUT'),
-                          content: const Text('Are you really finished?'),
-                          actions: [
-                            DefaultButton(
-                              text: 'CANCEL',
-                              onPressed: () => Navigator.of(context).pop(),
-                            ),
-                            DefaultButton(
-                              text: 'CONTINUE',
-                              onPressed: () => Navigator.of(context).pop(),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
+                  onPressed: () => showAlertDialog(context),
                 ),
               ),
               const SizedBox(width: 20),
@@ -107,39 +85,27 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
       ),
     );
   }
-}
 
-class TimerController {
-  TimerController() {
-    _myDuration = Duration.zero;
-  }
-  late Timer _countdown;
-  late Duration _myDuration;
-  ValueNotifier<Duration> countdownNotifier = ValueNotifier(Duration.zero);
-  ValueNotifier<bool> isRunningNotifier = ValueNotifier(true);
-
-  void start() {
-    isRunningNotifier.value = true;
-    _countdown = Timer.periodic(
-      const Duration(seconds: 1),
-      (_) => setCountDown(),
+  void showAlertDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: UIColors.liver,
+          title: const Text('FINISH WORKOUT'),
+          content: const Text('Are you really finished?'),
+          actions: [
+            DefaultButton(
+              text: 'CANCEL',
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            DefaultButton(
+              text: 'CONTINUE',
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
     );
-  }
-
-  void play() {
-    isRunningNotifier.value = true;
-    _countdown.cancel();
-    start();
-  }
-
-  void stop() {
-    isRunningNotifier.value = false;
-    _countdown.cancel();
-  }
-
-  void setCountDown() {
-    final seconds = _myDuration.inSeconds + 1;
-    _myDuration = Duration(seconds: seconds);
-    countdownNotifier.value = _myDuration;
   }
 }
