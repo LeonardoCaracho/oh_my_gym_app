@@ -19,6 +19,15 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     emit(state.copyWith(workout: state.workout.copyWith(name: name)));
   }
 
+  void deleteExercise(int index) {
+    final exercises = [...state.workout.exercises]..removeAt(index);
+    emit(
+      state.copyWith(
+        workout: state.workout.copyWith(exercises: exercises),
+      ),
+    );
+  }
+
   void addExercise() {
     final exercises = state.workout.exercises
       ..add(

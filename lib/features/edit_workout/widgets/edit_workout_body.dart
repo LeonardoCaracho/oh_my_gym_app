@@ -36,16 +36,24 @@ class EditWorkoutBody extends StatelessWidget {
                       );
                     }
 
-                    return ExerciseCard(
-                      exercise: exercises[index],
-                      onAddSet: () => context
-                          .read<EditWorkoutCubit>()
-                          .addSet(exercises[index].id),
-                      onDelete: (exerciseId, setIndex) =>
-                          context.read<EditWorkoutCubit>().deleteSet(
-                                exerciseId,
-                                setIndex,
-                              ),
+                    return Dismissible(
+                      onDismissed: (direction) {
+                        context.read<EditWorkoutCubit>().deleteExercise(
+                              index,
+                            );
+                      },
+                      key: UniqueKey(),
+                      child: ExerciseCard(
+                        exercise: exercises[index],
+                        onAddSet: () => context
+                            .read<EditWorkoutCubit>()
+                            .addSet(exercises[index].id),
+                        onDelete: (exerciseId, setIndex) =>
+                            context.read<EditWorkoutCubit>().deleteSet(
+                                  exerciseId,
+                                  setIndex,
+                                ),
+                      ),
                     );
                   },
                 ),

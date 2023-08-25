@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
+import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -24,6 +26,11 @@ class App extends StatelessWidget {
           create: (context) => LoginCubit(
             authRepository: locator<AuthenticationContract>(),
           ),
+        ),
+        BlocProvider<WorkoutsBloc>(
+          create: (context) => WorkoutsBloc(
+            workoutsRepository: locator<WorkoutsContract>(),
+          )..add(const WorkoutsRequested()),
         ),
       ],
       child: const AppView(),

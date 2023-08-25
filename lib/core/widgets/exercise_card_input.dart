@@ -46,6 +46,7 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
         ),
         isDense: true,
         hintText: widget.hintText,
+        hintStyle: UITextStyle.bodyText3,
         filled: true,
         fillColor: UIColors.white.withOpacity(0.5),
         border: OutlineInputBorder(

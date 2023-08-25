@@ -7,11 +7,13 @@ class ExerciseSetRowInput extends StatelessWidget {
     this.label,
     this.onChanged,
     this.value,
+    this.hint = '0',
     super.key,
   });
 
   final String? label;
   final String? value;
+  final String hint;
   final ValueChanged<String>? onChanged;
 
   @override
@@ -25,7 +27,7 @@ class ExerciseSetRowInput extends StatelessWidget {
         SizedBox(
           width: 60,
           child: ExerciseCardInput(
-            hintText: '0',
+            hintText: hint,
             onChanged: onChanged,
             value: value,
           ),
