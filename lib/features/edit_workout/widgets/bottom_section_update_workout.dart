@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
+import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 
 class BottomSectionUpdateWorkout extends StatelessWidget {
   const BottomSectionUpdateWorkout({super.key});
@@ -30,8 +31,10 @@ class BottomSectionUpdateWorkout extends StatelessWidget {
                 textOnLoading: 'UPDATING',
                 icon: const Icon(Icons.update),
                 isLoading: state.status.isLoading,
-                onPressed: () =>
-                    context.read<EditWorkoutCubit>().updateWorkout(),
+                onPressed: () {
+                  context.read<EditWorkoutCubit>().updateWorkout();
+                  context.read<WorkoutsBloc>().add(const WorkoutsRequested());
+                },
               ),
             );
           },

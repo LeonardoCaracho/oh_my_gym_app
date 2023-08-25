@@ -17,8 +17,18 @@ class ExerciseSetRow extends StatelessWidget {
   final void Function(String exerciseId, int setIndex)? onDelete;
   final bool showDelete;
 
+  String? intToString(int? value) {
+    return (value != null && value > 0) ? value.toString() : null;
+  }
+
+  String? doubleToString(double? value) {
+    return (value != null && value > 0) ? value.toString() : null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final exerciseSet = exercise.sets[index];
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 8,
@@ -36,18 +46,18 @@ class ExerciseSetRow extends StatelessWidget {
             flex: 2,
             child: ExerciseSetRowInput(
               label: 'Reps: ',
-              value: '${exercise.sets[index].reps}',
-              onChanged: (text) =>
-                  exercise.sets[index].reps = int.tryParse(text) ?? 0,
+              value: intToString(exerciseSet.reps),
+              onChanged: (text) => exerciseSet.reps = int.tryParse(text) ?? 0,
             ),
           ),
           Expanded(
             flex: 2,
             child: ExerciseSetRowInput(
               label: 'Weight: ',
-              value: '${exercise.sets[index].weight}',
+              hint: '0.0',
+              value: doubleToString(exerciseSet.weight),
               onChanged: (text) =>
-                  exercise.sets[index].weight = double.tryParse(text) ?? 0,
+                  exerciseSet.weight = double.tryParse(text) ?? 0,
             ),
           ),
           if (showDelete)
