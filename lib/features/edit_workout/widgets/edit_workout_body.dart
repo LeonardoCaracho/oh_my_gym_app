@@ -44,6 +44,7 @@ class EditWorkoutBody extends StatelessWidget {
                       },
                       key: UniqueKey(),
                       child: ExerciseCard(
+                        isEditMode: true,
                         exercise: exercises[index],
                         onAddSet: () => context
                             .read<EditWorkoutCubit>()

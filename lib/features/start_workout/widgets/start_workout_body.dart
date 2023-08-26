@@ -26,16 +26,8 @@ class StartWorkoutBody extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: exercises.length,
                       itemBuilder: (_, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                            left: 8,
-                            right: 8,
-                            top: 4,
-                          ),
-                          child: ExerciseCard(
-                            exercise: exercises[index],
-                            isEditMode: false,
-                          ),
+                        return ExerciseCard(
+                          exercise: exercises[index],
                         );
                       },
                     ),
