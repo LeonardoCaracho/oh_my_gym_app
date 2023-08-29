@@ -28,6 +28,24 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     );
   }
 
+  void reorderExercises(int oldIndex, int newIndex) {
+    final exercises = [...state.workout.exercises];
+    var index = newIndex;
+
+    if (oldIndex < index) {
+      index -= 1;
+    }
+
+    final item = exercises.removeAt(oldIndex);
+    exercises.insert(index, item);
+
+    emit(
+      state.copyWith(
+        workout: state.workout.copyWith(exercises: exercises),
+      ),
+    );
+  }
+
   void addExercise() {
     final exercises = state.workout.exercises
       ..add(
