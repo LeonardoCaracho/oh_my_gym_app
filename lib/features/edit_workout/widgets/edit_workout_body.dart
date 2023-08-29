@@ -24,26 +24,25 @@ class EditWorkoutBody extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: ListView.builder(
-                  itemCount: exercises.length + 1,
+                child: ReorderableListView.builder(
+                  buildDefaultDragHandles: false,
+                  onReorder: (oldIndex, newIndex) {
+                    context.read<EditWorkoutCubit>().reorderExercises(
+                          oldIndex,
+                          newIndex,
+                        );
+                  },
+                  itemCount: exercises.length,
                   itemBuilder: (_, index) {
-                    if (index == exercises.length) {
-                      return DefaultButton(
-                        text: 'Add Exercise',
-                        icon: Icons.add,
-                        onPressed: () =>
-                            context.read<EditWorkoutCubit>().addExercise(),
-                      );
-                    }
-
                     return Dismissible(
                       onDismissed: (direction) {
                         context.read<EditWorkoutCubit>().deleteExercise(
                               index,
                             );
                       },
-                      key: UniqueKey(),
+                      key: Key(exercises[index].id),
                       child: ExerciseCard(
+                        index: index,
                         isEditMode: true,
                         exercise: exercises[index],
                         onAddSet: () => context
@@ -58,6 +57,11 @@ class EditWorkoutBody extends StatelessWidget {
                     );
                   },
                 ),
+              ),
+              DefaultButton(
+                text: 'Add Exercise',
+                icon: Icons.add,
+                onPressed: () => context.read<EditWorkoutCubit>().addExercise(),
               ),
               if (state.isEditMode)
                 const BottomSectionUpdateWorkout()

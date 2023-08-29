@@ -141,5 +141,33 @@ void main() {
         isA<EditWorkoutState>(),
       ],
     );
+
+    blocTest<EditWorkoutCubit, EditWorkoutState>(
+      'emits updated state when deleteExercise is called',
+      build: () => editWorkoutCubit,
+      seed: () => EditWorkoutState(
+        workout: Workout.create(exercises: [mockExercise]),
+      ),
+      act: (cubit) {
+        cubit.deleteExercise(0);
+      },
+      expect: () => [
+        isA<EditWorkoutState>(),
+      ],
+    );
+
+    blocTest<EditWorkoutCubit, EditWorkoutState>(
+      'emits updated state when reorderExercise is called',
+      build: () => editWorkoutCubit,
+      seed: () => EditWorkoutState(
+        workout: Workout.create(exercises: [mockExercise, mockExercise]),
+      ),
+      act: (cubit) {
+        cubit.reorderExercises(0, 1);
+      },
+      expect: () => [
+        isA<EditWorkoutState>(),
+      ],
+    );
   });
 }

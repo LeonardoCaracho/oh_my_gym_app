@@ -6,6 +6,7 @@ import 'package:workout_repository/workout_repository.dart';
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     required this.exercise,
+    this.index,
     this.onAddSet,
     this.onDelete,
     this.isEditMode = false,
@@ -15,6 +16,7 @@ class ExerciseCard extends StatelessWidget {
   final Exercise exercise;
   final bool isEditMode;
   final VoidCallback? onAddSet;
+  final int? index;
   final void Function(String exerciseId, int setIndex)? onDelete;
 
   @override
@@ -22,9 +24,15 @@ class ExerciseCard extends StatelessWidget {
     return Card(
       color: UIColors.lightPurple,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: ExpansionTile(
+        leading: index != null
+            ? ReorderableDragStartListener(
+                index: index!,
+                child: const Icon(Icons.drag_handle),
+              )
+            : null,
         tilePadding: const EdgeInsets.all(8),
         initiallyExpanded: true,
         title: Row(
@@ -54,19 +62,22 @@ class ExerciseCard extends StatelessWidget {
           ],
         ),
         children: [
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: exercise.sets.length,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (_, index) {
-              return ExerciseSetTile(
-                isEditMode: isEditMode,
-                set: exercise.sets[index],
-                exerciseId: exercise.id,
-                index: index,
-                onDelete: onDelete,
-              );
-            },
+          MediaQuery(
+            data: MediaQuery.of(context).removePadding(removeBottom: true),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: exercise.sets.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (_, index) {
+                return ExerciseSetTile(
+                  isEditMode: isEditMode,
+                  set: exercise.sets[index],
+                  exerciseId: exercise.id,
+                  index: index,
+                  onDelete: onDelete,
+                );
+              },
+            ),
           ),
           if (isEditMode)
             Padding(
