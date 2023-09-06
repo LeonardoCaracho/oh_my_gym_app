@@ -3,7 +3,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
-import 'package:workout_repository/src/models/exercise_set.dart';
+import 'package:workouts_api/src/models/models.dart';
 
 part 'exercise.g.dart';
 

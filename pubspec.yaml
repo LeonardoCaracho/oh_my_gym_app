@@ -28,6 +28,8 @@ dependencies:
   path_provider: ^2.0.15
   workout_repository:
     path: ./packages/workout_repository
+  workouts_api:
+    path: ./packages/workouts_api
 
 dev_dependencies:
   bloc_test: ^9.1.2

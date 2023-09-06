@@ -2,7 +2,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
-import 'package:workout_repository/src/models/exercise.dart';
+import 'package:workouts_api/workouts_api.dart';
 
 part 'workout.g.dart';
 
