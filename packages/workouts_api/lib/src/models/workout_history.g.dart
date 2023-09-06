@@ -10,10 +10,12 @@ WorkoutHistory _$WorkoutHistoryFromJson(Map<String, dynamic> json) =>
     WorkoutHistory(
       workout: Workout.fromJson(json['workout'] as Map<String, dynamic>),
       finishDate: DateTime.parse(json['finishDate'] as String),
+      docId: json['docId'] as String?,
     );
 
 Map<String, dynamic> _$WorkoutHistoryToJson(WorkoutHistory instance) =>
     <String, dynamic>{
       'workout': instance.workout.toJson(),
       'finishDate': instance.finishDate.toIso8601String(),
+      'docId': instance.docId,
     };

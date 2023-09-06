@@ -1,4 +1,5 @@
 import 'package:history_repository/history_repository.dart';
+import 'package:workouts_api/workouts_api.dart';
 
 class HistoryRepository extends HistoryContract {
   @override

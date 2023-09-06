@@ -1,4 +1,4 @@
-import 'package:history_repository/history_repository.dart';
+import 'package:workouts_api/workouts_api.dart';
 
 abstract class HistoryContract {
   Future<void> saveRecord(WorkoutHistory workout);
