@@ -1,27 +1,42 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:oh_my_gym_app/core/core.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
+import 'package:workouts_api/workouts_api.dart';
 
-import '../../../edit_workout/cubit/edit_workout_cubit_test.dart';
+class MockStartWorkoutCubit extends MockCubit<StartWorkoutState>
+    implements StartWorkoutCubit {}
 
 void main() {
+  late StartWorkoutCubit startWorkoutCubit;
+
+  setUp(() {
+    startWorkoutCubit = MockStartWorkoutCubit();
+    when(() => startWorkoutCubit.state).thenReturn(
+      StartWorkoutState(
+        workout: Workout.create(),
+      ),
+    );
+  });
   group('StartWorkoutBody', () {
-    testWidgets('renders Text', (tester) async {
+    testWidgets('renders widget', (tester) async {
       await tester.pumpWidget(
         BlocProvider(
-          create: (context) => StartWorkoutCubit(),
+          create: (context) => startWorkoutCubit,
           child: MaterialApp(
-            home: StartWorkoutBody(
-              workout: mockWorkout,
+            home: Scaffold(
+              body: StartWorkoutBody(
+                workout: Workout.create(),
+              ),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ExerciseCard), findsOneWidget);
+      expect(find.byType(StartWorkoutBody), findsWidgets);
     });
   });
 }

@@ -1,5 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:history_repository/history_repository.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
 import 'package:oh_my_gym_app/features/start_workout/widgets/start_workout_body.dart';
 import 'package:workouts_api/workouts_api.dart';
@@ -15,7 +17,9 @@ class StartWorkoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => StartWorkoutCubit(),
+      create: (context) => StartWorkoutCubit(
+        historyRepository: locator<HistoryContract>(),
+      )..startWorkout(workout),
       child: Scaffold(
         appBar: AppBar(
           title: Text(

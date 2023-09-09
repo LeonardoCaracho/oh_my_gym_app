@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
 
 void main() {
@@ -29,7 +30,7 @@ void main() {
         'when no argument specified',
         () {
           const startWorkoutState = StartWorkoutState(
-            customProperty: 'My property',
+            status: Status.failure,
           );
           expect(
             startWorkoutState.copyWith(),
@@ -43,16 +44,16 @@ void main() {
         'when all arguments specified',
         () {
           const startWorkoutState = StartWorkoutState(
-            customProperty: 'My property',
+            status: Status.failure,
           );
           final otherStartWorkoutState = StartWorkoutState(
-            customProperty: 'My property 2',
+            status: Status.success,
           );
           expect(startWorkoutState, isNot(equals(otherStartWorkoutState)));
 
           expect(
             startWorkoutState.copyWith(
-              customProperty: otherStartWorkoutState.customProperty,
+              status: otherStartWorkoutState.status,
             ),
             equals(otherStartWorkoutState),
           );
