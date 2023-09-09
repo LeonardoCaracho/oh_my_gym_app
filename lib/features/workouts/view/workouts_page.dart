@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
 import 'package:oh_my_gym_app/features/workouts/widgets/workouts_body.dart';
 
@@ -12,8 +14,19 @@ class WorkoutsPage extends StatelessWidget {
         ..add(
           const WorkoutsRequested(),
         ),
-      child: const Scaffold(
-        body: WorkoutsView(),
+      child: Scaffold(
+        body: const WorkoutsView(),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.all(8),
+          child: SafeArea(
+            child: DefaultButton(
+              text: 'WORKOUTS DONE',
+              icon: Icons.history,
+              onPressed: () =>
+                  context.goNamed(RouteConstants.workoutsHistoryRouteName),
+            ),
+          ),
+        ),
       ),
     );
   }
