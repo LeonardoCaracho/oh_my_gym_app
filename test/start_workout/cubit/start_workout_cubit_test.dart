@@ -1,30 +1,82 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:history_repository/history_repository.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
+import 'package:workouts_api/workouts_api.dart';
+
+class MockHistoryContract extends Mock implements HistoryContract {}
+
+class FakeHistoryWorkout extends Fake implements WorkoutHistory {}
+
+final mockExercise = Exercise.empty(id: '1');
+final mockWorkout = Workout.create(exercises: [mockExercise]);
 
 void main() {
   group('StartWorkoutCubit', () {
+    late HistoryContract historyRepository;
+    late StartWorkoutCubit startWorkoutCubit;
+
+    setUpAll(() => registerFallbackValue(FakeHistoryWorkout()));
+
+    setUp(() {
+      historyRepository = MockHistoryContract();
+      startWorkoutCubit =
+          StartWorkoutCubit(historyRepository: historyRepository);
+    });
+
     group('constructor', () {
       test('can be instantiated', () {
         expect(
-          StartWorkoutCubit(),
+          startWorkoutCubit,
           isNotNull,
         );
       });
     });
 
     test('initial state has default value for customProperty', () {
-      final startWorkoutCubit = StartWorkoutCubit();
-      expect(startWorkoutCubit.state.customProperty, equals('Default Value'));
+      expect(startWorkoutCubit.state.status, equals(Status.inital));
+      expect(startWorkoutCubit.state.workout, equals(null));
     });
 
     blocTest<StartWorkoutCubit, StartWorkoutState>(
-      'yourCustomFunction emits nothing',
-      build: StartWorkoutCubit.new,
-      act: (cubit) => cubit.yourCustomFunction(),
-      expect: () => <StartWorkoutState>[],
+      'startWorkout emits state with selected workout',
+      build: () => startWorkoutCubit,
+      act: (cubit) => cubit.startWorkout(mockWorkout),
+      expect: () => <StartWorkoutState>[
+        StartWorkoutState(workout: mockWorkout),
+      ],
+    );
+
+    blocTest<StartWorkoutCubit, StartWorkoutState>(
+      'startWorkout emits correctly',
+      seed: () => StartWorkoutState(workout: mockWorkout),
+      build: () {
+        when(() => historyRepository.saveRecord(any()))
+            .thenAnswer((invocation) => Future.value());
+
+        return startWorkoutCubit;
+      },
+      act: (cubit) => cubit.finishWorkout(),
+      expect: () => <StartWorkoutState>[
+        StartWorkoutState(workout: mockWorkout, status: Status.loading),
+        StartWorkoutState(workout: mockWorkout, status: Status.success),
+      ],
+    );
+
+    blocTest<StartWorkoutCubit, StartWorkoutState>(
+      'finishWorkout don`t emit status success if there is not workout',
+      build: () {
+        when(() => historyRepository.saveRecord(any()))
+            .thenAnswer((invocation) => Future.value());
+
+        return startWorkoutCubit;
+      },
+      act: (cubit) => cubit.finishWorkout(),
+      expect: () => <StartWorkoutState>[
+        const StartWorkoutState(status: Status.loading),
+      ],
     );
   });
 }

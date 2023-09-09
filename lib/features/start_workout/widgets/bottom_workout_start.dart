@@ -30,80 +30,99 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: UIColors.lightPurple,
-      child: Column(
-        children: [
-          const SizedBox(height: 8),
-          Text(
-            'The timer is running baby!',
-            style: UITextStyle.headline4,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ValueListenableBuilder<Duration>(
-              valueListenable: timerController.countdownNotifier,
-              builder: (context, duration, child) {
-                return Text(
-                  duration.getFormattedCountdown(),
-                  style: UITextStyle.headline3,
-                );
-              },
+    return BlocListener<StartWorkoutCubit, StartWorkoutState>(
+      listener: (context, state) {
+        if (state.status.isSuccess) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Container(
+        width: double.infinity,
+        color: UIColors.lightPurple,
+        child: Column(
+          children: [
+            const SizedBox(height: 8),
+            Text(
+              'The timer is running baby!',
+              style: UITextStyle.headline4,
             ),
-          ),
-          Row(
-            children: [
-              const SizedBox(width: 20),
-              ValueListenableBuilder<bool>(
-                valueListenable: timerController.isRunningNotifier,
-                builder: (context, isRunning, child) {
-                  return Expanded(
-                    child: isRunning
-                        ? DefaultButton(
-                            text: 'PAUSE',
-                            onPressed: timerController.stop,
-                          )
-                        : DefaultButton(
-                            text: 'PLAY',
-                            onPressed: timerController.play,
-                          ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ValueListenableBuilder<Duration>(
+                valueListenable: timerController.countdownNotifier,
+                builder: (context, duration, child) {
+                  return Text(
+                    duration.getFormattedCountdown(),
+                    style: UITextStyle.headline3,
                   );
                 },
               ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: DefaultButton(
-                  text: 'FINISH',
-                  onPressed: () => showAlertDialog(context),
+            ),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                ValueListenableBuilder<bool>(
+                  valueListenable: timerController.isRunningNotifier,
+                  builder: (context, isRunning, child) {
+                    return Expanded(
+                      child: isRunning
+                          ? DefaultButton(
+                              text: 'PAUSE',
+                              onPressed: timerController.stop,
+                            )
+                          : DefaultButton(
+                              text: 'PLAY',
+                              onPressed: timerController.play,
+                            ),
+                    );
+                  },
                 ),
-              ),
-              const SizedBox(width: 20),
-            ],
-          ),
-        ],
+                const SizedBox(width: 20),
+                Expanded(
+                  child: DefaultButton(
+                    text: 'FINISH',
+                    onPressed: () => finishWorkoutDialog(context),
+                  ),
+                ),
+                const SizedBox(width: 20),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  void showAlertDialog(BuildContext context) {
+  void finishWorkoutDialog(BuildContext context) {
+    final startWorkoutCubit = context.read<StartWorkoutCubit>();
+
     showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: UIColors.liver,
-          title: const Text('FINISH WORKOUT'),
-          content: const Text('Are you really finished?'),
-          actions: [
-            DefaultButton(
-              text: 'CANCEL',
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            DefaultButton(
-              text: 'CONTINUE',
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
+        return BlocProvider.value(
+          value: startWorkoutCubit,
+          child: Builder(
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: UIColors.liver,
+                title: const Text('FINISH WORKOUT'),
+                content: const Text('Are you really finished?'),
+                actions: [
+                  DefaultButton(
+                    text: 'CANCEL',
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  DefaultButton(
+                    text: 'YES',
+                    onPressed: () {
+                      context.read<StartWorkoutCubit>().finishWorkout();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
         );
       },
     );

@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
 import 'package:get_it/get_it.dart';
+import 'package:history_repository/history_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
@@ -32,11 +33,23 @@ Future<void> initLocator() async {
       ),
       dependsOn: [AuthenticationContract],
     )
+    ..registerSingletonAsync<HistoryApi>(
+      () async => HistoryApi(
+        authRepository: locator<AuthenticationContract>(),
+      ),
+      dependsOn: [AuthenticationContract],
+    )
     ..registerSingletonAsync<WorkoutsContract>(
       () async => WorkoutRepository(
         workoutsApi: locator<WorkoutsApi>(),
       ),
       dependsOn: [WorkoutsApi],
+    )
+    ..registerSingletonAsync<HistoryContract>(
+      () async => HistoryRepository(
+        locator<HistoryApi>(),
+      ),
+      dependsOn: [HistoryApi],
     );
 
   await locator.allReady();

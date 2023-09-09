@@ -3,16 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
+import 'package:workouts_api/workouts_api.dart';
 
-import '../../edit_workout/cubit/edit_workout_cubit_test.dart';
+import '../../helpers/di_testing.dart';
 
 void main() {
   group('StartWorkoutPage', () {
+    setUpAll(() async => initLocatorTesting());
+
+    tearDownAll(clearLocatorTesting);
     testWidgets('renders StartWorkoutView', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: StartWorkoutPage(
-            workout: mockWorkout,
+            workout: Workout.create(),
           ),
         ),
       );
