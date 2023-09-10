@@ -1,10 +1,12 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:history_repository/history_repository.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/features/workouts/bloc/bloc.dart';
+import 'package:oh_my_gym_app/features/workouts_history/cubit/cubit.dart';
 import 'package:oh_my_gym_app/l10n/l10n.dart';
 import 'package:workout_repository/workout_repository.dart';
 
@@ -31,6 +33,11 @@ class App extends StatelessWidget {
           create: (context) => WorkoutsBloc(
             workoutsRepository: locator<WorkoutsContract>(),
           )..add(const WorkoutsRequested()),
+        ),
+        BlocProvider<WorkoutsHistoryCubit>(
+          create: (context) => WorkoutsHistoryCubit(
+            historyRepository: locator<HistoryContract>(),
+          ),
         ),
       ],
       child: const AppView(),

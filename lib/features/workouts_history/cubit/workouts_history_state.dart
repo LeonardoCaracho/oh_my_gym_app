@@ -1,33 +1,32 @@
 part of 'workouts_history_cubit.dart';
 
-/// {@template workouts_history}
-/// WorkoutsHistoryState description
-/// {@endtemplate}
 class WorkoutsHistoryState extends Equatable {
-  /// {@macro workouts_history}
   const WorkoutsHistoryState({
-    this.customProperty = 'Default Value',
+    this.records = const [],
+    this.recordsGrouped = const [],
+    this.recordsByWorkout = const [],
+    this.status = Status.inital,
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final List<WorkoutHistory> records;
+  final List<WorkoutHistory> recordsGrouped;
+  final List<WorkoutHistory> recordsByWorkout;
+  final Status status;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [records, status, recordsGrouped, recordsByWorkout];
 
-  /// Creates a copy of the current WorkoutsHistoryState with property changes
   WorkoutsHistoryState copyWith({
-    String? customProperty,
+    List<WorkoutHistory>? records,
+    List<WorkoutHistory>? recordsGrouped,
+    List<WorkoutHistory>? recordsByWorkout,
+    Status? status,
   }) {
     return WorkoutsHistoryState(
-      customProperty: customProperty ?? this.customProperty,
+      records: records ?? this.records,
+      status: status ?? this.status,
+      recordsGrouped: recordsGrouped ?? this.recordsGrouped,
+      recordsByWorkout: recordsByWorkout ?? this.recordsByWorkout,
     );
   }
-}
-/// {@template workouts_history_initial}
-/// The initial state of WorkoutsHistoryState
-/// {@endtemplate}
-class WorkoutsHistoryInitial extends WorkoutsHistoryState {
-  /// {@macro workouts_history_initial}
-  const WorkoutsHistoryInitial() : super();
 }
