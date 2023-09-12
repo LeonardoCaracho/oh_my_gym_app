@@ -14,14 +14,22 @@ class WorkoutsHistoryBody extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Colors.grey,
+                  ),
                   itemCount: state.recordsGrouped.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      contentPadding: const EdgeInsets.all(8),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
                       title: Text(
                         state.recordsGrouped[index].workout.name,
                       ),
-                      subtitle: Text(state.recordsGrouped[index].workout.id),
+                      subtitle: const Text('Number of sessions: X'),
                       onTap: () {
                         context.goNamed(
                           RouteConstants.workoutHistoryRouteName,

@@ -20,7 +20,7 @@ class WorkoutHistoryPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'OH MY HISTORY - ITEM',
+            'OH MY HISTORY',
             style: UITextStyle.headline3,
           ),
         ),
