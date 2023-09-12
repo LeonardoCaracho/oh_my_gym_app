@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:oh_my_gym_app/features/workouts_history/cubit/cubit.dart';
-import 'package:workouts_api/src/models/workout_history.dart';
 import 'package:workouts_api/workouts_api.dart';
 
 class WorkoutHistoryBody extends StatelessWidget {

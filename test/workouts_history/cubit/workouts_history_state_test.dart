@@ -46,7 +46,9 @@ void main() {
             status: Status.loading,
           );
           expect(
-              workoutsHistoryState, isNot(equals(otherWorkoutsHistoryState)));
+            workoutsHistoryState,
+            isNot(equals(otherWorkoutsHistoryState)),
+          );
 
           expect(
             workoutsHistoryState.copyWith(
