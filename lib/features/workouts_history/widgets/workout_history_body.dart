@@ -20,6 +20,20 @@ class WorkoutHistoryBody extends StatelessWidget {
                         state.recordsByWorkout[index].workout.name,
                       ),
                       subtitle: Text(state.recordsByWorkout[index].workout.id),
+                      onTap: () {
+                        final record = state.recordsByWorkout[index].workout;
+
+                        showModalBottomSheet<void>(
+                          context: context,
+                          builder: (context) {
+                            return Column(
+                              children: [
+                                Text(record.name),
+                              ],
+                            );
+                          },
+                        );
+                      },
                     );
                   },
                 ),
