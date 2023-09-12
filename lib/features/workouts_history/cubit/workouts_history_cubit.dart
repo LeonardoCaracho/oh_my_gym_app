@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:history_repository/history_repository.dart';
 import 'package:oh_my_gym_app/core/core.dart';
-import 'package:oh_my_gym_app/main_development.dart';
 import 'package:workouts_api/workouts_api.dart';
 part 'workouts_history_state.dart';
 

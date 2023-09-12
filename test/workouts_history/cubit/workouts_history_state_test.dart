@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts_history/cubit/cubit.dart';
 
 void main() {
@@ -28,9 +29,7 @@ void main() {
         'copies correctly '
         'when no argument specified',
         () {
-          const workoutsHistoryState = WorkoutsHistoryState(
-            customProperty: 'My property',
-          );
+          const workoutsHistoryState = WorkoutsHistoryState();
           expect(
             workoutsHistoryState.copyWith(),
             equals(workoutsHistoryState),
@@ -42,17 +41,16 @@ void main() {
         'copies correctly '
         'when all arguments specified',
         () {
-          const workoutsHistoryState = WorkoutsHistoryState(
-            customProperty: 'My property',
-          );
+          const workoutsHistoryState = WorkoutsHistoryState();
           final otherWorkoutsHistoryState = WorkoutsHistoryState(
-            customProperty: 'My property 2',
+            status: Status.loading,
           );
-          expect(workoutsHistoryState, isNot(equals(otherWorkoutsHistoryState)));
+          expect(
+              workoutsHistoryState, isNot(equals(otherWorkoutsHistoryState)));
 
           expect(
             workoutsHistoryState.copyWith(
-              customProperty: otherWorkoutsHistoryState.customProperty,
+              status: otherWorkoutsHistoryState.status,
             ),
             equals(otherWorkoutsHistoryState),
           );
