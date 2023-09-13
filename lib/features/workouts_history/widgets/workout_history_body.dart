@@ -42,7 +42,7 @@ class WorkoutHistoryBody extends StatelessWidget {
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -70,7 +70,7 @@ class WorkoutRecordDetails extends StatelessWidget {
             (exercise) => ExerciseDetails(
               exercise: exercise,
             ),
-          )
+          ),
         ],
       ),
     );
