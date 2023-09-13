@@ -13,4 +13,10 @@ class RouteConstants {
 
   static String get startWorkoutsRoute => 'start-workouts';
   static String get startWorkoutRouteName => 'start workout';
+
+  static String get workoutsHistoryRoute => 'workouts-history';
+  static String get workoutsHistoryRouteName => 'workouts history';
+
+  static String get workoutHistoryRoute => 'workout-history';
+  static String get workoutHistoryRouteName => 'workout history';
 }

@@ -7,6 +7,7 @@ import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
 import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
+import 'package:oh_my_gym_app/features/workouts_history/workouts_history.dart';
 import 'package:workouts_api/workouts_api.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -84,6 +85,24 @@ class AppRouter {
                   workout: state.extra! as Workout,
                 );
               },
+            ),
+            GoRoute(
+              name: RouteConstants.workoutsHistoryRouteName,
+              path: RouteConstants.workoutsHistoryRoute,
+              builder: (context, state) {
+                return const WorkoutsHistoryPage();
+              },
+              routes: [
+                GoRoute(
+                  name: RouteConstants.workoutHistoryRouteName,
+                  path: RouteConstants.workoutHistoryRoute,
+                  builder: (context, state) {
+                    return WorkoutHistoryPage(
+                      workoutId: state.queryParameters['docId']!,
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
