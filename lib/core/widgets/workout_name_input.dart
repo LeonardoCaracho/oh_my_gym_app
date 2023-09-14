@@ -43,7 +43,7 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
       decoration: InputDecoration(
         hintText: 'Workout name',
         filled: true,
-        fillColor: UIColors.black.withOpacity(0.1),
+        // fillColor: UIColors.white.withOpacity(0.5),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 3,
           horizontal: 3,

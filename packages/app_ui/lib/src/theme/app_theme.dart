@@ -6,29 +6,47 @@ class UITheme {
   /// Light Theme example based on Material 2 Design.
   ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: UIColors.darkPurple,
-      canvasColor: _backgroundColor,
-      scaffoldBackgroundColor: _backgroundColor,
-      iconTheme: _lightIconTheme,
-      appBarTheme: _lightAppBarTheme,
-      dividerTheme: _dividerTheme,
-      textTheme: _lightTextTheme,
-      buttonTheme: _buttonTheme,
-      splashColor: UIColors.transparent,
-      elevatedButtonTheme: _elevatedButtonTheme,
-      textButtonTheme: _textButtonTheme,
-      colorScheme: _lightColorScheme,
-      bottomSheetTheme: _lightBottomSheetTheme,
-      listTileTheme: _listTileTheme,
-      switchTheme: _switchTheme,
-      progressIndicatorTheme: _progressIndicatorTheme,
-      tabBarTheme: _tabBarTheme,
-      bottomNavigationBarTheme: _bottomAppBarTheme,
-      chipTheme: _chipTheme,
-      dividerColor: UIColors.grey,
-      outlinedButtonTheme: _lightOutlinedButtonTheme,
+      useMaterial3: true,
+      // primaryColor: UIColors.darkPurple,
+      // canvasColor: _backgroundColor,
+      // scaffoldBackgroundColor: _backgroundColor,
+      // iconTheme: _lightIconTheme,
+      // appBarTheme: _lightAppBarTheme,
+      // dividerTheme: _dividerTheme,
+      // textTheme: _lightTextTheme,
+      // buttonTheme: _buttonTheme,
+      // splashColor: UIColors.transparent,
+      // elevatedButtonTheme: _elevatedButtonTheme,
+      // textButtonTheme: _textButtonTheme,
+      colorScheme: colorScheme,
+      // bottomSheetTheme: _lightBottomSheetTheme,
+
+      // listTileTheme: _listTileTheme,
+      // switchTheme: _switchTheme,
+      // progressIndicatorTheme: _progressIndicatorTheme,
+      // tabBarTheme: _tabBarTheme,
+      // bottomNavigationBarTheme: _bottomAppBarTheme,
+      // chipTheme: _chipTheme,
+      // dividerColor: UIColors.grey,
+      // outlinedButtonTheme: _lightOutlinedButtonTheme,
+      bottomSheetTheme:
+          BottomSheetThemeData(backgroundColor: Colors.black.withOpacity(0)),
     );
   }
+
+  final ColorScheme colorScheme = const ColorScheme(
+    primary: UIColors.darkBlue,
+    error: UIColors.red,
+    secondary: UIColors.orange,
+    background: UIColors.darkBlue, // Replace with your desired background color
+    onPrimary: Colors.white, // Replace with your desired text color on primary
+    onSecondary: Colors.black,
+    onError: Colors.red,
+    onBackground: UIColors.darkBlue,
+    brightness: Brightness.light,
+    surface: UIColors.orange,
+    onSurface: UIColors.darkBlue,
+  );
 
   /// Dark Theme example based on Material 2 Design.
   ThemeData get darkTheme => lightTheme.copyWith(
@@ -49,23 +67,23 @@ class UITheme {
   /// Returns the correct color based on the current theme.
   ColorScheme get _lightColorScheme {
     return ColorScheme.light(
-      primary: UIColors.skyBlue,
-      primaryContainer: UIColors.lightBlue200,
+      primary: UIColors.white,
+      primaryContainer: UIColors.orange,
       onPrimaryContainer: UIColors.oceanBlue,
-      secondary: UIColors.paleSky,
-      onSecondary: UIColors.white,
-      secondaryContainer: UIColors.lightBlue200,
-      onSecondaryContainer: UIColors.oceanBlue,
-      tertiary: UIColors.secondary.shade700,
-      onTertiary: UIColors.white,
-      tertiaryContainer: UIColors.secondary.shade300,
-      onTertiaryContainer: UIColors.secondary.shade700,
+      secondary: UIColors.orange,
+      onSecondary: UIColors.pink,
+      secondaryContainer: UIColors.orange,
+      onSecondaryContainer: UIColors.pink,
+      tertiary: UIColors.pink,
+      onTertiary: UIColors.pink,
+      tertiaryContainer: UIColors.pink,
+      onTertiaryContainer: UIColors.pink,
       error: UIColors.red,
       errorContainer: UIColors.red.shade200,
       onErrorContainer: UIColors.redWine,
-      background: _backgroundColor,
+      background: UIColors.darkBlue,
       onBackground: UIColors.onBackground,
-      surfaceVariant: UIColors.surface,
+      surfaceVariant: UIColors.orange,
       onSurfaceVariant: UIColors.grey,
       inversePrimary: UIColors.crystalBlue,
     );
@@ -97,7 +115,7 @@ class UITheme {
       titleTextStyle: _lightTextTheme.titleMedium,
       elevation: 0,
       toolbarHeight: 64,
-      backgroundColor: UIColors.white,
+      backgroundColor: UIColors.darkBlue,
       toolbarTextStyle: _lightTextTheme.titleLarge,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
@@ -119,7 +137,7 @@ class UITheme {
   /// Returns the correct [IconThemeData] based on the current theme.
   IconThemeData get _lightIconTheme {
     return const IconThemeData(
-      color: UIColors.black,
+      color: UIColors.white,
     );
   }
 
@@ -236,7 +254,7 @@ class UITheme {
         textStyle: _lightTextTheme.labelLarge?.copyWith(
           fontWeight: UIFontWeight.bold,
         ),
-        backgroundColor: UIColors.lightPurple,
+        backgroundColor: UIColors.orange,
       ),
     );
   }
@@ -268,7 +286,7 @@ class UITheme {
   /// Returns the correct [BottomSheetThemeData] based on the current theme.
   BottomSheetThemeData get _lightBottomSheetTheme {
     return const BottomSheetThemeData(
-      backgroundColor: UIColors.modalBackground,
+      backgroundColor: UIColors.darkBlue,
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(

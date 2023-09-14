@@ -17,7 +17,7 @@ class WorkoutsPage extends StatelessWidget {
       child: Scaffold(
         body: const WorkoutsView(),
         bottomSheet: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(16),
           child: SafeArea(
             child: DefaultButton(
               text: 'WORKOUTS DONE',

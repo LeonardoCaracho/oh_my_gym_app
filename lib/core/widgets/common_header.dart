@@ -13,7 +13,9 @@ class CommonHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: UITextStyle.headline3,
+      style: UITextStyle.headline4.copyWith(
+        color: UIColors.white,
+      ),
     );
   }
 }

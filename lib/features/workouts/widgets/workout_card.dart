@@ -23,7 +23,7 @@ class WorkoutCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: UIColors.lightPurple,
+      color: UIColors.lighPink,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -32,6 +32,7 @@ class WorkoutCard extends StatelessWidget {
           final workoutsBloc = context.read<WorkoutsBloc>();
           showModalBottomSheet<void>(
             context: context,
+            backgroundColor: UIColors.orange,
             builder: (context) {
               return BlocProvider.value(
                 value: workoutsBloc,

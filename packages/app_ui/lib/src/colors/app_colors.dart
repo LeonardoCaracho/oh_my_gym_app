@@ -82,6 +82,14 @@ abstract class UIColors {
   /// The light outline color.
   static const Color outlineLight = Color(0x33000000);
 
+  static const Color darkBlue = Color(0xFF051224);
+
+  static const Color orange = Color(0xFFF15E4D);
+
+  static const Color pink = Color(0xFFEF4068);
+
+  static const Color lighPink = Color.fromARGB(255, 203, 133, 150);
+
   /// The secondary color of application.
   static const MaterialColor secondary = MaterialColor(0xFF963F6E, <int, Color>{
     50: Color(0xFFFFECF3),

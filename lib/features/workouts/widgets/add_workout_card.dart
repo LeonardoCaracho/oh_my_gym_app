@@ -24,7 +24,7 @@ class AddWorkoutCard extends StatelessWidget {
         }
       },
       child: Card(
-        color: UIColors.lightPurple,
+        color: UIColors.lighPink,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

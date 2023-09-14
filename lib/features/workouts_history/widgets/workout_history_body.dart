@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:oh_my_gym_app/features/workouts_history/cubit/cubit.dart';
@@ -27,9 +28,13 @@ class WorkoutHistoryBody extends StatelessWidget {
                       contentPadding: const EdgeInsets.all(8),
                       leading: const Icon(
                         Icons.date_range,
+                        color: UIColors.white,
                       ),
                       title: Text(
                         dateFormatter(record.finishDate),
+                        style: UITextStyle.bodyText3.copyWith(
+                          color: UIColors.white,
+                        ),
                       ),
                       onTap: () {
                         showModalBottomSheet<void>(

@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/core/core.dart';
@@ -16,7 +17,7 @@ class WorkoutsHistoryBody extends StatelessWidget {
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (context, index) => const Divider(
-                    color: Colors.grey,
+                    color: UIColors.white,
                   ),
                   itemCount: state.recordsGrouped.length,
                   itemBuilder: (context, index) {
@@ -25,11 +26,20 @@ class WorkoutsHistoryBody extends StatelessWidget {
                       trailing: const Icon(
                         Icons.arrow_forward_ios,
                         size: 15,
+                        color: UIColors.white,
                       ),
                       title: Text(
                         state.recordsGrouped[index].workout.name,
+                        style: UITextStyle.bodyText3.copyWith(
+                          color: UIColors.white,
+                        ),
                       ),
-                      subtitle: const Text('Number of sessions: X'),
+                      subtitle: Text(
+                        'Number of sessions: X',
+                        style: UITextStyle.bodyText3.copyWith(
+                          color: UIColors.white,
+                        ),
+                      ),
                       onTap: () {
                         context.goNamed(
                           RouteConstants.workoutHistoryRouteName,

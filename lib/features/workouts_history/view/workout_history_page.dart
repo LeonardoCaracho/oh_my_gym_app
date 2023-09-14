@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts_history/workouts_history.dart';
 
 class WorkoutHistoryPage extends StatelessWidget {
@@ -19,9 +20,8 @@ class WorkoutHistoryPage extends StatelessWidget {
         ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'OH MY HISTORY',
-            style: UITextStyle.headline3,
+          title: const CommonHeader(
+            title: 'OH MY HISTORY',
           ),
         ),
         body: const WorkoutHistoryView(),

@@ -1,5 +1,5 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts_history/cubit/cubit.dart';
 import 'package:oh_my_gym_app/features/workouts_history/widgets/workouts_history_body.dart';
 
@@ -12,9 +12,8 @@ class WorkoutsHistoryPage extends StatelessWidget {
       value: context.read<WorkoutsHistoryCubit>()..getRecords(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'OH MY HISTORY',
-            style: UITextStyle.headline3,
+          title: const CommonHeader(
+            title: 'OH MY HISTORY',
           ),
         ),
         body: const WorkoutsHistoryView(),

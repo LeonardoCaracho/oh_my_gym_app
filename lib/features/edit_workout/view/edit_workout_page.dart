@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
@@ -28,9 +27,10 @@ class EditWorkoutPage extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'OH MY WORKOUT!',
-            style: UITextStyle.headline3,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: const CommonHeader(
+            title: 'OH MY WORKOUT',
           ),
         ),
         body: const EditWorkoutView(),
