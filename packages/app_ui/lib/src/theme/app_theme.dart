@@ -3,34 +3,29 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/services.dart';
 
 class UITheme {
-  /// Light Theme example based on Material 2 Design.
   ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      // primaryColor: UIColors.darkPurple,
-      // canvasColor: _backgroundColor,
-      // scaffoldBackgroundColor: _backgroundColor,
-      // iconTheme: _lightIconTheme,
-      // appBarTheme: _lightAppBarTheme,
-      // dividerTheme: _dividerTheme,
-      // textTheme: _lightTextTheme,
-      // buttonTheme: _buttonTheme,
-      // splashColor: UIColors.transparent,
-      // elevatedButtonTheme: _elevatedButtonTheme,
-      // textButtonTheme: _textButtonTheme,
+      canvasColor: _backgroundColor,
+      scaffoldBackgroundColor: _backgroundColor,
+      iconTheme: _lightIconTheme,
+      dividerTheme: _dividerTheme,
+      textTheme: _lightTextTheme,
+      buttonTheme: _buttonTheme,
+      splashColor: UIColors.transparent,
+      elevatedButtonTheme: _elevatedButtonTheme,
+      textButtonTheme: _textButtonTheme,
+      bottomSheetTheme: _lightBottomSheetTheme,
+      listTileTheme: _listTileTheme,
+      switchTheme: _switchTheme,
+      progressIndicatorTheme: _progressIndicatorTheme,
+      tabBarTheme: _tabBarTheme,
+      chipTheme: _chipTheme,
+      dividerColor: UIColors.grey,
+      outlinedButtonTheme: _lightOutlinedButtonTheme,
+      appBarTheme: _lightAppBarTheme,
       colorScheme: colorScheme,
-      // bottomSheetTheme: _lightBottomSheetTheme,
-
-      // listTileTheme: _listTileTheme,
-      // switchTheme: _switchTheme,
-      // progressIndicatorTheme: _progressIndicatorTheme,
-      // tabBarTheme: _tabBarTheme,
-      // bottomNavigationBarTheme: _bottomAppBarTheme,
-      // chipTheme: _chipTheme,
-      // dividerColor: UIColors.grey,
-      // outlinedButtonTheme: _lightOutlinedButtonTheme,
-      bottomSheetTheme:
-          BottomSheetThemeData(backgroundColor: Colors.black.withOpacity(0)),
+      bottomNavigationBarTheme: _bottomAppBarTheme,
     );
   }
 
@@ -48,65 +43,8 @@ class UITheme {
     onSurface: UIColors.darkBlue,
   );
 
-  /// Dark Theme example based on Material 2 Design.
-  ThemeData get darkTheme => lightTheme.copyWith(
-        chipTheme: _darkChipTheme,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: UIColors.black,
-        colorScheme: _darkColorScheme,
-        appBarTheme: _darkAppBarTheme,
-        disabledColor: UIColors.white.withOpacity(0.5),
-        textTheme: _darkTextTheme,
-        unselectedWidgetColor: UIColors.lightGrey,
-        iconTheme: _darkIconTheme,
-        bottomSheetTheme: _darkBottomSheetTheme,
-        outlinedButtonTheme: _darkOutlinedButtonTheme,
-        textButtonTheme: _darkTextButtonTheme,
-      );
-
-  /// Returns the correct color based on the current theme.
-  ColorScheme get _lightColorScheme {
-    return ColorScheme.light(
-      primary: UIColors.white,
-      primaryContainer: UIColors.orange,
-      onPrimaryContainer: UIColors.oceanBlue,
-      secondary: UIColors.orange,
-      onSecondary: UIColors.pink,
-      secondaryContainer: UIColors.orange,
-      onSecondaryContainer: UIColors.pink,
-      tertiary: UIColors.pink,
-      onTertiary: UIColors.pink,
-      tertiaryContainer: UIColors.pink,
-      onTertiaryContainer: UIColors.pink,
-      error: UIColors.red,
-      errorContainer: UIColors.red.shade200,
-      onErrorContainer: UIColors.redWine,
-      background: UIColors.darkBlue,
-      onBackground: UIColors.onBackground,
-      surfaceVariant: UIColors.orange,
-      onSurfaceVariant: UIColors.grey,
-      inversePrimary: UIColors.crystalBlue,
-    );
-  }
-
-  /// Returns the correct color based on the current theme.
-  ColorScheme get _darkColorScheme => _lightColorScheme.copyWith(
-        background: UIColors.black,
-        onBackground: UIColors.white,
-        surface: UIColors.black,
-        onSurface: UIColors.lightGrey,
-        primary: UIColors.blue,
-        onPrimary: UIColors.oceanBlue,
-        primaryContainer: UIColors.oceanBlue,
-        onPrimaryContainer: UIColors.lightBlue200,
-        secondary: UIColors.paleSky,
-        onSecondary: UIColors.lightGrey,
-        secondaryContainer: UIColors.liver,
-        onSecondaryContainer: UIColors.brightGrey,
-      );
-
   /// Returns the correct background color based on the current theme.
-  Color get _backgroundColor => UIColors.white;
+  Color get _backgroundColor => UIColors.darkBlue;
 
   /// Returns the correct [AppBarTheme] based on the current theme.
   AppBarTheme get _lightAppBarTheme {
@@ -117,32 +55,12 @@ class UITheme {
       toolbarHeight: 64,
       backgroundColor: UIColors.darkBlue,
       toolbarTextStyle: _lightTextTheme.titleLarge,
-      systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
-  }
-
-  /// Returns the correct [AppBarTheme] based on the current theme.
-  AppBarTheme get _darkAppBarTheme {
-    return _lightAppBarTheme.copyWith(
-      backgroundColor: UIColors.grey,
-      iconTheme: _darkIconTheme,
-      toolbarTextStyle: _darkTextTheme.titleLarge,
-      titleTextStyle: _darkTextTheme.titleMedium,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
   }
 
   /// Returns the correct [IconThemeData] based on the current theme.
   IconThemeData get _lightIconTheme {
-    return const IconThemeData(
-      color: UIColors.white,
-    );
-  }
-
-  /// Returns the correct [IconThemeData] based on the current theme.
-  IconThemeData get _darkIconTheme {
     return const IconThemeData(
       color: UIColors.white,
     );
@@ -161,15 +79,6 @@ class UITheme {
 
   /// Returns the correct [TextTheme] based on the current theme.
   TextTheme get _lightTextTheme => lightUITextTheme;
-
-  /// Returns the correct [TextTheme] based on the current theme.
-  TextTheme get _darkTextTheme {
-    return _lightTextTheme.apply(
-      bodyColor: UIColors.white,
-      displayColor: UIColors.white,
-      decorationColor: UIColors.white,
-    );
-  }
 
   /// The UI text theme based on [UITextStyle].
   static final lightUITextTheme = TextTheme(
@@ -204,26 +113,6 @@ class UITheme {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
         side: const BorderSide(),
-      ),
-    );
-  }
-
-  /// Returns the correct [ChipThemeData] based on the current theme.
-  ChipThemeData get _darkChipTheme {
-    return _chipTheme.copyWith(
-      backgroundColor: UIColors.white,
-      disabledColor: _backgroundColor,
-      selectedColor: UIColors.secondary.shade700,
-      secondarySelectedColor: UIColors.secondary.shade700,
-      labelStyle: UITextStyle.button.copyWith(
-        color: UIColors.secondary.shade700,
-      ),
-      secondaryLabelStyle: UITextStyle.labelSmall.copyWith(
-        color: UIColors.black,
-      ),
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: UIColors.white, width: 2),
-        borderRadius: BorderRadius.circular(22),
       ),
     );
   }
@@ -271,22 +160,10 @@ class UITheme {
     );
   }
 
-  /// Returns the correct [TextButtonThemeData] based on the current theme.
-  TextButtonThemeData get _darkTextButtonTheme {
-    return TextButtonThemeData(
-      style: TextButton.styleFrom(
-        textStyle: _lightTextTheme.labelLarge?.copyWith(
-          fontWeight: UIFontWeight.light,
-        ),
-        foregroundColor: UIColors.white,
-      ),
-    );
-  }
-
   /// Returns the correct [BottomSheetThemeData] based on the current theme.
   BottomSheetThemeData get _lightBottomSheetTheme {
     return const BottomSheetThemeData(
-      backgroundColor: UIColors.darkBlue,
+      backgroundColor: UIColors.transparent,
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -294,13 +171,6 @@ class UITheme {
           topRight: Radius.circular(UISpacing.lg),
         ),
       ),
-    );
-  }
-
-  /// Returns the correct [BottomSheetThemeData] based on the current theme.
-  BottomSheetThemeData get _darkBottomSheetTheme {
-    return _lightBottomSheetTheme.copyWith(
-      backgroundColor: UIColors.grey,
     );
   }
 
@@ -366,7 +236,7 @@ class UITheme {
   /// theme.
   BottomNavigationBarThemeData get _bottomAppBarTheme {
     return BottomNavigationBarThemeData(
-      backgroundColor: UIColors.black,
+      backgroundColor: UIColors.darkBlue,
       selectedItemColor: UIColors.white,
       unselectedItemColor: UIColors.white.withOpacity(0.74),
     );
@@ -394,41 +264,6 @@ class UITheme {
           (states) => states.contains(MaterialState.disabled)
               ? UITextStyle.button.copyWith(
                   color: UIColors.black,
-                  fontWeight: FontWeight.w500,
-                )
-              : UITextStyle.button.copyWith(
-                  color: states.contains(MaterialState.disabled)
-                      ? UIColors.black
-                      : UIColors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-        ),
-      ),
-    );
-  }
-
-  /// Returns the correct [OutlinedButtonThemeData] based on the current theme.
-  OutlinedButtonThemeData get _darkOutlinedButtonTheme {
-    return OutlinedButtonThemeData(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(const StadiumBorder()),
-        backgroundColor: MaterialStateColor.resolveWith(
-          (states) => UIColors.black,
-        ),
-        side: MaterialStateProperty.resolveWith(
-          (states) => const BorderSide(color: UIColors.white),
-        ),
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(
-            horizontal: UISpacing.xlg,
-            vertical: UISpacing.lg,
-          ),
-        ),
-        alignment: Alignment.center,
-        textStyle: MaterialStateProperty.resolveWith(
-          (states) => states.contains(MaterialState.disabled)
-              ? UITextStyle.button.copyWith(
-                  color: UIColors.white,
                   fontWeight: FontWeight.w500,
                 )
               : UITextStyle.button.copyWith(

@@ -38,9 +38,6 @@ abstract class UIColors {
   static const Color oceanBlue = Color(0xFF02569B);
 
   /// The light blue accent color.
-  static const Color lightBlue = Color(0xFFB3E5FC);
-
-  /// The light blue accent color.
   static const Color lightBlue200 = Color(0xFFB3E5FC);
 
   /// The crystal blue color.
@@ -82,13 +79,15 @@ abstract class UIColors {
   /// The light outline color.
   static const Color outlineLight = Color(0x33000000);
 
-  static const Color darkBlue = Color(0xFF051224);
+  static const Color darkBlue = Color(0xFF023047);
 
-  static const Color orange = Color(0xFFF15E4D);
+  static const Color orange = Color(0xFFFB8500);
 
   static const Color pink = Color(0xFFEF4068);
 
-  static const Color lighPink = Color.fromARGB(255, 203, 133, 150);
+  static const Color lightBlue = Color(0xFF8ECAE6);
+
+  static const Color mediumblue = Color(0xFF219EBC);
 
   /// The secondary color of application.
   static const MaterialColor secondary = MaterialColor(0xFF963F6E, <int, Color>{

@@ -38,13 +38,15 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
       },
       child: Container(
         width: double.infinity,
-        color: UIColors.lightPurple,
+        color: UIColors.transparent,
         child: Column(
           children: [
             const SizedBox(height: 8),
             Text(
               'The timer is running baby!',
-              style: UITextStyle.headline4,
+              style: UITextStyle.headline4.copyWith(
+                color: UIColors.white,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -53,7 +55,9 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
                 builder: (context, duration, child) {
                   return Text(
                     duration.getFormattedCountdown(),
-                    style: UITextStyle.headline3,
+                    style: UITextStyle.headline3.copyWith(
+                      color: UIColors.white,
+                    ),
                   );
                 },
               ),
