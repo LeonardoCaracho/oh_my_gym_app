@@ -32,7 +32,7 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
   Widget build(BuildContext context) {
     return TextField(
       controller: _controller,
-      style: UITextStyle.button,
+      style: UITextStyle.subtitle2,
       textAlign: TextAlign.center,
       onChanged: (text) {
         if (_timer?.isActive ?? false) _timer?.cancel();
@@ -43,7 +43,7 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
       decoration: InputDecoration(
         hintText: 'Workout name',
         filled: true,
-        // fillColor: UIColors.white.withOpacity(0.5),
+        fillColor: UIColors.lightBlue,
         contentPadding: const EdgeInsets.symmetric(
           vertical: 3,
           horizontal: 3,

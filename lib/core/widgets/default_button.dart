@@ -7,11 +7,17 @@ class DefaultButton extends StatelessWidget {
     super.key,
     this.onPressed,
     this.icon,
+    this.backgroundColor,
+    this.textColor,
+    this.iconColor,
   });
 
   final VoidCallback? onPressed;
   final String text;
   final IconData? icon;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +25,9 @@ class DefaultButton extends StatelessWidget {
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(1),
         padding: MaterialStateProperty.all(EdgeInsets.zero),
+        backgroundColor: backgroundColor != null
+            ? MaterialStateProperty.all(backgroundColor)
+            : null,
       ),
       onPressed: onPressed,
       child: SizedBox(
@@ -28,9 +37,13 @@ class DefaultButton extends StatelessWidget {
           children: [
             Text(
               text,
-              style: UITextStyle.bodyText3,
+              style: UITextStyle.bodyText3.copyWith(color: textColor),
             ),
-            if (icon == null) const Icon(Icons.add) else Icon(icon),
+            if (icon != null)
+              Icon(
+                icon,
+                color: iconColor,
+              ),
           ],
         ),
       ),

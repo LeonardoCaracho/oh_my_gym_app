@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:history_repository/history_repository.dart';
 import 'package:oh_my_gym_app/core/core.dart';
@@ -21,12 +20,7 @@ class StartWorkoutPage extends StatelessWidget {
         historyRepository: locator<HistoryContract>(),
       )..startWorkout(workout),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'START MY WORKOUT!',
-            style: UITextStyle.headline3,
-          ),
-        ),
+        appBar: AppBar(title: const CommonHeader(title: 'WORKOUT STARTED')),
         body: StartWorkoutView(
           workout: workout,
         ),

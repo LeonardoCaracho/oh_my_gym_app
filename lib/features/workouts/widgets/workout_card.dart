@@ -23,7 +23,7 @@ class WorkoutCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: UIColors.lighPink,
+      color: UIColors.lightBlue,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

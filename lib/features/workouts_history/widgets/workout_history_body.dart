@@ -97,15 +97,39 @@ class ExerciseDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(exercise.name),
+          Text(
+            exercise.name,
+            style: UITextStyle.bodyText3.copyWith(
+              color: UIColors.white,
+            ),
+          ),
           const SizedBox(height: 8),
           ...exercise.sets.asMap().keys.toList().map(
                 (index) => Row(
                   children: [
-                    Expanded(child: Text('${index + 1}')),
-                    Expanded(child: Text('Reps: ${exercise.sets[index].reps}')),
                     Expanded(
-                      child: Text('Weight: ${exercise.sets[index].weight}'),
+                      child: Text(
+                        '${index + 1}',
+                        style: UITextStyle.bodyText3.copyWith(
+                          color: UIColors.white,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Reps: ${exercise.sets[index].reps}',
+                        style: UITextStyle.bodyText3.copyWith(
+                          color: UIColors.white,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Weight: ${exercise.sets[index].weight}',
+                        style: UITextStyle.bodyText3.copyWith(
+                          color: UIColors.white,
+                        ),
+                      ),
                     ),
                   ],
                 ),
