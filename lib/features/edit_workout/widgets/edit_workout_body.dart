@@ -16,11 +16,28 @@ class EditWorkoutBody extends StatelessWidget {
 
           return Column(
             children: [
-              WorkoutNameInput(
-                value: state.workout.name,
-                onChanged: (text) {
-                  context.read<EditWorkoutCubit>().updateName(text);
-                },
+              Row(
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: WorkoutNameInput(
+                      value: state.workout.name,
+                      onChanged: (text) {
+                        context.read<EditWorkoutCubit>().updateName(text);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    flex: 2,
+                    child: DefaultButton(
+                      text: '',
+                      icon: Icons.add,
+                      onPressed: () =>
+                          context.read<EditWorkoutCubit>().addExercise(),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -57,11 +74,6 @@ class EditWorkoutBody extends StatelessWidget {
                     );
                   },
                 ),
-              ),
-              DefaultButton(
-                text: 'Add Exercise',
-                icon: Icons.add,
-                onPressed: () => context.read<EditWorkoutCubit>().addExercise(),
               ),
               if (state.isEditMode)
                 const BottomSectionUpdateWorkout()

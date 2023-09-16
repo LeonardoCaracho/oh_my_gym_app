@@ -137,7 +137,7 @@ class UITheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(6)),
         ),
         padding: const EdgeInsets.symmetric(vertical: UISpacing.lg),
         textStyle: _lightTextTheme.labelLarge?.copyWith(

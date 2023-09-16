@@ -1,8 +1,8 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
-class DefaultButton extends StatelessWidget {
-  const DefaultButton({
+class DefaultButtonSmall extends StatelessWidget {
+  const DefaultButtonSmall({
     required this.text,
     super.key,
     this.onPressed,
@@ -23,7 +23,8 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all(1),
+        minimumSize: MaterialStateProperty.all(const Size.fromHeight(30)),
+        elevation: MaterialStateProperty.all(0),
         padding: MaterialStateProperty.all(EdgeInsets.zero),
         backgroundColor: backgroundColor != null
             ? MaterialStateProperty.all(backgroundColor)
@@ -37,13 +38,14 @@ class DefaultButton extends StatelessWidget {
           children: [
             Text(
               text,
-              style: UITextStyle.bodyText3.copyWith(color: textColor),
+              style: UITextStyle.caption.copyWith(color: textColor),
             ),
             const SizedBox(width: UISpacing.xs),
             if (icon != null)
               Icon(
                 icon,
                 color: iconColor,
+                size: 20,
               ),
           ],
         ),

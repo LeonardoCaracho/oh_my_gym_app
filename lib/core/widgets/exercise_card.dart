@@ -33,7 +33,7 @@ class ExerciseCard extends StatelessWidget {
                 child: const Icon(Icons.drag_handle),
               )
             : null,
-        tilePadding: const EdgeInsets.all(8),
+        tilePadding: const EdgeInsets.symmetric(horizontal: UISpacing.sm),
         initiallyExpanded: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,7 +48,7 @@ class ExerciseCard extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: UISpacing.sm),
             Expanded(
               child: ExerciseCardInput(
                 hintText: 'Observations',
@@ -82,7 +82,7 @@ class ExerciseCard extends StatelessWidget {
           if (isEditMode)
             Padding(
               padding: const EdgeInsets.all(8),
-              child: DefaultButton(
+              child: DefaultButtonSmall(
                 backgroundColor: UIColors.mediumblue,
                 textColor: UIColors.white,
                 iconColor: UIColors.white,
