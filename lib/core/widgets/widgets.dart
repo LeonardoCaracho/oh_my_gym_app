@@ -6,4 +6,3 @@ export 'exercise_card_input.dart';
 export 'exercise_set_row_input.dart';
 export 'exercise_set_tile.dart';
 export 'loading_button.dart';
-export 'workout_name_input.dart';

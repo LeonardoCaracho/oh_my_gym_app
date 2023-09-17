@@ -22,7 +22,7 @@ class ExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: UIColors.lightBlue,
+      color: UIColors.lightDark,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -83,9 +83,6 @@ class ExerciseCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8),
               child: DefaultButtonSmall(
-                backgroundColor: UIColors.mediumblue,
-                textColor: UIColors.white,
-                iconColor: UIColors.white,
                 text: 'Add Set',
                 icon: Icons.add,
                 onPressed: onAddSet,

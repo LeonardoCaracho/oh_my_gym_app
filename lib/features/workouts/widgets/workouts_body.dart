@@ -41,6 +41,15 @@ class WorkoutsBody extends StatelessWidget {
               }
 
               if (state is WorkoutsIsLoadSuccess) {
+                if (state.workouts.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      '🐔',
+                      style: TextStyle(fontSize: 60),
+                    ),
+                  );
+                }
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: GridView.builder(

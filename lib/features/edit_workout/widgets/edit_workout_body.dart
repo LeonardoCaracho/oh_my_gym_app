@@ -1,7 +1,7 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
-import 'package:oh_my_gym_app/features/edit_workout/widgets/bottom_section_update_workout.dart';
 
 class EditWorkoutBody extends StatelessWidget {
   const EditWorkoutBody({super.key});
@@ -16,28 +16,33 @@ class EditWorkoutBody extends StatelessWidget {
 
           return Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 8,
-                    child: WorkoutNameInput(
-                      value: state.workout.name,
-                      onChanged: (text) {
-                        context.read<EditWorkoutCubit>().updateName(text);
-                      },
-                    ),
+              TextField(
+                cursorColor: UIColors.lightDark,
+                style: const TextStyle(
+                  color: UIColors.white,
+                ),
+                onChanged: (text) {
+                  context.read<EditWorkoutCubit>().updateName(text);
+                },
+                decoration: const InputDecoration(
+                  hintText: 'Workout Name',
+                  isDense: true,
+                  hintStyle: TextStyle(
+                    color: UIColors.white,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    flex: 2,
-                    child: DefaultButton(
-                      text: '',
-                      icon: Icons.add,
-                      onPressed: () =>
-                          context.read<EditWorkoutCubit>().addExercise(),
-                    ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: UIColors.white),
                   ),
-                ],
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: UIColors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              ExerciseNameInput(
+                onChanged: (text) {
+                  context.read<EditWorkoutCubit>().updateName(text);
+                },
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -75,10 +80,6 @@ class EditWorkoutBody extends StatelessWidget {
                   },
                 ),
               ),
-              if (state.isEditMode)
-                const BottomSectionUpdateWorkout()
-              else
-                const BottomSectionSaveWorkout(),
             ],
           );
         },

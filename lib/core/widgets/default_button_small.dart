@@ -38,7 +38,10 @@ class DefaultButtonSmall extends StatelessWidget {
           children: [
             Text(
               text,
-              style: UITextStyle.caption.copyWith(color: textColor),
+              style: UITextStyle.caption.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(width: UISpacing.xs),
             if (icon != null)

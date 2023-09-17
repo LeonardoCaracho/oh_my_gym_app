@@ -25,15 +25,37 @@ class EditWorkoutPage extends StatelessWidget {
         ),
         workoutsRepository: locator<WorkoutsContract>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          title: const CommonHeader(
-            title: 'OH MY WORKOUT',
-          ),
-        ),
-        body: const EditWorkoutView(),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              centerTitle: true,
+              title: const CommonHeader(
+                title: 'OH MY WORKOUT',
+              ),
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close),
+              ),
+              actions: [
+                if (isEditMode)
+                  IconButton(
+                    onPressed: () =>
+                        context.read<EditWorkoutCubit>().updateWorkout(),
+                    icon: const Icon(Icons.update),
+                  )
+                else
+                  IconButton(
+                    onPressed: () =>
+                        context.read<EditWorkoutCubit>().saveWorkout(),
+                    icon: const Icon(Icons.check),
+                  ),
+              ],
+            ),
+            body: const EditWorkoutView(),
+          );
+        },
       ),
     );
   }
