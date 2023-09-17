@@ -16,27 +16,11 @@ class EditWorkoutBody extends StatelessWidget {
 
           return Column(
             children: [
-              TextField(
-                cursorColor: UIColors.lightDark,
-                style: const TextStyle(
-                  color: UIColors.white,
-                ),
+              WorkoutNameInput(
+                value: state.workout.name,
                 onChanged: (text) {
                   context.read<EditWorkoutCubit>().updateName(text);
                 },
-                decoration: const InputDecoration(
-                  hintText: 'Workout Name',
-                  isDense: true,
-                  hintStyle: TextStyle(
-                    color: UIColors.white,
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: UIColors.white),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: UIColors.white),
-                  ),
-                ),
               ),
               const SizedBox(height: 8),
               ExerciseNameInput(
