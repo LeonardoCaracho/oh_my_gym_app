@@ -53,7 +53,14 @@ class EditWorkoutPage extends StatelessWidget {
                   ),
               ],
             ),
-            body: const EditWorkoutView(),
+            body: BlocListener<EditWorkoutCubit, EditWorkoutState>(
+              listener: (context, state) {
+                if (state.status.isSuccess) {
+                  Navigator.of(context).pop(true);
+                }
+              },
+              child: const EditWorkoutView(),
+            ),
           );
         },
       ),
