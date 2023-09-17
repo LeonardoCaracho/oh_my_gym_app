@@ -47,10 +47,10 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     );
   }
 
-  void addExercise() {
+  void addExercise(String name) {
     final exercises = state.workout.exercises
       ..add(
-        Exercise.empty(),
+        Exercise.empty(name: name),
       );
 
     emit(state.copyWith(workout: state.workout.copyWith(exercises: exercises)));

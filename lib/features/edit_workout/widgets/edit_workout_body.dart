@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
@@ -23,11 +22,7 @@ class EditWorkoutBody extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 8),
-              ExerciseNameInput(
-                onChanged: (text) {
-                  context.read<EditWorkoutCubit>().updateName(text);
-                },
-              ),
+              ExerciseNameInput(),
               const SizedBox(height: 20),
               Expanded(
                 child: ReorderableListView.builder(
