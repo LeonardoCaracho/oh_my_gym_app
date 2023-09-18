@@ -8,82 +8,81 @@ class WorkoutsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8, top: 8),
-          child: Text(
-            'Start a workout',
-            textAlign: TextAlign.start,
-            style: UITextStyle.headline3.copyWith(
-              color: UIColors.white,
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          pinned: true,
+          snap: true,
+          floating: true,
+          centerTitle: false,
+          expandedHeight: 120,
+          flexibleSpace: FlexibleSpaceBar(
+            titlePadding: const EdgeInsets.all(8),
+            expandedTitleScale: 1,
+            background: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                'Start a workout',
+                style: UITextStyle.headline3.copyWith(
+                  color: UIColors.white,
+                ),
+              ),
             ),
+            title: const AddWorkoutCard(),
           ),
         ),
-        const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.all(8),
-          child: AddWorkoutCard(),
-        ),
-        const Divider(
-          color: UIColors.white,
-          indent: 0,
-          endIndent: 0,
-        ),
-        Expanded(
-          child: BlocBuilder<WorkoutsBloc, WorkoutsState>(
-            builder: (context, state) {
-              if (state is WorkoutsIsLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              if (state is WorkoutsIsLoadSuccess) {
-                if (state.workouts.isEmpty) {
-                  return const Center(
-                    child: Text(
-                      '🐔',
-                      style: TextStyle(fontSize: 60),
-                    ),
-                  );
-                }
-
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                      childAspectRatio: 1.4,
-                    ),
-                    itemCount: state.workouts.length,
-                    itemBuilder: (context, index) {
-                      return WorkoutCard(
-                        workout: state.workouts[index],
-                      );
-                    },
-                  ),
-                );
-              }
-
-              if (state is WorkoutsIsLoadFailure) {
-                return Center(
+        BlocBuilder<WorkoutsBloc, WorkoutsState>(
+          builder: (context, state) {
+            if (state is WorkoutsIsLoadFailure) {
+              return SliverFillRemaining(
+                child: Center(
                   child: InkWell(
                     child: const Text('Error loading workouts!'),
                     onTap: () {
                       context.read<AppBloc>().add(const AppLogoutRequested());
                     },
                   ),
+                ),
+              );
+            }
+
+            if (state is WorkoutsIsLoading) {
+              return const SliverFillRemaining(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+
+            if (state is WorkoutsIsLoadSuccess) {
+              if (state.workouts.isEmpty) {
+                return const SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      '🐔',
+                      style: TextStyle(fontSize: 60),
+                    ),
+                  ),
                 );
               }
 
-              return const SizedBox.shrink();
-            },
-          ),
+              return SliverGrid.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 1.4,
+                ),
+                itemCount: state.workouts.length,
+                itemBuilder: (context, index) {
+                  return WorkoutCard(
+                    workout: state.workouts[index],
+                  );
+                },
+              );
+            }
+            return const SliverFillRemaining(child: SizedBox.shrink());
+          },
         ),
       ],
     );
