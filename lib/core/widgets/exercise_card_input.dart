@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ExerciseCardInput extends StatefulWidget {
   const ExerciseCardInput({
@@ -8,12 +9,14 @@ class ExerciseCardInput extends StatefulWidget {
     this.onChanged,
     this.value,
     this.isReadOnly = false,
+    this.multiLine = false,
   });
 
   final String? hintText;
   final String? value;
   final ValueChanged<String>? onChanged;
   final bool isReadOnly;
+  final bool multiLine;
 
   @override
   State<ExerciseCardInput> createState() => _ExerciseCardInputState();
@@ -37,21 +40,21 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
       controller: _controller,
       onChanged: widget.onChanged,
       style: UITextStyle.bodyText3,
-      textAlign: TextAlign.center,
-      keyboardType: TextInputType.number,
+      minLines: 1,
+      maxLines: widget.multiLine ? 3 : 1,
+      keyboardType:
+          widget.multiLine ? TextInputType.multiline : TextInputType.number,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 3,
-          horizontal: 3,
-        ),
+        hintText: widget.hintText ?? '',
         isDense: true,
-        hintText: widget.hintText,
-        hintStyle: UITextStyle.bodyText3,
-        filled: true,
-        fillColor: UIColors.white.withOpacity(0.5),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(8),
+        hintStyle: const TextStyle(
+          color: UIColors.white,
+        ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: UIColors.white),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: UIColors.white),
         ),
       ),
     );

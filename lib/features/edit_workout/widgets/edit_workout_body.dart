@@ -13,50 +13,53 @@ class EditWorkoutBody extends StatelessWidget {
         builder: (context, state) {
           final exercises = state.workout.exercises;
 
-          return Column(
-            children: [
-              WorkoutNameInput(
-                value: state.workout.name,
-                onChanged: (text) {
-                  context.read<EditWorkoutCubit>().updateName(text);
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    WorkoutNameInput(
+                      value: state.workout.name,
+                      onChanged: (text) {
+                        context.read<EditWorkoutCubit>().updateName(text);
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
+              SliverList.builder(
+                itemCount: state.workout.exercises.length,
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    onDismissed: (direction) {
+                      context.read<EditWorkoutCubit>().deleteExercise(
+                            index,
+                          );
+                    },
+                    key: Key(exercises[index].id),
+                    child: ExerciseCard(
+                      index: index,
+                      isEditMode: true,
+                      exercise: exercises[index],
+                      onAddSet: () => context
+                          .read<EditWorkoutCubit>()
+                          .addSet(exercises[index].id),
+                      onDelete: (exerciseId, setIndex) =>
+                          context.read<EditWorkoutCubit>().deleteSet(
+                                exerciseId,
+                                setIndex,
+                              ),
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 8),
-              ExerciseNameInput(),
-              const SizedBox(height: 20),
-              Expanded(
-                child: ReorderableListView.builder(
-                  buildDefaultDragHandles: false,
-                  onReorder: (oldIndex, newIndex) {
-                    context.read<EditWorkoutCubit>().reorderExercises(
-                          oldIndex,
-                          newIndex,
-                        );
-                  },
-                  itemCount: exercises.length,
-                  itemBuilder: (_, index) {
-                    return Dismissible(
-                      onDismissed: (direction) {
-                        context.read<EditWorkoutCubit>().deleteExercise(
-                              index,
-                            );
-                      },
-                      key: Key(exercises[index].id),
-                      child: ExerciseCard(
-                        index: index,
-                        isEditMode: true,
-                        exercise: exercises[index],
-                        onAddSet: () => context
-                            .read<EditWorkoutCubit>()
-                            .addSet(exercises[index].id),
-                        onDelete: (exerciseId, setIndex) =>
-                            context.read<EditWorkoutCubit>().deleteSet(
-                                  exerciseId,
-                                  setIndex,
-                                ),
-                      ),
-                    );
-                  },
+              SliverToBoxAdapter(
+                child: DefaultButtonSmall(
+                  text: 'Add Exercise',
+                  icon: Icons.add,
+                  onPressed: () =>
+                      context.read<EditWorkoutCubit>().addExercise(),
                 ),
               ),
             ],

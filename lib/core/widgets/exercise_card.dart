@@ -35,29 +35,26 @@ class ExerciseCard extends StatelessWidget {
             : null,
         tilePadding: const EdgeInsets.symmetric(horizontal: UISpacing.sm),
         initiallyExpanded: true,
-        title: Row(
+        title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: ExerciseCardInput(
-                hintText: 'Exercise name',
-                isReadOnly: isEditMode == false,
-                value: exercise.name,
-                onChanged: (text) {
-                  exercise.name = text;
-                },
-              ),
+            ExerciseCardInput(
+              hintText: 'Exercise name',
+              isReadOnly: isEditMode == false,
+              value: exercise.name,
+              onChanged: (text) {
+                exercise.name = text;
+              },
             ),
             const SizedBox(width: UISpacing.sm),
-            Expanded(
-              child: ExerciseCardInput(
-                hintText: 'Observations',
-                isReadOnly: isEditMode == false,
-                value: exercise.observation,
-                onChanged: (text) {
-                  exercise.observation = text;
-                },
-              ),
+            ExerciseCardInput(
+              hintText: 'Notes',
+              isReadOnly: isEditMode == false,
+              multiLine: true,
+              value: exercise.observation,
+              onChanged: (text) {
+                exercise.observation = text;
+              },
             ),
           ],
         ),
