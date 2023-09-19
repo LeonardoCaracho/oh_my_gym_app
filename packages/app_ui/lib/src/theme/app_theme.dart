@@ -30,21 +30,22 @@ class UITheme {
   }
 
   final ColorScheme colorScheme = const ColorScheme(
-    primary: UIColors.darkBlue,
+    primary: UIColors.backgroundDark,
     error: UIColors.red,
     secondary: UIColors.orange,
-    background: UIColors.darkBlue, // Replace with your desired background color
+    background:
+        UIColors.backgroundDark, // Replace with your desired background color
     onPrimary: Colors.white, // Replace with your desired text color on primary
     onSecondary: Colors.black,
     onError: Colors.red,
-    onBackground: UIColors.darkBlue,
+    onBackground: UIColors.backgroundDark,
     brightness: Brightness.light,
     surface: UIColors.orange,
-    onSurface: UIColors.darkBlue,
+    onSurface: UIColors.backgroundDark,
   );
 
   /// Returns the correct background color based on the current theme.
-  Color get _backgroundColor => UIColors.darkBlue;
+  Color get _backgroundColor => UIColors.backgroundDark;
 
   /// Returns the correct [AppBarTheme] based on the current theme.
   AppBarTheme get _lightAppBarTheme {
@@ -53,7 +54,7 @@ class UITheme {
       titleTextStyle: _lightTextTheme.titleMedium,
       elevation: 0,
       toolbarHeight: 64,
-      backgroundColor: UIColors.darkBlue,
+      backgroundColor: UIColors.backgroundDark,
       toolbarTextStyle: _lightTextTheme.titleLarge,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
@@ -93,9 +94,9 @@ class UITheme {
     bodySmall: UITextStyle.caption,
     labelSmall: UITextStyle.overline,
   ).apply(
-    bodyColor: UIColors.black,
-    displayColor: UIColors.black,
-    decorationColor: UIColors.black,
+    bodyColor: UIColors.white,
+    displayColor: UIColors.white,
+    decorationColor: UIColors.white,
   );
 
   /// Returns the correct [ChipThemeData] based on the current theme.
@@ -137,7 +138,7 @@ class UITheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         padding: const EdgeInsets.symmetric(vertical: UISpacing.lg),
         textStyle: _lightTextTheme.labelLarge?.copyWith(
@@ -236,7 +237,7 @@ class UITheme {
   /// theme.
   BottomNavigationBarThemeData get _bottomAppBarTheme {
     return BottomNavigationBarThemeData(
-      backgroundColor: UIColors.darkBlue,
+      backgroundColor: UIColors.backgroundDark,
       selectedItemColor: UIColors.white,
       unselectedItemColor: UIColors.white.withOpacity(0.74),
     );

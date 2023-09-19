@@ -22,7 +22,7 @@ class ExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: UIColors.lightBlue,
+      color: UIColors.lightDark,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -33,31 +33,28 @@ class ExerciseCard extends StatelessWidget {
                 child: const Icon(Icons.drag_handle),
               )
             : null,
-        tilePadding: const EdgeInsets.all(8),
+        tilePadding: const EdgeInsets.symmetric(horizontal: UISpacing.sm),
         initiallyExpanded: true,
-        title: Row(
+        title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: ExerciseCardInput(
-                hintText: 'Exercise name',
-                isReadOnly: isEditMode == false,
-                value: exercise.name,
-                onChanged: (text) {
-                  exercise.name = text;
-                },
-              ),
+            ExerciseCardInput(
+              hintText: 'Exercise name',
+              isReadOnly: isEditMode == false,
+              value: exercise.name,
+              onChanged: (text) {
+                exercise.name = text;
+              },
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: ExerciseCardInput(
-                hintText: 'Observations',
-                isReadOnly: isEditMode == false,
-                value: exercise.observation,
-                onChanged: (text) {
-                  exercise.observation = text;
-                },
-              ),
+            const SizedBox(width: UISpacing.sm),
+            ExerciseCardInput(
+              hintText: 'Notes',
+              isReadOnly: isEditMode == false,
+              multiLine: true,
+              value: exercise.observation,
+              onChanged: (text) {
+                exercise.observation = text;
+              },
             ),
           ],
         ),
@@ -82,10 +79,7 @@ class ExerciseCard extends StatelessWidget {
           if (isEditMode)
             Padding(
               padding: const EdgeInsets.all(8),
-              child: DefaultButton(
-                backgroundColor: UIColors.mediumblue,
-                textColor: UIColors.white,
-                iconColor: UIColors.white,
+              child: DefaultButtonSmall(
                 text: 'Add Set',
                 icon: Icons.add,
                 onPressed: onAddSet,

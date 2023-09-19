@@ -14,24 +14,34 @@ class AddWorkoutCard extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () async {
-        final shouldUpdate = await context.pushNamed<bool>(
-          RouteConstants.addWorkoutRouteName,
-        );
+      onTap: () async {},
+      child: Row(
+        children: [
+          Expanded(
+            flex: 7,
+            child: Text(
+              'Workouts',
+              style: UITextStyle.headline4.copyWith(
+                color: UIColors.white,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: DefaultButtonSmall(
+              text: '+ Add',
+              onPressed: () async {
+                final shouldUpdate = await context.pushNamed<bool>(
+                  RouteConstants.addWorkoutRouteName,
+                );
 
-        if (shouldUpdate ?? false) {
-          updateWorkouts();
-        }
-      },
-      child: Card(
-        color: UIColors.lightBlue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const Icon(
-          Icons.add,
-          size: 64,
-        ),
+                if (shouldUpdate ?? false) {
+                  updateWorkouts();
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

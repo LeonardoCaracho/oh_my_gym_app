@@ -19,9 +19,13 @@ class Exercise extends Equatable {
   factory Exercise.fromJson(Map<String, dynamic> json) =>
       _$ExerciseFromJson(json);
 
-  factory Exercise.empty({String? id}) => Exercise(
+  factory Exercise.empty({
+    String? id,
+    String? name,
+  }) =>
+      Exercise(
         id: id ?? const Uuid().v4(),
-        name: '',
+        name: name ?? '',
         observation: '',
         sets: [
           ExerciseSet(

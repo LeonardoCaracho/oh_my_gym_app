@@ -19,7 +19,7 @@ class UIOutlinedButton extends StatelessWidget {
     required this.text,
     this.onPressed,
     this.icon,
-  })  : backgroundColor = UIColors.lightBlue200,
+  })  : backgroundColor = UIColors.lightDark200,
         darkBackgroundColor = UIColors.blue,
         borderColor = UIColors.white,
         textColor = UIColors.black;
