@@ -35,7 +35,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(DefaultButton), findsWidgets);
+      expect(find.byType(EditWorkoutBody), findsOneWidget);
     });
   });
 }
