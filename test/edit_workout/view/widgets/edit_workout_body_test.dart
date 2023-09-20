@@ -4,7 +4,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:workouts_api/workouts_api.dart';
 
