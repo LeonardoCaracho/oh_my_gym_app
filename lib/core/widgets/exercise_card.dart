@@ -59,21 +59,11 @@ class ExerciseCard extends StatelessWidget {
           ],
         ),
         children: [
-          MediaQuery(
-            data: MediaQuery.of(context).removePadding(removeBottom: true),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: exercise.sets.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (_, index) {
-                return ExerciseSetTile(
-                  isEditMode: isEditMode,
-                  set: exercise.sets[index],
-                  exerciseId: exercise.id,
-                  index: index,
-                  onDelete: onDelete,
-                );
-              },
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: SetRow(
+              exercise: exercise,
+              onDelete: onDelete,
             ),
           ),
           if (isEditMode)

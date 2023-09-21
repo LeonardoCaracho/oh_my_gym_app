@@ -1,38 +1,67 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:oh_my_gym_app/core/core.dart';
 
-class ExerciseSetRowInput extends StatelessWidget {
+class ExerciseSetRowInput extends StatefulWidget {
   const ExerciseSetRowInput({
-    this.label,
+    super.key,
+    this.hintText,
     this.onChanged,
     this.value,
-    this.hint = '0',
-    super.key,
+    this.isReadOnly = false,
+    this.multiLine = false,
   });
 
-  final String? label;
+  final String? hintText;
   final String? value;
-  final String hint;
   final ValueChanged<String>? onChanged;
+  final bool isReadOnly;
+  final bool multiLine;
+
+  @override
+  State<ExerciseSetRowInput> createState() => _ExerciseSetRowInputState();
+}
+
+class _ExerciseSetRowInputState extends State<ExerciseSetRowInput> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.value != null) {
+      _controller.text = widget.value!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          label != null ? label! : '',
-          style: UITextStyle.bodyText2,
-        ),
-        SizedBox(
-          width: 60,
-          child: ExerciseCardInput(
-            hintText: hint,
-            onChanged: onChanged,
-            value: value,
+    return Container(
+      margin: const EdgeInsets.only(
+        right: 6,
+        bottom: 6,
+      ),
+      width: 20,
+      child: TextField(
+        readOnly: widget.isReadOnly,
+        controller: _controller,
+        onChanged: widget.onChanged,
+        style: UITextStyle.bodyText3,
+        minLines: 1,
+        maxLines: widget.multiLine ? 3 : 1,
+        keyboardType:
+            widget.multiLine ? TextInputType.multiline : TextInputType.number,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: UIColors.backgroundDark,
+          hintText: widget.hintText ?? '',
+          isDense: true,
+          hintStyle: const TextStyle(
+            color: UIColors.white,
+          ),
+          border: const UnderlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
         ),
-      ],
+      ),
     );
   }
 }
