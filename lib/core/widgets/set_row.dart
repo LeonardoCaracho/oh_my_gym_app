@@ -19,17 +19,20 @@ class SetRow extends StatelessWidget {
     return sets
         .map(
           (e) => Dismissible(
+            direction: DismissDirection.endToStart,
             onDismissed: (direction) => onDelete?.call(exercise.id, 0),
             background: Container(
+              margin: const EdgeInsets.only(bottom: 8),
               color: UIColors.orange,
               alignment: Alignment.centerRight,
               child: const Padding(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.only(right: 16),
                 child: Icon(Icons.delete),
               ),
             ),
             key: Key(Random().nextInt(99).toString()),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Text(
@@ -62,15 +65,12 @@ class SetRow extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: ExerciseSetRowInput(
-                      hintText: '0',
-                      value: (e.reps != null && e.reps! > 0)
-                          ? e.reps.toString()
-                          : null,
-                      onChanged: (text) => e.reps = int.tryParse(text) ?? 0,
-                    ),
+                  child: ExerciseSetRowInput(
+                    hintText: '0',
+                    value: (e.reps != null && e.reps! > 0)
+                        ? e.reps.toString()
+                        : null,
+                    onChanged: (text) => e.reps = int.tryParse(text) ?? 0,
                   ),
                 ),
               ],

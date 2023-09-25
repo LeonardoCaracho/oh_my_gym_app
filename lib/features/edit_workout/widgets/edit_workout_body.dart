@@ -33,11 +33,18 @@ class EditWorkoutBody extends StatelessWidget {
                 itemCount: state.workout.exercises.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
+                    direction: DismissDirection.endToStart,
                     background: Container(
+                      padding: const EdgeInsets.only(
+                        right: 8,
+                      ),
+                      margin: const EdgeInsets.only(
+                        bottom: 8,
+                      ),
                       alignment: Alignment.centerRight,
                       color: UIColors.orange,
                       child: const Padding(
-                        padding: EdgeInsets.all(8),
+                        padding: EdgeInsets.only(right: 16),
                         child: Icon(Icons.delete),
                       ),
                     ),
@@ -47,18 +54,21 @@ class EditWorkoutBody extends StatelessWidget {
                           );
                     },
                     key: Key(exercises[index].id),
-                    child: ExerciseCard(
-                      index: index,
-                      isEditMode: true,
-                      exercise: exercises[index],
-                      onAddSet: () => context
-                          .read<EditWorkoutCubit>()
-                          .addSet(exercises[index].id),
-                      onDelete: (exerciseId, setIndex) =>
-                          context.read<EditWorkoutCubit>().deleteSet(
-                                exerciseId,
-                                setIndex,
-                              ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: ExerciseCard(
+                        index: index,
+                        isEditMode: true,
+                        exercise: exercises[index],
+                        onAddSet: () => context
+                            .read<EditWorkoutCubit>()
+                            .addSet(exercises[index].id),
+                        onDelete: (exerciseId, setIndex) =>
+                            context.read<EditWorkoutCubit>().deleteSet(
+                                  exerciseId,
+                                  setIndex,
+                                ),
+                      ),
                     ),
                   );
                 },

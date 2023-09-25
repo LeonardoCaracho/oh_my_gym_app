@@ -22,40 +22,19 @@ class ExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       color: UIColors.lightDark,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
       child: ExpansionTile(
-        leading: index != null
-            ? ReorderableDragStartListener(
-                index: index!,
-                child: const Icon(Icons.drag_handle),
-              )
-            : null,
         tilePadding: const EdgeInsets.symmetric(horizontal: UISpacing.sm),
         initiallyExpanded: true,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ExerciseCardInput(
-              hintText: 'Exercise name',
-              isReadOnly: isEditMode == false,
-              value: exercise.name,
-              onChanged: (text) {
-                exercise.name = text;
-              },
-            ),
+            ExerciseCardHeader(isEditMode: isEditMode, exercise: exercise),
             const SizedBox(width: UISpacing.sm),
-            ExerciseCardInput(
-              hintText: 'Notes',
-              isReadOnly: isEditMode == false,
-              multiLine: true,
-              value: exercise.observation,
-              onChanged: (text) {
-                exercise.observation = text;
-              },
-            ),
           ],
         ),
         children: [
@@ -77,6 +56,71 @@ class ExerciseCard extends StatelessWidget {
             ),
         ],
       ),
+    );
+  }
+}
+
+class ExerciseCardHeader extends StatefulWidget {
+  const ExerciseCardHeader({
+    super.key,
+    required this.isEditMode,
+    required this.exercise,
+  });
+
+  final bool isEditMode;
+  final Exercise exercise;
+
+  @override
+  State<ExerciseCardHeader> createState() => _ExerciseCardHeaderState();
+}
+
+class _ExerciseCardHeaderState extends State<ExerciseCardHeader> {
+  bool isAddNote = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: ExerciseCardInput(
+                hintText: 'Exercise name',
+                isReadOnly: widget.isEditMode == false,
+                value: widget.exercise.name,
+                onChanged: (text) {
+                  widget.exercise.name = text;
+                },
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  isAddNote = !isAddNote;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Icon(
+                  isAddNote ? Icons.speaker_notes_off : Icons.speaker_notes,
+                  color: UIColors.white,
+                  size: 20,
+                ),
+              ),
+            ),
+          ],
+        ),
+        if (isAddNote)
+          ExerciseCardInput(
+            hintText: 'Notes',
+            isReadOnly: widget.isEditMode == false,
+            multiLine: true,
+            value: widget.exercise.observation,
+            onChanged: (text) {
+              widget.exercise.observation = text;
+            },
+          ),
+      ],
     );
   }
 }
