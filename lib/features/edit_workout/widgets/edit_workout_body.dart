@@ -19,13 +19,37 @@ class EditWorkoutBody extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    WorkoutNameInput(
-                      value: state.workout.name,
-                      onChanged: (text) {
-                        context.read<EditWorkoutCubit>().updateName(text);
-                      },
+                    Row(
+                      children: [
+                        Expanded(
+                          child: WorkoutNameInput(
+                            value: state.workout.name,
+                            onChanged: (text) {
+                              context.read<EditWorkoutCubit>().updateName(text);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 60,
+                          child: InkWell(
+                            child: const Icon(Icons.sort),
+                            onTap: () {
+                              final editWorkoutCubit =
+                                  context.read<EditWorkoutCubit>();
+                              showDialog<void>(
+                                context: context,
+                                builder: (context) {
+                                  return SortingDialog(
+                                    editWorkoutCubit: editWorkoutCubit,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        )
+                      ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

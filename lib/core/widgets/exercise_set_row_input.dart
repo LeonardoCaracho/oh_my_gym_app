@@ -47,11 +47,13 @@ class _ExerciseSetRowInputState extends State<ExerciseSetRowInput> {
         style: UITextStyle.bodyText3,
         minLines: 1,
         maxLines: widget.multiLine ? 3 : 1,
+        textAlign: TextAlign.center,
+        cursorColor: UIColors.white,
         keyboardType:
             widget.multiLine ? TextInputType.multiline : TextInputType.number,
         decoration: InputDecoration(
           filled: true,
-          fillColor: UIColors.backgroundDark,
+          fillColor: UIColors.backgroundDark.withOpacity(0.5),
           hintText: widget.hintText ?? '',
           isDense: true,
           hintStyle: const TextStyle(

@@ -37,6 +37,7 @@ class SetRow extends StatelessWidget {
                 Expanded(
                   child: Text(
                     '1',
+                    textAlign: TextAlign.center,
                     style: UITextStyle.bodyText2,
                   ),
                 ),
@@ -44,27 +45,22 @@ class SetRow extends StatelessWidget {
                   flex: 2,
                   child: Text(
                     '0 kg x 11',
+                    textAlign: TextAlign.center,
                     style: UITextStyle.bodyText2.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: ExerciseSetRowInput(
-                      hintText: '0.0',
-                      value: (e.weight != null && e.weight! > 0)
-                          ? e.weight.toString()
-                          : null,
-                      onChanged: (text) =>
-                          e.weight = double.tryParse(text) ?? 0,
-                    ),
+                  child: ExerciseSetRowInput(
+                    hintText: '0.0',
+                    value: (e.weight != null && e.weight! > 0)
+                        ? e.weight.toString()
+                        : null,
+                    onChanged: (text) => e.weight = double.tryParse(text) ?? 0,
                   ),
                 ),
                 Expanded(
-                  flex: 2,
                   child: ExerciseSetRowInput(
                     hintText: '0',
                     value: (e.reps != null && e.reps! > 0)
@@ -72,6 +68,9 @@ class SetRow extends StatelessWidget {
                         : null,
                     onChanged: (text) => e.reps = int.tryParse(text) ?? 0,
                   ),
+                ),
+                const Expanded(
+                  child: SizedBox.shrink(),
                 ),
               ],
             ),
@@ -89,6 +88,7 @@ class SetRow extends StatelessWidget {
             Expanded(
               child: Text(
                 'SET',
+                textAlign: TextAlign.center,
                 style: UITextStyle.caption.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -98,28 +98,32 @@ class SetRow extends StatelessWidget {
               flex: 2,
               child: Text(
                 'PREVIOUS',
+                textAlign: TextAlign.center,
                 style: UITextStyle.caption.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
               child: Text(
                 'WEIGHT',
+                textAlign: TextAlign.center,
                 style: UITextStyle.caption.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
               child: Text(
                 'REPS',
+                textAlign: TextAlign.center,
                 style: UITextStyle.caption.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
+            ),
+            const Expanded(
+              child: SizedBox.shrink(),
             ),
           ],
         ),
