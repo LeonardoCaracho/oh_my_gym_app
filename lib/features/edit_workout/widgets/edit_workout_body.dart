@@ -32,6 +32,7 @@ class EditWorkoutBody extends StatelessWidget {
                         SizedBox(
                           width: 60,
                           child: InkWell(
+                            key: const Key('sorting_button'),
                             child: const Icon(Icons.sort),
                             onTap: () {
                               final editWorkoutCubit =
