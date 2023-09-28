@@ -22,59 +22,25 @@ class ExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       color: UIColors.lightDark,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
       child: ExpansionTile(
-        leading: index != null
-            ? ReorderableDragStartListener(
-                index: index!,
-                child: const Icon(Icons.drag_handle),
-              )
-            : null,
         tilePadding: const EdgeInsets.symmetric(horizontal: UISpacing.sm),
         initiallyExpanded: true,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ExerciseCardInput(
-              hintText: 'Exercise name',
-              isReadOnly: isEditMode == false,
-              value: exercise.name,
-              onChanged: (text) {
-                exercise.name = text;
-              },
-            ),
-            const SizedBox(width: UISpacing.sm),
-            ExerciseCardInput(
-              hintText: 'Notes',
-              isReadOnly: isEditMode == false,
-              multiLine: true,
-              value: exercise.observation,
-              onChanged: (text) {
-                exercise.observation = text;
-              },
-            ),
+            ExerciseCardHeader(isEditMode: isEditMode, exercise: exercise),
+            const SizedBox(height: UISpacing.md),
           ],
         ),
         children: [
-          MediaQuery(
-            data: MediaQuery.of(context).removePadding(removeBottom: true),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: exercise.sets.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (_, index) {
-                return ExerciseSetTile(
-                  isEditMode: isEditMode,
-                  set: exercise.sets[index],
-                  exerciseId: exercise.id,
-                  index: index,
-                  onDelete: onDelete,
-                );
-              },
-            ),
+          SetRow(
+            exercise: exercise,
+            onDelete: onDelete,
           ),
           if (isEditMode)
             Padding(
