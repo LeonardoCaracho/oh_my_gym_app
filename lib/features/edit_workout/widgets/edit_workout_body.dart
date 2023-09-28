@@ -47,7 +47,7 @@ class EditWorkoutBody extends StatelessWidget {
                               );
                             },
                           ),
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
