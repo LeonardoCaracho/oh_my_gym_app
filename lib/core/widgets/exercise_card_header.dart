@@ -18,7 +18,21 @@ class ExerciseCardHeader extends StatefulWidget {
 }
 
 class _ExerciseCardHeaderState extends State<ExerciseCardHeader> {
-  bool isAddNote = false;
+  late bool isAddNote;
+  late bool hasNote;
+
+  @override
+  void initState() {
+    hasNote = !widget.isEditMode && widget.exercise.observation!.isNotEmpty;
+
+    if (hasNote) {
+      isAddNote = true;
+    } else {
+      isAddNote = false;
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

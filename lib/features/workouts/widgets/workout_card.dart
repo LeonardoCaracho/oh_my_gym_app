@@ -30,13 +30,13 @@ class WorkoutCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           final workoutsBloc = context.read<WorkoutsBloc>();
-          showModalBottomSheet<void>(
+          showDialog<void>(
             context: context,
-            backgroundColor: UIColors.orange,
+            // backgroundColor: UIColors.orange,
             builder: (context) {
               return BlocProvider.value(
                 value: workoutsBloc,
-                child: WorkoutOptionsBottomSheet(workout: workout),
+                child: WorkoutOptionsDialog(workout: workout),
               );
             },
           );
