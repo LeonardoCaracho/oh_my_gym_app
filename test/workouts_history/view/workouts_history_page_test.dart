@@ -30,15 +30,13 @@ void main() {
           child: Builder(
             builder: (context) {
               return MaterialApp(
-                home: WorkoutHistoryPage(
-                  workoutId: '1',
-                ),
+                home: WorkoutsHistoryPage(),
               );
             },
           ),
         ),
       );
-      expect(find.byType(WorkoutHistoryPage), findsOneWidget);
+      expect(find.byType(WorkoutsHistoryPage), findsOneWidget);
     });
   });
 }
