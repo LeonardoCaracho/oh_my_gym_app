@@ -29,6 +29,7 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      autofocus: true,
       controller: _controller,
       cursorColor: UIColors.lightDark,
       style: const TextStyle(

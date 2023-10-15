@@ -92,17 +92,6 @@ class AppRouter {
               builder: (context, state) {
                 return const WorkoutsHistoryPage();
               },
-              routes: [
-                GoRoute(
-                  name: RouteConstants.workoutHistoryRouteName,
-                  path: RouteConstants.workoutHistoryRoute,
-                  builder: (context, state) {
-                    return WorkoutHistoryPage(
-                      workoutId: state.queryParameters['docId']!,
-                    );
-                  },
-                ),
-              ],
             ),
           ],
         ),

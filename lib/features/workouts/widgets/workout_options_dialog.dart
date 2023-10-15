@@ -25,11 +25,25 @@ class WorkoutOptionsDialog extends StatelessWidget {
 
     return AlertDialog(
       backgroundColor: UIColors.liver,
-      title: Text(
-        workout.name,
-        style: UITextStyle.headline4.copyWith(
-          color: UIColors.white,
-        ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            workout.name,
+            style: UITextStyle.headline4.copyWith(
+              color: UIColors.white,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              context
+                  .read<WorkoutsBloc>()
+                  .add(WorkoutRemoved(workout: workout));
+              closeBottomSheet();
+            },
+          ),
+        ],
       ),
       content: SizedBox(
         width: 300,
@@ -48,18 +62,22 @@ class WorkoutOptionsDialog extends StatelessWidget {
         ),
       ),
       actions: [
-        DefaultButton(
-          text: 'START',
-          onPressed: () {
-            closeBottomSheet();
-            context.goNamed(
-              RouteConstants.startWorkoutRouteName,
-              extra: workout,
-            );
-          },
-        ),
         Row(
           children: [
+            Expanded(
+              child: DefaultButton(
+                text: 'START',
+                icon: Icons.play_arrow,
+                onPressed: () {
+                  closeBottomSheet();
+                  context.goNamed(
+                    RouteConstants.startWorkoutRouteName,
+                    extra: workout,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(width: 8),
             Expanded(
               child: DefaultButton(
                 text: 'EDIT',
@@ -73,19 +91,6 @@ class WorkoutOptionsDialog extends StatelessWidget {
                   if (shouldUpdate ?? false) {
                     updateWorkouts();
                   }
-                  closeBottomSheet();
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: DefaultButton(
-                text: 'DELETE',
-                icon: Icons.delete,
-                onPressed: () {
-                  context
-                      .read<WorkoutsBloc>()
-                      .add(WorkoutRemoved(workout: workout));
                   closeBottomSheet();
                 },
               ),

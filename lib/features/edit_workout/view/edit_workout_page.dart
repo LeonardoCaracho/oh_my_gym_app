@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
@@ -46,10 +47,19 @@ class EditWorkoutPage extends StatelessWidget {
                     icon: const Icon(Icons.update),
                   )
                 else
-                  IconButton(
-                    onPressed: () =>
-                        context.read<EditWorkoutCubit>().saveWorkout(),
-                    icon: const Icon(Icons.check),
+                  BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
+                    builder: (context, state) {
+                      final hasExercises = state.workout.exercises.isNotEmpty;
+
+                      return IconButton(
+                        disabledColor: UIColors.grey,
+                        onPressed: hasExercises
+                            ? () =>
+                                context.read<EditWorkoutCubit>().saveWorkout()
+                            : null,
+                        icon: const Icon(Icons.check),
+                      );
+                    },
                   ),
               ],
             ),
