@@ -42,7 +42,7 @@ class WorkoutOptionsDialog extends StatelessWidget {
                   .add(WorkoutRemoved(workout: workout));
               closeBottomSheet();
             },
-          )
+          ),
         ],
       ),
       content: SizedBox(
