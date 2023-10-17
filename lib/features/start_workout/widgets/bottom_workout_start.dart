@@ -113,15 +113,15 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
                 content: const Text('Are you really finished?'),
                 actions: [
                   DefaultButton(
-                    text: 'CANCEL',
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  DefaultButton(
                     text: 'YES',
                     onPressed: () {
                       context.read<StartWorkoutCubit>().finishWorkout();
                       Navigator.of(context).pop();
                     },
+                  ),
+                  DefaultButton(
+                    text: "NO, BUT I'll",
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
               );

@@ -26,6 +26,8 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
         return;
       }
 
+      _updateSets();
+
       final record = WorkoutHistory(
         workout: state.workout!,
         finishDate: DateTime.now(),
@@ -36,6 +38,16 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
       emit(state.copyWith(status: Status.success));
     } catch (e) {
       emit(state.copyWith(status: Status.failure));
+    }
+  }
+
+  void _updateSets() {
+    for (final exercise in state.workout!.exercises) {
+      for (final set in exercise.sets) {
+        set
+          ..prevReps = set.reps
+          ..prevWeight = set.weight;
+      }
     }
   }
 }

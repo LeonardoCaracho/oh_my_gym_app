@@ -15,10 +15,17 @@ class SetRow extends StatelessWidget {
   final Exercise exercise;
   final void Function(String exerciseId, int setIndex)? onDelete;
 
-  List<Widget> rowsBuilder(List<ExerciseSet> sets) {
+  String formatPreviousValues(ExerciseSet set) {
+    if (set.prevReps != null && set.prevWeight != null) {
+      return '${set.prevReps} x ${set.prevWeight}';
+    }
+    return '---';
+  }
+
+  List<Widget> _rowsBuilder(List<ExerciseSet> sets) {
     return sets
         .map(
-          (e) => Dismissible(
+          (set) => Dismissible(
             direction: DismissDirection.endToStart,
             onDismissed: (direction) => onDelete?.call(exercise.id, 0),
             background: Container(
@@ -44,7 +51,7 @@ class SetRow extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    '0 kg x 11',
+                    formatPreviousValues(set),
                     textAlign: TextAlign.center,
                     style: UITextStyle.bodyText2.copyWith(
                       fontWeight: FontWeight.bold,
@@ -54,19 +61,20 @@ class SetRow extends StatelessWidget {
                 Expanded(
                   child: ExerciseSetRowInput(
                     hintText: '0.0',
-                    value: (e.weight != null && e.weight! > 0)
-                        ? e.weight.toString()
+                    value: (set.weight != null && set.weight! > 0)
+                        ? set.weight.toString()
                         : null,
-                    onChanged: (text) => e.weight = double.tryParse(text) ?? 0,
+                    onChanged: (text) =>
+                        set.weight = double.tryParse(text) ?? 0,
                   ),
                 ),
                 Expanded(
                   child: ExerciseSetRowInput(
                     hintText: '0',
-                    value: (e.reps != null && e.reps! > 0)
-                        ? e.reps.toString()
+                    value: (set.reps != null && set.reps! > 0)
+                        ? set.reps.toString()
                         : null,
-                    onChanged: (text) => e.reps = int.tryParse(text) ?? 0,
+                    onChanged: (text) => set.reps = int.tryParse(text) ?? 0,
                   ),
                 ),
                 const Expanded(
@@ -128,7 +136,7 @@ class SetRow extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        ...rowsBuilder(exercise.sets),
+        ..._rowsBuilder(exercise.sets),
       ],
     );
   }
