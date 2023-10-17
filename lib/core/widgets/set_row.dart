@@ -27,7 +27,10 @@ class SetRow extends StatelessWidget {
         .map(
           (set) => Dismissible(
             direction: DismissDirection.endToStart,
-            onDismissed: (direction) => onDelete?.call(exercise.id, 0),
+            onDismissed: (direction) => onDelete?.call(
+              exercise.id,
+              sets.indexOf(set),
+            ),
             background: Container(
               margin: const EdgeInsets.only(bottom: 8),
               color: UIColors.orange,
