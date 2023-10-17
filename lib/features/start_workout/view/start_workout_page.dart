@@ -3,6 +3,7 @@ import 'package:history_repository/history_repository.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
 import 'package:oh_my_gym_app/features/start_workout/widgets/start_workout_body.dart';
+import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
 class StartWorkoutPage extends StatelessWidget {
@@ -18,6 +19,7 @@ class StartWorkoutPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => StartWorkoutCubit(
         historyRepository: locator<HistoryContract>(),
+        workoutsRepository: locator<WorkoutsContract>(),
       )..startWorkout(workout),
       child: Scaffold(
         appBar: AppBar(title: const CommonHeader(title: 'WORKOUT STARTED')),
