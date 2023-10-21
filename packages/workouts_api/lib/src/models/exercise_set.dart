@@ -10,6 +10,8 @@ class ExerciseSet extends Equatable {
   ExerciseSet({
     this.reps,
     this.weight,
+    this.prevReps,
+    this.prevWeight,
   });
 
   factory ExerciseSet.fromJson(Map<String, dynamic> json) =>
@@ -22,8 +24,11 @@ class ExerciseSet extends Equatable {
 
   int? reps;
   double? weight;
+  int? prevReps;
+  double? prevWeight;
+
   Map<String, dynamic> toJson() => _$ExerciseSetToJson(this);
 
   @override
-  List<Object?> get props => [reps, weight];
+  List<Object?> get props => [reps, weight, prevReps, prevWeight];
 }

@@ -4,11 +4,16 @@ import 'package:history_repository/history_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
+import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
 class MockHistoryContract extends Mock implements HistoryContract {}
 
+class MockWorkoutsContract extends Mock implements WorkoutsContract {}
+
 class FakeHistoryWorkout extends Fake implements WorkoutHistory {}
+
+class FakeWorkout extends Fake implements Workout {}
 
 final mockExercise = Exercise.empty(id: '1');
 final mockWorkout = Workout.create(exercises: [mockExercise]);
@@ -16,14 +21,26 @@ final mockWorkout = Workout.create(exercises: [mockExercise]);
 void main() {
   group('StartWorkoutCubit', () {
     late HistoryContract historyRepository;
+    late WorkoutsContract workoutsRepository;
     late StartWorkoutCubit startWorkoutCubit;
 
-    setUpAll(() => registerFallbackValue(FakeHistoryWorkout()));
+    setUpAll(() {
+      registerFallbackValue(FakeHistoryWorkout());
+      registerFallbackValue(FakeWorkout());
+    });
 
     setUp(() {
       historyRepository = MockHistoryContract();
-      startWorkoutCubit =
-          StartWorkoutCubit(historyRepository: historyRepository);
+      workoutsRepository = MockWorkoutsContract();
+
+      startWorkoutCubit = StartWorkoutCubit(
+        historyRepository: historyRepository,
+        workoutsRepository: workoutsRepository,
+      );
+
+      when(() => workoutsRepository.updateWorkout(any())).thenAnswer(
+        (_) => Future.value(),
+      );
     });
 
     group('constructor', () {

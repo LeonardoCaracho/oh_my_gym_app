@@ -56,7 +56,7 @@ class UITheme {
       toolbarHeight: 64,
       backgroundColor: UIColors.backgroundDark,
       toolbarTextStyle: _lightTextTheme.titleLarge,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     );
   }
 
