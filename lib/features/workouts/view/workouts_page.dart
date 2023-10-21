@@ -17,10 +17,10 @@ class WorkoutsPage extends StatelessWidget {
       child: Scaffold(
         body: const WorkoutsView(),
         bottomSheet: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: SafeArea(
             child: DefaultButton(
-              text: 'WORKOUTS DONE',
+              text: 'WORKOUTS HISTORY',
               icon: Icons.history,
               onPressed: () =>
                   context.goNamed(RouteConstants.workoutsHistoryRouteName),
