@@ -7,7 +7,7 @@ part 'settings_state.dart';
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit() : super(const SettingsInitial());
 
-  /// A description for yourCustomFunction 
+  /// A description for yourCustomFunction
   FutureOr<void> yourCustomFunction() {
     // TODO: Add Logic
   }

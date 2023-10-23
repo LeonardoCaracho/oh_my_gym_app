@@ -24,6 +24,7 @@ class SettingsState extends Equatable {
     );
   }
 }
+
 /// {@template settings_initial}
 /// The initial state of SettingsState
 /// {@endtemplate}
