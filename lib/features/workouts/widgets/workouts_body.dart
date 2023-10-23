@@ -1,6 +1,8 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 
 class WorkoutsBody extends StatelessWidget {
@@ -17,15 +19,27 @@ class WorkoutsBody extends StatelessWidget {
           centerTitle: false,
           expandedHeight: 120,
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             titlePadding: const EdgeInsets.all(8),
             expandedTitleScale: 1,
             background: Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(
-                'Start a workout',
-                style: UITextStyle.headline3.copyWith(
-                  color: UIColors.white,
-                ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Start a workout',
+                    style: UITextStyle.headline3.copyWith(
+                      color: UIColors.white,
+                    ),
+                  ),
+                  IconButton.filled(
+                    onPressed: () => context
+                        .goNamed(RouteConstants.settingsHistoryRouteName),
+                    icon: const Icon(Icons.settings),
+                  ),
+                ],
               ),
             ),
             title: const AddWorkoutCard(),
@@ -69,14 +83,19 @@ class WorkoutsBody extends StatelessWidget {
               return SliverGrid.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 1.4,
+                  childAspectRatio: 1.5,
                 ),
                 itemCount: state.workouts.length,
                 itemBuilder: (context, index) {
-                  return WorkoutCard(
-                    workout: state.workouts[index],
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      left: 8,
+                      bottom: 8,
+                      right: index.isOdd ? 8 : 0,
+                    ),
+                    child: WorkoutCard(
+                      workout: state.workouts[index],
+                    ),
                   );
                 },
               );

@@ -1,3 +1,4 @@
+export 'constants/constants.dart';
 export 'dependency_injection/di.dart';
 export 'enums/enums.dart';
 export 'extensions/extensions.dart';
