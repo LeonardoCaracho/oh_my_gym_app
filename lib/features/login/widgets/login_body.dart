@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 
 class LoginBody extends StatelessWidget {
@@ -13,23 +14,21 @@ class LoginBody extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Center(
-            child: Text(
-              'OH MY GYM',
-              style: UITextStyle.headline1,
+            child: Image.asset(
+              'assets/images/logo.webp',
+              scale: 2,
             ),
           ),
         ),
         Expanded(
           child: Center(
-            child: ElevatedButton(
-              child: const SizedBox(
-                width: 200,
-                child: Text(
-                  'Sign In With Google',
-                  textAlign: TextAlign.center,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: DefaultButtonSmall(
+                icon: Icons.g_mobiledata,
+                text: 'Sign In With Google',
+                onPressed: () => context.read<LoginCubit>().loginWithGoogle(),
               ),
-              onPressed: () => context.read<LoginCubit>().loginWithGoogle(),
             ),
           ),
         ),

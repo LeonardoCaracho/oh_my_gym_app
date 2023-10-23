@@ -83,14 +83,19 @@ class WorkoutsBody extends StatelessWidget {
               return SliverGrid.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 1.4,
+                  childAspectRatio: 1.5,
                 ),
                 itemCount: state.workouts.length,
                 itemBuilder: (context, index) {
-                  return WorkoutCard(
-                    workout: state.workouts[index],
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      left: 8,
+                      bottom: 8,
+                      right: index.isOdd ? 8 : 0,
+                    ),
+                    child: WorkoutCard(
+                      workout: state.workouts[index],
+                    ),
                   );
                 },
               );

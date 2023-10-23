@@ -14,7 +14,7 @@ class SettingsBody extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: [
-              DefaultButton(
+              DefaultButtonSmall(
                 text: 'Logout',
                 onPressed: () {
                   context.read<AppBloc>().add(const AppLogoutRequested());
