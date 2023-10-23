@@ -15,7 +15,7 @@ class LoginBody extends StatelessWidget {
           flex: 2,
           child: Center(
             child: Image.asset(
-              'assets/images/logo.webp',
+              AssetsConstants.logo,
               scale: 2,
             ),
           ),
