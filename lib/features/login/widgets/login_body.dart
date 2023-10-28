@@ -24,7 +24,6 @@ class LoginBody extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: DefaultButtonSmall(
-                icon: Icons.g_mobiledata,
                 text: 'Sign In With Google',
                 onPressed: () => context.read<LoginCubit>().loginWithGoogle(),
               ),

@@ -5,15 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workouts_api/workouts_api.dart';
 
-class SetRow extends StatelessWidget {
+class SetRow extends StatefulWidget {
   const SetRow({
     required this.exercise,
     required this.onDelete,
+    this.isEditMode = false,
     super.key,
   });
 
   final Exercise exercise;
   final void Function(String exerciseId, int setIndex)? onDelete;
+  final bool isEditMode;
+
+  @override
+  State<SetRow> createState() => _SetRowState();
+}
+
+class _SetRowState extends State<SetRow> {
+  var isDone = false;
 
   String formatPreviousValues(ExerciseSet set) {
     if (set.prevReps != null && set.prevWeight != null) {
@@ -27,8 +36,8 @@ class SetRow extends StatelessWidget {
         .map(
           (set) => Dismissible(
             direction: DismissDirection.endToStart,
-            onDismissed: (direction) => onDelete?.call(
-              exercise.id,
+            onDismissed: (direction) => widget.onDelete?.call(
+              widget.exercise.id,
               sets.indexOf(set),
             ),
             background: Container(
@@ -41,49 +50,69 @@ class SetRow extends StatelessWidget {
               ),
             ),
             key: Key(Random().nextInt(99).toString()),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Text(
-                    '1',
-                    textAlign: TextAlign.center,
-                    style: UITextStyle.bodyText2,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    formatPreviousValues(set),
-                    textAlign: TextAlign.center,
-                    style: UITextStyle.bodyText2.copyWith(
-                      fontWeight: FontWeight.bold,
+            child: Container(
+              color: isDone ? Colors.black26 : UIColors.lightDark,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      '1',
+                      textAlign: TextAlign.center,
+                      style: UITextStyle.bodyText2,
                     ),
                   ),
-                ),
-                Expanded(
-                  child: ExerciseSetRowInput(
-                    hintText: '0.0',
-                    value: (set.weight != null && set.weight! > 0)
-                        ? set.weight.toString()
-                        : null,
-                    onChanged: (text) =>
-                        set.weight = double.tryParse(text) ?? 0,
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      formatPreviousValues(set),
+                      textAlign: TextAlign.center,
+                      style: UITextStyle.bodyText2.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: ExerciseSetRowInput(
-                    hintText: '0',
-                    value: (set.reps != null && set.reps! > 0)
-                        ? set.reps.toString()
-                        : null,
-                    onChanged: (text) => set.reps = int.tryParse(text) ?? 0,
+                  Expanded(
+                    child: ExerciseSetRowInput(
+                      hintText: '0.0',
+                      value: (set.weight != null && set.weight! > 0)
+                          ? set.weight.toString()
+                          : null,
+                      onChanged: (text) =>
+                          set.weight = double.tryParse(text) ?? 0,
+                    ),
                   ),
-                ),
-                const Expanded(
-                  child: SizedBox.shrink(),
-                ),
-              ],
+                  Expanded(
+                    child: ExerciseSetRowInput(
+                      hintText: '0',
+                      value: (set.reps != null && set.reps! > 0)
+                          ? set.reps.toString()
+                          : null,
+                      onChanged: (text) => set.reps = int.tryParse(text) ?? 0,
+                    ),
+                  ),
+                  if (!widget.isEditMode)
+                    Expanded(
+                      child: IconButton(
+                        icon: Icon(isDone
+                            ? Icons.check_box_rounded
+                            : Icons.check_box_outline_blank_rounded),
+                        padding: const EdgeInsets.only(top: 5),
+                        alignment: Alignment.topCenter,
+                        color: isDone ? Colors.green[400] : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            isDone = !isDone;
+                          });
+                        },
+                      ),
+                    )
+                  else
+                    const Expanded(
+                      child: SizedBox.shrink(),
+                    ),
+                ],
+              ),
             ),
           ),
         )
@@ -133,13 +162,24 @@ class SetRow extends StatelessWidget {
                 ),
               ),
             ),
-            const Expanded(
-              child: SizedBox.shrink(),
-            ),
+            if (!widget.isEditMode)
+              Expanded(
+                child: Text(
+                  'DONE',
+                  textAlign: TextAlign.center,
+                  style: UITextStyle.caption.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            else
+              const Expanded(
+                child: SizedBox.shrink(),
+              ),
           ],
         ),
         const SizedBox(height: 8),
-        ..._rowsBuilder(exercise.sets),
+        ..._rowsBuilder(widget.exercise.sets),
       ],
     );
   }

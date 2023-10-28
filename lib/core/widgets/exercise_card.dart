@@ -39,8 +39,10 @@ class ExerciseCard extends StatelessWidget {
         ),
         children: [
           SetRow(
+            key: Key(exercise.id),
             exercise: exercise,
             onDelete: onDelete,
+            isEditMode: isEditMode,
           ),
           if (isEditMode)
             Padding(
