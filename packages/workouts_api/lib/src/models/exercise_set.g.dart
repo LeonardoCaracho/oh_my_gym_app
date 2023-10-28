@@ -11,6 +11,7 @@ ExerciseSet _$ExerciseSetFromJson(Map<String, dynamic> json) => ExerciseSet(
       weight: (json['weight'] as num?)?.toDouble(),
       prevReps: json['prevReps'] as int?,
       prevWeight: (json['prevWeight'] as num?)?.toDouble(),
+      isDone: json['isDone'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ExerciseSetToJson(ExerciseSet instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$ExerciseSetToJson(ExerciseSet instance) =>
       'weight': instance.weight,
       'prevReps': instance.prevReps,
       'prevWeight': instance.prevWeight,
+      'isDone': instance.isDone,
     };
