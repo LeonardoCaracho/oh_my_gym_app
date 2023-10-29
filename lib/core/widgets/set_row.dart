@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workouts_api/workouts_api.dart';
 
@@ -22,8 +23,6 @@ class SetRow extends StatefulWidget {
 }
 
 class _SetRowState extends State<SetRow> {
-  var isDone = false;
-
   String formatPreviousValues(ExerciseSet set) {
     if (set.prevReps != null && set.prevWeight != null) {
       return '${set.prevReps} x ${set.prevWeight}';
@@ -32,91 +31,94 @@ class _SetRowState extends State<SetRow> {
   }
 
   List<Widget> _rowsBuilder(List<ExerciseSet> sets) {
-    return sets
-        .map(
-          (set) => Dismissible(
-            direction: DismissDirection.endToStart,
-            onDismissed: (direction) => widget.onDelete?.call(
-              widget.exercise.id,
-              sets.indexOf(set),
-            ),
-            background: Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              color: UIColors.orange,
-              alignment: Alignment.centerRight,
-              child: const Padding(
-                padding: EdgeInsets.only(right: 16),
-                child: Icon(Icons.delete),
-              ),
-            ),
-            key: Key(Random().nextInt(99).toString()),
-            child: Container(
-              color: isDone ? Colors.black26 : UIColors.lightDark,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      '1',
-                      textAlign: TextAlign.center,
-                      style: UITextStyle.bodyText2,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Text(
-                      formatPreviousValues(set),
-                      textAlign: TextAlign.center,
-                      style: UITextStyle.bodyText2.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ExerciseSetRowInput(
-                      hintText: '0.0',
-                      value: (set.weight != null && set.weight! > 0)
-                          ? set.weight.toString()
-                          : null,
-                      onChanged: (text) =>
-                          set.weight = double.tryParse(text) ?? 0,
-                    ),
-                  ),
-                  Expanded(
-                    child: ExerciseSetRowInput(
-                      hintText: '0',
-                      value: (set.reps != null && set.reps! > 0)
-                          ? set.reps.toString()
-                          : null,
-                      onChanged: (text) => set.reps = int.tryParse(text) ?? 0,
-                    ),
-                  ),
-                  if (!widget.isEditMode)
-                    Expanded(
-                      child: IconButton(
-                        icon: Icon(isDone
-                            ? Icons.check_box_rounded
-                            : Icons.check_box_outline_blank_rounded),
-                        padding: const EdgeInsets.only(top: 5),
-                        alignment: Alignment.topCenter,
-                        color: isDone ? Colors.green[400] : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            isDone = !isDone;
-                          });
-                        },
-                      ),
-                    )
-                  else
-                    const Expanded(
-                      child: SizedBox.shrink(),
-                    ),
-                ],
-              ),
-            ),
+    return sets.asMap().entries.map((entry) {
+      final set = entry.value;
+      final index = entry.key;
+
+      return Dismissible(
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) => widget.onDelete?.call(
+          widget.exercise.id,
+          sets.indexOf(set),
+        ),
+        background: Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          color: UIColors.orange,
+          alignment: Alignment.centerRight,
+          child: const Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: Icon(Icons.delete),
           ),
-        )
-        .toList();
+        ),
+        key: Key(index.toString()),
+        child: ColoredBox(
+          color: set.isDone ? Colors.black26 : UIColors.lightDark,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  '1',
+                  textAlign: TextAlign.center,
+                  style: UITextStyle.bodyText2,
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  formatPreviousValues(set),
+                  textAlign: TextAlign.center,
+                  style: UITextStyle.bodyText2.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ExerciseSetRowInput(
+                  hintText: '0.0',
+                  value: (set.weight != null && set.weight! > 0)
+                      ? set.weight.toString()
+                      : null,
+                  onChanged: (text) => set.weight = double.tryParse(text) ?? 0,
+                ),
+              ),
+              Expanded(
+                child: ExerciseSetRowInput(
+                  hintText: '0',
+                  value: (set.reps != null && set.reps! > 0)
+                      ? set.reps.toString()
+                      : null,
+                  onChanged: (text) => set.reps = int.tryParse(text) ?? 0,
+                ),
+              ),
+              if (!widget.isEditMode)
+                Expanded(
+                  child: IconButton(
+                    icon: Icon(
+                      set.isDone
+                          ? Icons.check_box_rounded
+                          : Icons.check_box_outline_blank_rounded,
+                    ),
+                    padding: const EdgeInsets.only(top: 5),
+                    alignment: Alignment.topCenter,
+                    color: set.isDone ? Colors.green[400] : Colors.white,
+                    onPressed: () async {
+                      await HapticFeedback.lightImpact();
+                      setState(() {
+                        set.isDone = !set.isDone;
+                      });
+                    },
+                  ),
+                )
+              else
+                const Expanded(
+                  child: SizedBox.shrink(),
+                ),
+            ],
+          ),
+        ),
+      );
+    }).toList();
   }
 
   @override
