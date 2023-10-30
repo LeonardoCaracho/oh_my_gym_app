@@ -33,6 +33,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
 
   await Firebase.initializeApp(
+    name: 'oh-my-gym-app',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 

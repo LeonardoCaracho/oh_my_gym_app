@@ -19,6 +19,14 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
       context.read<WorkoutsBloc>().add(const WorkoutsRequested());
     }
 
+    void deleteWorkout() {
+      context.read<WorkoutsBloc>().add(
+            WorkoutRemoved(
+              workout: workout,
+            ),
+          );
+    }
+
     void closeBottomSheet() {
       Navigator.pop(context);
     }
@@ -51,11 +59,8 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
                   text: 'DELETE',
                   icon: Icons.delete,
                   onPressed: () {
+                    deleteWorkout();
                     closeBottomSheet();
-                    context.goNamed(
-                      RouteConstants.startWorkoutRouteName,
-                      extra: workout,
-                    );
                   },
                 ),
               ),

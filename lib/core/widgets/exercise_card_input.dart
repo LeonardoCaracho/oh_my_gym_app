@@ -42,7 +42,7 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
       minLines: 1,
       maxLines: widget.multiLine ? 3 : 1,
       keyboardType:
-          widget.multiLine ? TextInputType.multiline : TextInputType.number,
+          widget.multiLine ? TextInputType.multiline : TextInputType.text,
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         isDense: true,
