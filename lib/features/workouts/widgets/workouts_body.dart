@@ -60,7 +60,7 @@ class WorkoutsBody extends StatelessWidget {
               );
             }
 
-            if (state is WorkoutsIsLoading) {
+            if (state is WorkoutsIsLoading || state is WorkoutRemoveIsLoading) {
               return const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator(),

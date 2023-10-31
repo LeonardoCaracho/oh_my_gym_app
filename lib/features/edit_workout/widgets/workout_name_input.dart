@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class WorkoutNameInput extends StatefulWidget {
   const WorkoutNameInput({
     super.key,
-    this.value,
+    this.value = '',
     this.onChanged,
   });
 
-  final String? value;
+  final String value;
   final ValueChanged<String>? onChanged;
 
   @override
@@ -20,16 +20,19 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
 
   @override
   void initState() {
-    if (widget.value != null) {
+    if (widget.value.isNotEmpty) {
       _controller.text = widget.value!;
+    } else {
+      _controller.text = 'My Workout';
     }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       autofocus: true,
+      textCapitalization: TextCapitalization.sentences,
       controller: _controller,
       cursorColor: UIColors.lightDark,
       style: const TextStyle(
