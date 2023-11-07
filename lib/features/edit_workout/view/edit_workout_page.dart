@@ -42,8 +42,8 @@ class EditWorkoutPage extends StatelessWidget {
                   } else {
                     final shouldPop = await exitPageDialog(
                       context,
-                      title: 'EXIT',
-                      content: 'Do you really wanna leave?',
+                      title: 'REVERT CHANGES',
+                      content: 'You will lost all the changes',
                     );
                     if (shouldPop) {
                       Navigator.of(context).pop();

@@ -18,7 +18,7 @@ Future<void> deleteConfirmationDialog(
         child: Builder(
           builder: (context) {
             return AlertDialog(
-              backgroundColor: UIColors.liver,
+              backgroundColor: UIColors.backgroundDark,
               title: Text(
                 workout.name,
                 textAlign: TextAlign.center,
@@ -30,9 +30,12 @@ Future<void> deleteConfirmationDialog(
                 'DO YOU REALLY WANT TO DELETE THIS WORKOUT?',
                 textAlign: TextAlign.center,
               ),
+              actionsOverflowButtonSpacing: -10,
               actions: [
-                DefaultButton(
-                  text: 'YES',
+                DefaultButtonSmall(
+                  text: 'DELETE',
+                  btnColor: UIColors.lightDark,
+                  textColor: UIColors.white,
                   onPressed: () {
                     context.read<WorkoutsBloc>().add(
                           WorkoutRemoved(
@@ -42,8 +45,10 @@ Future<void> deleteConfirmationDialog(
                     Navigator.of(context).pop();
                   },
                 ),
-                DefaultButton(
-                  text: 'NO',
+                DefaultButtonSmall(
+                  text: 'CANCEL',
+                  btnColor: UIColors.lightDark,
+                  textColor: UIColors.white,
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ],
