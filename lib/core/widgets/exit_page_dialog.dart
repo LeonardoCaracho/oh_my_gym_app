@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 
 Future<bool> exitPageDialog(
-  BuildContext context,
-) async {
+  BuildContext context, {
+  String title = '',
+  String content = '',
+}) async {
   final result = await showDialog<bool>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          'EXIT',
+          title,
           textAlign: TextAlign.center,
           style: UITextStyle.headline4.copyWith(
             color: UIColors.white,
           ),
         ),
-        content: const Text(
-          'DO YOU REALLY WANNA LEAVE?',
+        content: Text(
+          content,
           textAlign: TextAlign.center,
         ),
         actions: [

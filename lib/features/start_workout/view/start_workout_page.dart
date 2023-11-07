@@ -21,10 +21,25 @@ class StartWorkoutPage extends StatelessWidget {
         historyRepository: locator<HistoryContract>(),
         workoutsRepository: locator<WorkoutsContract>(),
       )..startWorkout(workout),
-      child: Scaffold(
-        appBar: AppBar(title: const CommonHeader(title: 'WORKOUT STARTED')),
-        body: StartWorkoutView(
-          workout: workout,
+      child: WillPopScope(
+        onWillPop: () async {
+          final shouldPop = await exitPageDialog(
+            context,
+            title: 'EXIT WORKOUT',
+            content:
+                'You will lost all your data, do you really want to leave?',
+          );
+          if (shouldPop) {
+            Navigator.of(context).pop();
+          }
+
+          return false;
+        },
+        child: Scaffold(
+          appBar: AppBar(title: const CommonHeader(title: 'WORKOUT STARTED')),
+          body: StartWorkoutView(
+            workout: workout,
+          ),
         ),
       ),
     );

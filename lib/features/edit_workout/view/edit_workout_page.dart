@@ -36,7 +36,11 @@ class EditWorkoutPage extends StatelessWidget {
               ),
               leading: IconButton(
                 onPressed: () async {
-                  final shouldPop = await exitPageDialog(context);
+                  final shouldPop = await exitPageDialog(
+                    context,
+                    title: 'EXIT',
+                    content: 'Do you really wanna leave?',
+                  );
                   if (shouldPop) {
                     Navigator.of(context).pop();
                   }
