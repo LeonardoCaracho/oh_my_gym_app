@@ -1,8 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
-import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
-import 'package:oh_my_gym_app/features/edit_workout/widgets/edit_workout_body.dart';
+import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
@@ -36,28 +35,43 @@ class EditWorkoutPage extends StatelessWidget {
                 title: 'OH MY WORKOUT',
               ),
               leading: IconButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () async {
+                  final shouldPop = await exitPageDialog(context);
+                  if (shouldPop) {
+                    Navigator.of(context).pop();
+                  }
+                },
                 icon: const Icon(Icons.close),
               ),
               actions: [
                 if (isEditMode)
-                  IconButton(
+                  TextButton(
                     onPressed: () =>
                         context.read<EditWorkoutCubit>().updateWorkout(),
-                    icon: const Icon(Icons.update),
+                    child: Text(
+                      'UPDATE',
+                      style: UITextStyle.bodyText3.copyWith(
+                        color: UIColors.white,
+                      ),
+                    ),
                   )
                 else
                   BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
                     builder: (context, state) {
                       final hasExercises = state.workout.exercises.isNotEmpty;
 
-                      return IconButton(
-                        disabledColor: UIColors.grey,
+                      return TextButton(
                         onPressed: hasExercises
                             ? () =>
                                 context.read<EditWorkoutCubit>().saveWorkout()
                             : null,
-                        icon: const Icon(Icons.check),
+                        child: Text(
+                          'SAVE',
+                          style: UITextStyle.bodyText3.copyWith(
+                            color:
+                                hasExercises ? UIColors.white : UIColors.grey,
+                          ),
+                        ),
                       );
                     },
                   ),

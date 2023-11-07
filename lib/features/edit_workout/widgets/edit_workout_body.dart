@@ -29,25 +29,26 @@ class EditWorkoutBody extends StatelessWidget {
                             },
                           ),
                         ),
-                        SizedBox(
-                          width: 60,
-                          child: InkWell(
-                            key: const Key('sorting_button'),
-                            child: const Icon(Icons.sort),
-                            onTap: () {
-                              final editWorkoutCubit =
-                                  context.read<EditWorkoutCubit>();
-                              showDialog<void>(
-                                context: context,
-                                builder: (context) {
-                                  return SortingDialog(
-                                    editWorkoutCubit: editWorkoutCubit,
-                                  );
-                                },
-                              );
-                            },
+                        if (state.workout.exercises.length >= 2)
+                          SizedBox(
+                            width: 60,
+                            child: InkWell(
+                              key: const Key('sorting_button'),
+                              child: const Icon(Icons.swap_vert),
+                              onTap: () {
+                                final editWorkoutCubit =
+                                    context.read<EditWorkoutCubit>();
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (context) {
+                                    return SortingDialog(
+                                      editWorkoutCubit: editWorkoutCubit,
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
-                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
