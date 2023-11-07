@@ -36,13 +36,18 @@ class EditWorkoutPage extends StatelessWidget {
               ),
               leading: IconButton(
                 onPressed: () async {
-                  final shouldPop = await exitPageDialog(
-                    context,
-                    title: 'EXIT',
-                    content: 'Do you really wanna leave?',
-                  );
-                  if (shouldPop) {
+                  if (workout ==
+                      context.read<EditWorkoutCubit>().state.workout) {
                     Navigator.of(context).pop();
+                  } else {
+                    final shouldPop = await exitPageDialog(
+                      context,
+                      title: 'EXIT',
+                      content: 'Do you really wanna leave?',
+                    );
+                    if (shouldPop) {
+                      Navigator.of(context).pop();
+                    }
                   }
                 },
                 icon: const Icon(Icons.close),
