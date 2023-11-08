@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
@@ -28,7 +29,12 @@ class DefaultButton extends StatelessWidget {
         backgroundColor:
             btnColor != null ? MaterialStateProperty.all(btnColor) : null,
       ),
-      onPressed: onPressed,
+      onPressed: onPressed != null
+          ? () async {
+              onPressed!();
+              await HapticFeedback.lightImpact();
+            }
+          : null,
       child: SizedBox(
         width: double.infinity,
         child: Row(

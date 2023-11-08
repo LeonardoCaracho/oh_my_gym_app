@@ -34,8 +34,7 @@ Future<void> deleteConfirmationDialog(
               actions: [
                 DefaultButtonSmall(
                   text: 'DELETE',
-                  btnColor: UIColors.lightDark,
-                  textColor: UIColors.white,
+                  // textColor: UIColors.white,
                   onPressed: () {
                     context.read<WorkoutsBloc>().add(
                           WorkoutRemoved(

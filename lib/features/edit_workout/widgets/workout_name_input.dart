@@ -20,11 +20,8 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
 
   @override
   void initState() {
-    if (widget.value.isNotEmpty) {
-      _controller.text = widget.value!;
-    } else {
-      _controller.text = 'My Workout';
-    }
+    _controller.text = widget.value;
+
     super.initState();
   }
 
