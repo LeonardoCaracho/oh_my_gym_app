@@ -56,7 +56,7 @@ class _SetRowState extends State<SetRow> {
             children: [
               Expanded(
                 child: Text(
-                  '1',
+                  '${index + 1}',
                   textAlign: TextAlign.center,
                   style: UITextStyle.bodyText2,
                 ),
@@ -73,7 +73,7 @@ class _SetRowState extends State<SetRow> {
               ),
               Expanded(
                 child: ExerciseSetRowInput(
-                  hintText: '0.0',
+                  hintText: '0',
                   value: (set.weight != null && set.weight! > 0)
                       ? set.weight.toString()
                       : null,

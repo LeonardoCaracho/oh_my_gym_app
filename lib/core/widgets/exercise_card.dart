@@ -30,6 +30,7 @@ class ExerciseCard extends StatelessWidget {
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: UISpacing.sm),
         initiallyExpanded: true,
+        shape: Border.all(color: Colors.transparent),
         title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

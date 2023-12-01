@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
@@ -7,7 +8,7 @@ class DefaultButton extends StatelessWidget {
     super.key,
     this.onPressed,
     this.icon,
-    this.backgroundColor,
+    this.btnColor,
     this.textColor,
     this.iconColor,
   });
@@ -15,7 +16,7 @@ class DefaultButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String text;
   final IconData? icon;
-  final Color? backgroundColor;
+  final Color? btnColor;
   final Color? textColor;
   final Color? iconColor;
 
@@ -25,11 +26,15 @@ class DefaultButton extends StatelessWidget {
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(1),
         padding: MaterialStateProperty.all(EdgeInsets.zero),
-        backgroundColor: backgroundColor != null
-            ? MaterialStateProperty.all(backgroundColor)
-            : null,
+        backgroundColor:
+            btnColor != null ? MaterialStateProperty.all(btnColor) : null,
       ),
-      onPressed: onPressed,
+      onPressed: onPressed != null
+          ? () async {
+              onPressed!();
+              await HapticFeedback.lightImpact();
+            }
+          : null,
       child: SizedBox(
         width: double.infinity,
         child: Row(
