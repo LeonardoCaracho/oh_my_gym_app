@@ -17,6 +17,10 @@ class EditWorkoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void pop() {
+      Navigator.of(context).pop();
+    }
+
     return BlocProvider(
       create: (context) => EditWorkoutCubit(
         EditWorkoutState(
@@ -46,7 +50,7 @@ class EditWorkoutPage extends StatelessWidget {
                       content: 'You will lost all the changes',
                     );
                     if (shouldPop) {
-                      Navigator.of(context).pop();
+                      pop();
                     }
                   }
                 },

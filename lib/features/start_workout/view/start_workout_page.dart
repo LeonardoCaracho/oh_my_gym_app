@@ -16,13 +16,17 @@ class StartWorkoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void pop() {
+      Navigator.of(context).pop();
+    }
+
     return BlocProvider(
       create: (context) => StartWorkoutCubit(
         historyRepository: locator<HistoryContract>(),
         workoutsRepository: locator<WorkoutsContract>(),
       )..startWorkout(workout),
-      child: WillPopScope(
-        onWillPop: () async {
+      child: PopScope(
+        onPopInvoked: (onPopInvoked) async {
           final shouldPop = await exitPageDialog(
             context,
             title: 'EXIT WORKOUT',
@@ -30,10 +34,8 @@ class StartWorkoutPage extends StatelessWidget {
                 'You will lost all your data, do you really want to leave?',
           );
           if (shouldPop) {
-            Navigator.of(context).pop();
+            pop();
           }
-
-          return false;
         },
         child: Scaffold(
           appBar: AppBar(title: const CommonHeader(title: 'WORKOUT STARTED')),

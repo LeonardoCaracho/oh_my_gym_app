@@ -44,7 +44,7 @@ Future<bool> exitPageDialog(
                 ),
               ),
             ],
-          )
+          ),
         ],
       );
     },
