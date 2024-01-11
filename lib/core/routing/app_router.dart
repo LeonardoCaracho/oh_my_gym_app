@@ -41,7 +41,7 @@ class AppRouter {
         final appState = context.read<AppBloc>().state;
 
         if (appState.status.isAuthenticated) {
-          if (state.location.startsWith(RouteConstants.loginRoute)) {
+          if (state.matchedLocation.startsWith(RouteConstants.loginRoute)) {
             return RouteConstants.homeRoute;
           }
         } else {
