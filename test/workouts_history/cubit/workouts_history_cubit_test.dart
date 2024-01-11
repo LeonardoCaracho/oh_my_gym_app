@@ -15,8 +15,6 @@ class FakeHistoryWorkout extends Fake implements WorkoutHistory {}
 final mockExercise = Exercise.empty(id: '1');
 final mockWorkout = Workout.create(exercises: [mockExercise]);
 
-// const workoutHistoryMock = WorkoutHistory(finishDate: DateTime)
-
 void main() {
   group('WorkoutsHistoryCubit', () {
     late HistoryContract historyRepository;
@@ -44,8 +42,6 @@ void main() {
     test('initial state has default value for customProperty', () {
       expect(workoutsHistoryCubit.state.status, equals(Status.inital));
       expect(workoutsHistoryCubit.state.records, equals([]));
-      expect(workoutsHistoryCubit.state.recordsByWorkout, equals([]));
-      expect(workoutsHistoryCubit.state.recordsGrouped, equals([]));
     });
 
     blocTest<WorkoutsHistoryCubit, WorkoutsHistoryState>(
@@ -64,19 +60,7 @@ void main() {
         WorkoutsHistoryState(
           status: Status.success,
           records: [workoutHistoryMock],
-          recordsGrouped: [workoutHistoryMock],
         ),
-      ],
-    );
-
-    blocTest<WorkoutsHistoryCubit, WorkoutsHistoryState>(
-      'getRecords emits state with history workouts',
-      build: () {
-        return workoutsHistoryCubit;
-      },
-      act: (cubit) => cubit.getRecordsByWorkout('1'),
-      expect: () => <WorkoutsHistoryState>[
-        const WorkoutsHistoryState(),
       ],
     );
   });

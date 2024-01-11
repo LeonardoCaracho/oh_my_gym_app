@@ -34,7 +34,7 @@ class SortingDialog extends StatelessWidget {
                     itemCount: exercises.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        key: Key(exercises[index].id),
+                        key: UniqueKey(),
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 8),
                         title: Text(

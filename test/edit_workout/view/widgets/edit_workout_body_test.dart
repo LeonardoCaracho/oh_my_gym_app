@@ -37,7 +37,7 @@ void main() {
       );
 
       expect(find.byType(EditWorkoutBody), findsOneWidget);
-      expect(find.byType(ExerciseCard), findsOneWidget);
+      expect(find.byType(ExerciseCard), findsNWidgets(2));
     });
 
     testWidgets('should open sorting dialog', (tester) async {

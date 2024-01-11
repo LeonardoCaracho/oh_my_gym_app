@@ -20,11 +20,12 @@ class WorkoutsHistoryCubit extends Cubit<WorkoutsHistoryState> {
 
       final records = await historyRepository.getRecords();
 
+      records.sort((a, b) => b.finishDate.compareTo(a.finishDate));
+
       emit(
         state.copyWith(
           status: Status.success,
           records: records,
-          recordsGrouped: _groupRecordsByWorkout(records),
         ),
       );
     } catch (e) {
@@ -35,28 +36,5 @@ class WorkoutsHistoryCubit extends Cubit<WorkoutsHistoryState> {
         ),
       );
     }
-  }
-
-  List<WorkoutHistory> _groupRecordsByWorkout(List<WorkoutHistory> records) {
-    final list = <WorkoutHistory>[];
-    for (final record in records) {
-      final workoutsExists = list.any(
-        (l) => l.workout.docId == record.workout.docId,
-      );
-      if (!workoutsExists) {
-        list.add(record);
-      }
-    }
-    return list;
-  }
-
-  FutureOr<void> getRecordsByWorkout(String docId) {
-    final list = state.records.where((r) => r.workout.docId == docId).toList();
-
-    emit(
-      state.copyWith(
-        recordsByWorkout: list,
-      ),
-    );
   }
 }

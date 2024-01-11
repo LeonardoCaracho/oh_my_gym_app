@@ -50,7 +50,8 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
       for (final set in exercise.sets) {
         set
           ..prevReps = set.reps
-          ..prevWeight = set.weight;
+          ..prevWeight = set.weight
+          ..isDone = false;
       }
     }
   }

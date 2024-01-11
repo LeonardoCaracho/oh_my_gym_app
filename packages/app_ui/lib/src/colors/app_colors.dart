@@ -85,7 +85,7 @@ abstract class UIColors {
 
   static const Color pink = Color(0xFFEF4068);
 
-  static const Color lightDark = Color(0xFF535353);
+  static const Color lightDark = Color.fromARGB(255, 53, 53, 53);
 
   static const Color mediumblue = Color(0xFF219EBC);
 

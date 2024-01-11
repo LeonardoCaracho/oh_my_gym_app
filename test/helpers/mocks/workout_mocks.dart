@@ -1,8 +1,12 @@
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workouts_api/workouts_api.dart';
 
-final workoutMock =
-    Workout(id: 'id', docId: 'docId', name: 'name', exercises: [exerciseMock]);
+final workoutMock = Workout(
+  id: 'id',
+  docId: 'docId',
+  name: 'name',
+  exercises: [exerciseMock, exerciseMock],
+);
 
 final exerciseMock = Exercise(id: 'id', name: 'name', sets: [exerciseSetMock]);
 

@@ -28,7 +28,7 @@ class Workout {
   }) =>
       Workout(
         id: id ?? const Uuid().v4(),
-        name: name ?? '',
+        name: name ?? 'My workout',
         exercises: exercises ?? [],
         docId: docId ?? '',
       );

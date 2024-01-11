@@ -109,8 +109,17 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
             builder: (context) {
               return AlertDialog(
                 backgroundColor: UIColors.liver,
-                title: const Text('FINISH WORKOUT'),
-                content: const Text('Are you really finished?'),
+                title: Text(
+                  'FINISH WORKOUT',
+                  textAlign: TextAlign.center,
+                  style: UITextStyle.headline4.copyWith(
+                    color: UIColors.white,
+                  ),
+                ),
+                content: const Text(
+                  'Are you really finished?',
+                  textAlign: TextAlign.center,
+                ),
                 actions: [
                   DefaultButton(
                     text: 'YES',
