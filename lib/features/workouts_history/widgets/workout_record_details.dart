@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:workouts_api/workouts_api.dart';
@@ -29,11 +28,9 @@ class WorkoutRecordDetails extends StatelessWidget {
               children: [
                 Text(
                   record.workout.name,
-                  style: UITextStyle.caption,
                 ),
                 Text(
                   dateFormatter(record.finishDate),
-                  style: UITextStyle.caption,
                 ),
               ],
             ),
@@ -65,10 +62,6 @@ class ExerciseDetails extends StatelessWidget {
       children: [
         Text(
           exercise.name,
-          style: UITextStyle.caption.copyWith(
-            color: UIColors.white,
-            fontWeight: FontWeight.bold,
-          ),
         ),
         const SizedBox(height: 4),
         ...exercise.sets.asMap().keys.toList().map(
@@ -77,25 +70,16 @@ class ExerciseDetails extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${index + 1}',
-                      style: UITextStyle.caption.copyWith(
-                        color: UIColors.white,
-                      ),
                     ),
                   ),
                   Expanded(
                     child: Text(
                       'Reps: ${exercise.sets[index].reps}',
-                      style: UITextStyle.caption.copyWith(
-                        color: UIColors.white,
-                      ),
                     ),
                   ),
                   Expanded(
                     child: Text(
                       'Weight: ${exercise.sets[index].weight}',
-                      style: UITextStyle.caption.copyWith(
-                        color: UIColors.white,
-                      ),
                     ),
                   ),
                 ],

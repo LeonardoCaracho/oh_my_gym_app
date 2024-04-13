@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseSetRowInput extends StatefulWidget {
@@ -41,14 +40,13 @@ class _ExerciseSetRowInputState extends State<ExerciseSetRowInput> {
       ),
       width: 20,
       child: TextField(
+        style: Theme.of(context).textTheme.bodyMedium,
         readOnly: widget.isReadOnly,
         controller: _controller,
         onChanged: widget.onChanged,
-        style: UITextStyle.bodyText3,
         minLines: 1,
         maxLines: widget.multiLine ? 3 : 1,
         textAlign: TextAlign.center,
-        cursorColor: UIColors.white,
         keyboardType: widget.multiLine
             ? TextInputType.multiline
             : const TextInputType.numberWithOptions(
@@ -56,13 +54,11 @@ class _ExerciseSetRowInputState extends State<ExerciseSetRowInput> {
                 decimal: true,
               ),
         decoration: InputDecoration(
+          fillColor: const Color.fromARGB(82, 158, 158, 158),
           filled: true,
-          fillColor: UIColors.backgroundDark.withOpacity(0.5),
           hintText: widget.hintText ?? '',
           isDense: true,
-          hintStyle: const TextStyle(
-            color: UIColors.white,
-          ),
+          hintStyle: Theme.of(context).textTheme.bodyMedium,
           border: const UnderlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),

@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:oh_my_gym_app/core/core.dart';
@@ -40,8 +39,8 @@ class _SetRowState extends State<SetRow> {
           sets.indexOf(set),
         ),
         background: Container(
+          color: AppColors.warning,
           margin: const EdgeInsets.only(bottom: 8),
-          color: UIColors.orange,
           alignment: Alignment.centerRight,
           child: const Padding(
             padding: EdgeInsets.only(right: 16),
@@ -50,7 +49,7 @@ class _SetRowState extends State<SetRow> {
         ),
         key: Key(index.toString()),
         child: ColoredBox(
-          color: set.isDone ? Colors.black26 : UIColors.lightDark,
+          color: set.isDone ? Colors.black45 : Colors.black26,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -58,7 +57,6 @@ class _SetRowState extends State<SetRow> {
                 child: Text(
                   '${index + 1}',
                   textAlign: TextAlign.center,
-                  style: UITextStyle.bodyText2,
                 ),
               ),
               Expanded(
@@ -66,9 +64,6 @@ class _SetRowState extends State<SetRow> {
                 child: Text(
                   formatPreviousValues(set),
                   textAlign: TextAlign.center,
-                  style: UITextStyle.bodyText2.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
               ),
               Expanded(
@@ -125,51 +120,36 @@ class _SetRowState extends State<SetRow> {
       children: [
         Row(
           children: [
-            Expanded(
+            const Expanded(
               child: Text(
                 'SET',
                 textAlign: TextAlign.center,
-                style: UITextStyle.caption.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: Text(
                 'PREVIOUS',
                 textAlign: TextAlign.center,
-                style: UITextStyle.caption.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
             ),
-            Expanded(
+            const Expanded(
               child: Text(
                 'WEIGHT',
                 textAlign: TextAlign.center,
-                style: UITextStyle.caption.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
             ),
-            Expanded(
+            const Expanded(
               child: Text(
                 'REPS',
                 textAlign: TextAlign.center,
-                style: UITextStyle.caption.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
             ),
             if (!widget.isEditMode)
-              Expanded(
+              const Expanded(
                 child: Text(
                   'DONE',
                   textAlign: TextAlign.center,
-                  style: UITextStyle.caption.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
               )
             else

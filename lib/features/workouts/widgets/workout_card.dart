@@ -1,5 +1,5 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 import 'package:workouts_api/workouts_api.dart';
 
@@ -23,7 +23,6 @@ class WorkoutCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: UIColors.lightDark,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -49,16 +48,13 @@ class WorkoutCard extends StatelessWidget {
             children: [
               Text(
                 workout.name,
-                style: UITextStyle.headline4,
               ),
-              const SizedBox(height: UISpacing.lg),
+              const SizedBox(height: AppSpacing.lg),
               Text(
                 'Total Exercises: ${workout.exercises.length}',
-                style: UITextStyle.bodyText2,
               ),
               Text(
                 'Total Sets: ${_getTotalSets()}',
-                style: UITextStyle.bodyText2,
               ),
             ],
           ),

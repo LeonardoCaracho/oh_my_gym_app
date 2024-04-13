@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
@@ -28,11 +27,8 @@ class WorkoutsBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Start a workout',
-                    style: UITextStyle.headline3.copyWith(
-                      color: UIColors.white,
-                    ),
                   ),
                   IconButton.filled(
                     onPressed: () => context

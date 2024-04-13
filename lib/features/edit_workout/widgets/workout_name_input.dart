@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutNameInput extends StatefulWidget {
@@ -31,23 +30,17 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
       autofocus: true,
       textCapitalization: TextCapitalization.sentences,
       controller: _controller,
-      cursorColor: UIColors.lightDark,
-      style: const TextStyle(
-        color: UIColors.white,
-      ),
       onChanged: widget.onChanged,
       decoration: const InputDecoration(
         hintText: 'Workout Name',
         isDense: true,
-        hintStyle: TextStyle(
-          color: UIColors.white,
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: UIColors.white),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: UIColors.white),
-        ),
+
+        // enabledBorder: UnderlineInputBorder(
+        //   borderSide: BorderSide(color: UIColors.white),
+        // ),
+        // focusedBorder: UnderlineInputBorder(
+        //   borderSide: BorderSide(color: UIColors.white),
+        // ),
       ),
     );
   }

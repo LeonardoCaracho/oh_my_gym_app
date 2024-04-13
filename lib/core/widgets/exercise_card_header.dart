@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workouts_api/workouts_api.dart';
@@ -60,7 +59,6 @@ class _ExerciseCardHeaderState extends State<ExerciseCardHeader> {
                 padding: const EdgeInsets.only(left: 8),
                 child: Icon(
                   isAddNote ? Icons.speaker_notes_off : Icons.speaker_notes,
-                  color: UIColors.white,
                   size: 20,
                 ),
               ),

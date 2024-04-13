@@ -87,7 +87,7 @@ abstract class UIColors {
 
   static const Color lightDark = Color.fromARGB(255, 53, 53, 53);
 
-  static const Color mediumblue = Color(0xFF219EBC);
+  static const Color mediumblue = Color.fromRGBO(12, 12, 12, 1);
 
   /// The secondary color of application.
   static const MaterialColor secondary = MaterialColor(0xFF963F6E, <int, Color>{

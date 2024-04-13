@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
@@ -63,9 +62,6 @@ class EditWorkoutPage extends StatelessWidget {
                         context.read<EditWorkoutCubit>().updateWorkout(),
                     child: Text(
                       'UPDATE',
-                      style: UITextStyle.bodyText3.copyWith(
-                        color: UIColors.white,
-                      ),
                     ),
                   )
                 else
@@ -80,10 +76,6 @@ class EditWorkoutPage extends StatelessWidget {
                             : null,
                         child: Text(
                           'SAVE',
-                          style: UITextStyle.bodyText3.copyWith(
-                            color:
-                                hasExercises ? UIColors.white : UIColors.grey,
-                          ),
                         ),
                       );
                     },

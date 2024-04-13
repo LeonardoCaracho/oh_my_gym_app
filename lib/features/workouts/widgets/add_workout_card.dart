@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/core/core.dart';
@@ -20,10 +19,8 @@ class AddWorkoutCard extends StatelessWidget {
           Expanded(
             flex: 7,
             child: Text(
-              'Workouts',
-              style: UITextStyle.headline4.copyWith(
-                color: UIColors.white,
-              ),
+              'Workousasats',
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
           ),
           Expanded(

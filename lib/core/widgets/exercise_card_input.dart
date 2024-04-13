@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseCardInput extends StatefulWidget {
@@ -38,7 +37,6 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
       readOnly: widget.isReadOnly,
       controller: _controller,
       onChanged: widget.onChanged,
-      style: UITextStyle.bodyText3,
       minLines: 1,
       maxLines: widget.multiLine ? 3 : 1,
       keyboardType:
@@ -46,15 +44,13 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         isDense: true,
-        hintStyle: const TextStyle(
-          color: UIColors.white,
-        ),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: UIColors.white),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: UIColors.white),
-        ),
+
+        // enabledBorder: const UnderlineInputBorder(
+        //   borderSide: BorderSide(color: UIColors.white),
+        // ),
+        // focusedBorder: const UnderlineInputBorder(
+        //   borderSide: BorderSide(color: UIColors.white),
+        // ),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
@@ -38,15 +37,11 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
       },
       child: Container(
         width: double.infinity,
-        color: UIColors.transparent,
         child: Column(
           children: [
             const SizedBox(height: 8),
             Text(
               'The timer is running baby!',
-              style: UITextStyle.headline4.copyWith(
-                color: UIColors.white,
-              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -55,9 +50,6 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
                 builder: (context, duration, child) {
                   return Text(
                     duration.getFormattedCountdown(),
-                    style: UITextStyle.headline3.copyWith(
-                      color: UIColors.white,
-                    ),
                   );
                 },
               ),
@@ -108,13 +100,9 @@ class _BottomWorkoutStartState extends State<BottomWorkoutStart> {
           child: Builder(
             builder: (context) {
               return AlertDialog(
-                backgroundColor: UIColors.liver,
                 title: Text(
                   'FINISH WORKOUT',
                   textAlign: TextAlign.center,
-                  style: UITextStyle.headline4.copyWith(
-                    color: UIColors.white,
-                  ),
                 ),
                 content: const Text(
                   'Are you really finished?',

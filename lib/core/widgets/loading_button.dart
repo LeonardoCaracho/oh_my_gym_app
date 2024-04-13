@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class LoadingButton extends StatelessWidget {
@@ -41,7 +40,6 @@ class LoadingButton extends StatelessWidget {
       onPressed: isLoading ? null : onPressed,
       label: Text(
         getLabelText(),
-        style: UITextStyle.bodyText3,
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class CommonHeader extends StatelessWidget {
@@ -13,9 +12,6 @@ class CommonHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: UITextStyle.headline4.copyWith(
-        color: UIColors.white,
-      ),
     );
   }
 }

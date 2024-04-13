@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -42,9 +41,7 @@ class DefaultButton extends StatelessWidget {
           children: [
             Text(
               text,
-              style: UITextStyle.bodyText3.copyWith(color: textColor),
             ),
-            const SizedBox(width: UISpacing.xs),
             if (icon != null)
               Icon(
                 icon,

@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:history_repository/history_repository.dart';
@@ -52,13 +51,11 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = UITheme();
-
     AppRouter(context);
 
     return MaterialApp.router(
       routerConfig: AppRouter.router,
-      theme: theme.lightTheme,
+      theme: themeData,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );

@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
@@ -18,13 +17,9 @@ Future<void> deleteConfirmationDialog(
         child: Builder(
           builder: (context) {
             return AlertDialog(
-              backgroundColor: UIColors.backgroundDark,
               title: Text(
                 workout.name,
                 textAlign: TextAlign.center,
-                style: UITextStyle.headline4.copyWith(
-                  color: UIColors.white,
-                ),
               ),
               content: const Text(
                 'DO YOU REALLY WANT TO DELETE THIS WORKOUT?',
@@ -46,8 +41,6 @@ Future<void> deleteConfirmationDialog(
                 ),
                 DefaultButtonSmall(
                   text: 'CANCEL',
-                  btnColor: UIColors.lightDark,
-                  textColor: UIColors.white,
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ],
