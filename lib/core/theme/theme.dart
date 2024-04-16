@@ -26,18 +26,33 @@ final themeData = ThemeData(
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
+    titleMedium: TextStyle(
+      fontSize: 18,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
     bodyMedium: TextStyle(fontSize: 12, color: Colors.white),
   ),
   iconTheme: IconThemeData(
     color: AppColors.secondary,
   ),
+  navigationBarTheme: NavigationBarThemeData(
+    indicatorColor: AppColors.primary,
+    backgroundColor: Colors.black,
+    labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+    labelTextStyle: MaterialStateProperty.resolveWith((state) {
+      if (state.contains(MaterialState.selected)) {
+        return TextStyle(color: AppColors.primary);
+      }
+    }),
+  ),
 );
 
 class AppColors {
   static Color get primary => const Color(0xFFF15E4D);
   static Color get secondary => Colors.white;
-  static Color get background => Colors.black;
+  static Color get background => const Color.fromARGB(255, 14, 14, 14);
   static Color get textColor => Colors.white;
   static Color get warning => Colors.red;
 }

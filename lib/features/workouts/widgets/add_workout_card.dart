@@ -19,7 +19,7 @@ class AddWorkoutCard extends StatelessWidget {
           Expanded(
             flex: 7,
             child: Text(
-              'Workousasats',
+              'Workouts',
               style: Theme.of(context).textTheme.headlineLarge,
             ),
           ),

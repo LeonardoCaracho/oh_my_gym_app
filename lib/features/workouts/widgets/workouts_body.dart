@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
-import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
+import 'package:workouts_api/workouts_api.dart';
 
 class WorkoutsBody extends StatelessWidget {
   const WorkoutsBody({super.key});
@@ -11,34 +10,29 @@ class WorkoutsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
+        const SliverAppBar(
           pinned: true,
           snap: true,
           floating: true,
           centerTitle: false,
-          expandedHeight: 120,
+          // expandedHeight: 120,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
-            titlePadding: const EdgeInsets.all(8),
+            titlePadding: EdgeInsets.all(8),
             expandedTitleScale: 1,
-            background: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Start a workout',
-                  ),
-                  IconButton.filled(
-                    onPressed: () => context
-                        .goNamed(RouteConstants.settingsHistoryRouteName),
-                    icon: const Icon(Icons.settings),
-                  ),
-                ],
-              ),
-            ),
-            title: const AddWorkoutCard(),
+            // background: Padding(
+            //   padding: EdgeInsets.all(8),
+            //   child: Row(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Text(
+            //         'Start a workout',
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            title: AddWorkoutCard(),
           ),
         ),
         BlocBuilder<WorkoutsBloc, WorkoutsState>(
@@ -76,6 +70,32 @@ class WorkoutsBody extends StatelessWidget {
                 );
               }
 
+              return SliverList.builder(
+                itemCount: state.workouts.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      state.workouts[index].name,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    subtitle: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Exercises: ${state.workouts[index].exercises.length}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Sets: ${_getTotalSets(state.workouts[index].exercises)}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+
               return SliverGrid.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -101,5 +121,14 @@ class WorkoutsBody extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _getTotalSets(List<Exercise> exercises) {
+    return exercises
+        .fold(
+          0,
+          (previousValue, element) => previousValue + element.sets.length,
+        )
+        .toString();
   }
 }
