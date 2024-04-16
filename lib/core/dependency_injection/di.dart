@@ -45,8 +45,8 @@ Future<void> initLocator() async {
       ),
       dependsOn: [WorkoutsApi],
     )
-    ..registerSingletonAsync<HistoryContract>(
-      () async => HistoryRepository(
+    ..registerSingletonAsync<HistoryRepository>(
+      () async => HistoryRepositoryImpl(
         locator<HistoryApi>(),
       ),
       dependsOn: [HistoryApi],

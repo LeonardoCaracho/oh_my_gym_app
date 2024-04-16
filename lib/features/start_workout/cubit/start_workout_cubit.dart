@@ -14,7 +14,7 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
     required this.workoutsRepository,
   }) : super(const StartWorkoutState());
 
-  final HistoryContract historyRepository;
+  final HistoryRepository historyRepository;
   final WorkoutsContract workoutsRepository;
 
   FutureOr<void> startWorkout(Workout workout) {

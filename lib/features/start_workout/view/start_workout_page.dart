@@ -22,7 +22,7 @@ class StartWorkoutPage extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => StartWorkoutCubit(
-        historyRepository: locator<HistoryContract>(),
+        historyRepository: locator<HistoryRepository>(),
         workoutsRepository: locator<WorkoutsContract>(),
       )..startWorkout(workout),
       child: PopScope(

@@ -8,7 +8,7 @@ import 'package:workouts_api/workouts_api.dart';
 
 import '../../helpers/mocks/mocks.dart';
 
-class MockHistoryContract extends Mock implements HistoryContract {}
+class MockHistoryRepository extends Mock implements HistoryRepository {}
 
 class FakeHistoryWorkout extends Fake implements WorkoutHistory {}
 
@@ -17,13 +17,13 @@ final mockWorkout = Workout.create(exercises: [mockExercise]);
 
 void main() {
   group('WorkoutsHistoryCubit', () {
-    late HistoryContract historyRepository;
+    late HistoryRepository historyRepository;
     late WorkoutsHistoryCubit workoutsHistoryCubit;
 
     setUpAll(() => registerFallbackValue(FakeHistoryWorkout()));
 
     setUp(() {
-      historyRepository = MockHistoryContract();
+      historyRepository = MockHistoryRepository();
       workoutsHistoryCubit =
           WorkoutsHistoryCubit(historyRepository: historyRepository);
 

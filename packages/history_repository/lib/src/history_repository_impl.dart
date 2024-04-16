@@ -1,8 +1,8 @@
-import 'package:history_repository/history_repository.dart';
+import 'package:history_repository/src/history_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
-class HistoryRepository extends HistoryContract {
-  HistoryRepository(this.historyApi);
+class HistoryRepositoryImpl extends HistoryRepository {
+  HistoryRepositoryImpl(this.historyApi);
 
   final HistoryApi historyApi;
 

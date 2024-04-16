@@ -35,7 +35,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider<WorkoutsHistoryCubit>(
           create: (context) => WorkoutsHistoryCubit(
-            historyRepository: locator<HistoryContract>(),
+            historyRepository: locator<HistoryRepository>(),
           ),
         ),
       ],

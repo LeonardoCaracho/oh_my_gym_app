@@ -12,7 +12,7 @@ class WorkoutsHistoryCubit extends Cubit<WorkoutsHistoryState> {
     required this.historyRepository,
   }) : super(const WorkoutsHistoryState());
 
-  final HistoryContract historyRepository;
+  final HistoryRepository historyRepository;
 
   FutureOr<void> getRecords() async {
     try {

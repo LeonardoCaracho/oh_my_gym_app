@@ -7,7 +7,7 @@ import 'package:oh_my_gym_app/features/start_workout/cubit/cubit.dart';
 import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
-class MockHistoryContract extends Mock implements HistoryContract {}
+class MockHistoryRepository extends Mock implements HistoryRepository {}
 
 class MockWorkoutsContract extends Mock implements WorkoutsContract {}
 
@@ -20,7 +20,7 @@ final mockWorkout = Workout.create(exercises: [mockExercise]);
 
 void main() {
   group('StartWorkoutCubit', () {
-    late HistoryContract historyRepository;
+    late HistoryRepository historyRepository;
     late WorkoutsContract workoutsRepository;
     late StartWorkoutCubit startWorkoutCubit;
 
@@ -30,7 +30,7 @@ void main() {
     });
 
     setUp(() {
-      historyRepository = MockHistoryContract();
+      historyRepository = MockHistoryRepository();
       workoutsRepository = MockWorkoutsContract();
 
       startWorkoutCubit = StartWorkoutCubit(
