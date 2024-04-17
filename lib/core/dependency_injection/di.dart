@@ -39,8 +39,8 @@ Future<void> initLocator() async {
       ),
       dependsOn: [AuthenticationContract],
     )
-    ..registerSingletonAsync<WorkoutsContract>(
-      () async => WorkoutRepository(
+    ..registerSingletonAsync<WorkoutRepository>(
+      () async => WorkoutRepositoryImpl(
         workoutsApi: locator<WorkoutsApi>(),
       ),
       dependsOn: [WorkoutsApi],

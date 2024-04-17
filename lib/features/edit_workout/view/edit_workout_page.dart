@@ -26,7 +26,7 @@ class EditWorkoutPage extends StatelessWidget {
           workout: workout,
           isEditMode: isEditMode,
         ),
-        workoutsRepository: locator<WorkoutsContract>(),
+        workoutsRepository: locator<WorkoutRepository>(),
       ),
       child: Builder(
         builder: (context) {

@@ -14,7 +14,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     required this.workoutsRepository,
   });
 
-  final WorkoutsContract workoutsRepository;
+  final WorkoutRepository workoutsRepository;
 
   void updateName(String name) {
     emit(state.copyWith(workout: state.workout.copyWith(name: name)));

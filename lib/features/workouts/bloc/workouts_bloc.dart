@@ -13,7 +13,7 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
     on<WorkoutsRequested>(_onWorkoutsRequestedEvent);
     on<WorkoutRemoved>(_onWorkoutRemovedEvent);
   }
-  final WorkoutsContract workoutsRepository;
+  final WorkoutRepository workoutsRepository;
 
   FutureOr<void> _onWorkoutsRequestedEvent(
     WorkoutsRequested event,

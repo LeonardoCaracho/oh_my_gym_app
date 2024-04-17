@@ -1,8 +1,8 @@
-import 'package:workout_repository/src/contracts/contracts.dart';
+import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
-class WorkoutRepository implements WorkoutsContract {
-  WorkoutRepository({
+class WorkoutRepositoryImpl implements WorkoutRepository {
+  WorkoutRepositoryImpl({
     required this.workoutsApi,
   });
 

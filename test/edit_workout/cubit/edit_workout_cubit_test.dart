@@ -8,7 +8,7 @@ import 'package:oh_my_gym_app/features/edit_workout/cubit/cubit.dart';
 import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
-class MockWorkoutsContracts extends Mock implements WorkoutsContract {}
+class MockWorkoutRepositorys extends Mock implements WorkoutRepository {}
 
 class FakeWorkout extends Fake implements Workout {}
 
@@ -16,13 +16,13 @@ final mockExercise = Exercise.empty(id: '1');
 final mockWorkout = Workout.create(exercises: [mockExercise]);
 
 void main() {
-  late WorkoutsContract workoutsRepository;
+  late WorkoutRepository workoutsRepository;
   late EditWorkoutCubit editWorkoutCubit;
 
   setUpAll(() => registerFallbackValue(FakeWorkout()));
 
   setUp(() {
-    workoutsRepository = MockWorkoutsContracts();
+    workoutsRepository = MockWorkoutRepositorys();
     editWorkoutCubit = EditWorkoutCubit(
       EditWorkoutState(workout: mockWorkout),
       workoutsRepository: workoutsRepository,

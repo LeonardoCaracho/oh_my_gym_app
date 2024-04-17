@@ -23,7 +23,7 @@ class StartWorkoutPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => StartWorkoutCubit(
         historyRepository: locator<HistoryRepository>(),
-        workoutsRepository: locator<WorkoutsContract>(),
+        workoutsRepository: locator<WorkoutRepository>(),
       )..startWorkout(workout),
       child: PopScope(
         onPopInvoked: (onPopInvoked) async {

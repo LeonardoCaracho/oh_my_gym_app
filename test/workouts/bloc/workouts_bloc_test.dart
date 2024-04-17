@@ -8,15 +8,15 @@ import 'package:workout_repository/workout_repository.dart';
 
 import '../../helpers/mocks/mocks.dart';
 
-class MockWorkoutsContract extends Mock implements WorkoutsContract {}
+class MockWorkoutRepository extends Mock implements WorkoutRepository {}
 
 void main() {
   group('WorkoutsBloc', () {
     late WorkoutsBloc workoutsBloc;
-    late WorkoutsContract mockWorkoutsRepository;
+    late WorkoutRepository mockWorkoutsRepository;
 
     setUp(() {
-      mockWorkoutsRepository = MockWorkoutsContract();
+      mockWorkoutsRepository = MockWorkoutRepository();
       workoutsBloc = WorkoutsBloc(workoutsRepository: mockWorkoutsRepository);
     });
 

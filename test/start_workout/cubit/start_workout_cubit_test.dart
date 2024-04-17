@@ -9,7 +9,7 @@ import 'package:workouts_api/workouts_api.dart';
 
 class MockHistoryRepository extends Mock implements HistoryRepository {}
 
-class MockWorkoutsContract extends Mock implements WorkoutsContract {}
+class MockWorkoutRepository extends Mock implements WorkoutRepository {}
 
 class FakeHistoryWorkout extends Fake implements WorkoutHistory {}
 
@@ -21,7 +21,7 @@ final mockWorkout = Workout.create(exercises: [mockExercise]);
 void main() {
   group('StartWorkoutCubit', () {
     late HistoryRepository historyRepository;
-    late WorkoutsContract workoutsRepository;
+    late WorkoutRepository workoutsRepository;
     late StartWorkoutCubit startWorkoutCubit;
 
     setUpAll(() {
@@ -31,7 +31,7 @@ void main() {
 
     setUp(() {
       historyRepository = MockHistoryRepository();
-      workoutsRepository = MockWorkoutsContract();
+      workoutsRepository = MockWorkoutRepository();
 
       startWorkoutCubit = StartWorkoutCubit(
         historyRepository: historyRepository,

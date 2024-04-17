@@ -3,7 +3,7 @@ import 'package:history_repository/history_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:workout_repository/workout_repository.dart';
 
-class WorkoutsContractMock extends Mock implements WorkoutsContract {}
+class WorkoutRepositoryMock extends Mock implements WorkoutRepository {}
 
 class HistoryRepositoryMock extends Mock implements HistoryRepository {}
 
@@ -11,8 +11,8 @@ GetIt locator = GetIt.instance;
 
 Future<void> initLocatorTesting() async {
   locator
-    ..registerSingletonAsync<WorkoutsContract>(
-      () async => WorkoutsContractMock(),
+    ..registerSingletonAsync<WorkoutRepository>(
+      () async => WorkoutRepositoryMock(),
     )
     ..registerSingletonAsync<HistoryRepository>(
       () async => HistoryRepositoryMock(),

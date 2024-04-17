@@ -30,7 +30,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider<WorkoutsBloc>(
           create: (context) => WorkoutsBloc(
-            workoutsRepository: locator<WorkoutsContract>(),
+            workoutsRepository: locator<WorkoutRepository>(),
           )..add(const WorkoutsRequested()),
         ),
         BlocProvider<WorkoutsHistoryCubit>(
