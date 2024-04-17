@@ -10,7 +10,7 @@ class HistoryApi {
             firebaseFirestore ?? firebase_firestore.FirebaseFirestore.instance;
 
   final firebase_firestore.FirebaseFirestore _firebaseFirestore;
-  final AuthenticationContract authRepository;
+  final AuthenticationRepository authRepository;
 
   Future<void> saveRecord(WorkoutHistory record) async {
     final user = authRepository.currentUser;

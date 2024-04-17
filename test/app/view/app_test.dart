@@ -10,13 +10,13 @@ class MockAppBloc extends MockCubit<AppState> implements AppBloc {}
 
 class MockLoginCubit extends MockCubit<LoginState> implements LoginCubit {}
 
-class MockAuthenticationContract extends Mock
+class MockAuthenticationRepository extends Mock
     implements FirebaseAuthRepository {}
 
 void main() {
   setUp(() {
-    locator.registerSingleton<AuthenticationContract>(
-      MockAuthenticationContract(),
+    locator.registerSingleton<AuthenticationRepository>(
+      MockAuthenticationRepository(),
     );
   });
 }

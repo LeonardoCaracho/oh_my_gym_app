@@ -6,14 +6,14 @@ import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 
 class MockAuthenticationRepository extends Mock
-    implements AuthenticationContract {}
+    implements AuthenticationRepository {}
 
 class MockUser extends Mock implements User {}
 
 void main() {
   group('AppBloc', () {
     final user = MockUser();
-    late AuthenticationContract authenticationRepository;
+    late AuthenticationRepository authenticationRepository;
 
     setUp(() {
       authenticationRepository = MockAuthenticationRepository();

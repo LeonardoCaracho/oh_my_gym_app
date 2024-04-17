@@ -20,12 +20,12 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider<AppBloc>(
           create: (context) => AppBloc(
-            authenticationRepository: locator<AuthenticationContract>(),
+            authenticationRepository: locator<AuthenticationRepository>(),
           ),
         ),
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(
-            authRepository: locator<AuthenticationContract>(),
+            authRepository: locator<AuthenticationRepository>(),
           ),
         ),
         BlocProvider<WorkoutsBloc>(

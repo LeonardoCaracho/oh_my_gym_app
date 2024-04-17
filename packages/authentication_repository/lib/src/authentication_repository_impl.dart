@@ -3,8 +3,8 @@ import 'package:cache/cache.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
 
-class FirebaseAuthRepository implements AuthenticationContract {
-  FirebaseAuthRepository({
+class AuthenticationRepositoryImpl implements AuthenticationRepository {
+  AuthenticationRepositoryImpl({
     required this.cache,
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,

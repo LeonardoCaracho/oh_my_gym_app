@@ -21,23 +21,23 @@ Future<void> initLocator() async {
       () async => UserCache(userBox: locator<Box<Map<dynamic, dynamic>>>()),
       dependsOn: [Box<Map<dynamic, dynamic>>],
     )
-    ..registerSingletonAsync<AuthenticationContract>(
-      () async => FirebaseAuthRepository(
+    ..registerSingletonAsync<AuthenticationRepository>(
+      () async => AuthenticationRepositoryImpl(
         cache: locator<UserCacheContract>(),
       ),
       dependsOn: [UserCacheContract],
     )
     ..registerSingletonAsync<WorkoutsApi>(
       () async => WorkoutsApi(
-        authRepository: locator<AuthenticationContract>(),
+        authRepository: locator<AuthenticationRepository>(),
       ),
-      dependsOn: [AuthenticationContract],
+      dependsOn: [AuthenticationRepository],
     )
     ..registerSingletonAsync<HistoryApi>(
       () async => HistoryApi(
-        authRepository: locator<AuthenticationContract>(),
+        authRepository: locator<AuthenticationRepository>(),
       ),
-      dependsOn: [AuthenticationContract],
+      dependsOn: [AuthenticationRepository],
     )
     ..registerSingletonAsync<WorkoutRepository>(
       () async => WorkoutRepositoryImpl(

@@ -10,7 +10,7 @@ class WorkoutsApi {
             firebaseFirestore ?? firebase_firestore.FirebaseFirestore.instance;
 
   final firebase_firestore.FirebaseFirestore _firebaseFirestore;
-  final AuthenticationContract authRepository;
+  final AuthenticationRepository authRepository;
 
   Future<void> saveWorkout(Workout workout) async {
     final user = authRepository.currentUser;

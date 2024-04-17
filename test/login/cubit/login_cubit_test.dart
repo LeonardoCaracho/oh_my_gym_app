@@ -7,15 +7,15 @@ import 'package:mocktail/mocktail.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 
-class MockAuthenticationContract extends Mock
-    implements AuthenticationContract {}
+class MockAuthenticationRepository extends Mock
+    implements AuthenticationRepository {}
 
 void main() {
-  late AuthenticationContract authRepository;
+  late AuthenticationRepository authRepository;
   late LoginCubit loginCubit;
 
   setUp(() {
-    authRepository = MockAuthenticationContract();
+    authRepository = MockAuthenticationRepository();
     loginCubit = LoginCubit(authRepository: authRepository);
   });
 

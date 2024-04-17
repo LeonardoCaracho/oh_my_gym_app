@@ -11,7 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
     required this.authRepository,
   }) : super(const LoginState());
 
-  final AuthenticationContract authRepository;
+  final AuthenticationRepository authRepository;
 
   FutureOr<void> loginWithGoogle() async {
     try {
