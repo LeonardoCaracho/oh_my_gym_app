@@ -11,6 +11,10 @@ class LocalDatabaseImpl implements LocalDatabase {
 
   @override
   Future<void> saveUser(UserModel user) async {
-    await database.insert('users', user.toMap());
+    await database.insert(
+      'Users',
+      user.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 }

@@ -29,6 +29,7 @@ Future<void> initLocator() async {
     ..registerSingletonAsync<AuthenticationRepository>(
       () async => AuthenticationRepositoryImpl(
         cache: locator<UserCacheContract>(),
+        localDatabase: locator<LocalDatabase>(),
       ),
       dependsOn: [UserCacheContract],
     )
