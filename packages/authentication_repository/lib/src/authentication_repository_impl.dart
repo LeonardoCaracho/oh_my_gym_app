@@ -2,10 +2,12 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:local_db/local_db.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   AuthenticationRepositoryImpl({
     required this.cache,
+    required this.localDatabase,
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
@@ -14,6 +16,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final UserCacheContract cache;
+  final LocalDatabase localDatabase;
 
   static const userCacheKey = '__user_cache_key__';
 
@@ -32,6 +35,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
           firebase_auth.GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
+      );
+
+      await localDatabase.saveUser(
+        UserModel(
+          id: googleUser.id,
+          email: googleUser.email,
+          name: googleUser.displayName ?? '',
+        ),
       );
 
       await _firebaseAuth.signInWithCredential(credential);

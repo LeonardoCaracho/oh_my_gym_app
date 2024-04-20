@@ -24,8 +24,12 @@ dependencies:
   history_repository:
     path: ./packages/history_repository
   hive_flutter: ^1.1.0
+  local_db:
+    path: ./packages/local_db
   intl: ^0.18.0
+  path: ^1.8.3
   path_provider: ^2.0.15
+  sqflite: ^2.3.2
   workout_repository:
     path: ./packages/workout_repository
   workouts_api:

@@ -20,6 +20,8 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_core_platform_interface: ^4.4.1
   google_sign_in: ^6.1.4
+  local_db:
+    path: ../local_db
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
   plugin_platform_interface: ^2.1.4
