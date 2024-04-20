@@ -2,8 +2,8 @@ import 'package:cache/cache.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class UserCache implements UserCacheContract {
-  UserCache({required this.userBox});
+class CacheImpl implements Cache {
+  CacheImpl({required this.userBox});
 
   Box<Map<dynamic, dynamic>> userBox;
 

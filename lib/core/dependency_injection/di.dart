@@ -22,16 +22,16 @@ Future<void> initLocator() async {
       final db = await DatabaseProvider().database;
       return LocalDatabaseImpl(database: db!);
     })
-    ..registerSingletonAsync<UserCacheContract>(
-      () async => UserCache(userBox: locator<Box<Map<dynamic, dynamic>>>()),
+    ..registerSingletonAsync<Cache>(
+      () async => CacheImpl(userBox: locator<Box<Map<dynamic, dynamic>>>()),
       dependsOn: [Box<Map<dynamic, dynamic>>],
     )
     ..registerSingletonAsync<AuthenticationRepository>(
       () async => AuthenticationRepositoryImpl(
-        cache: locator<UserCacheContract>(),
+        cache: locator<Cache>(),
         localDatabase: locator<LocalDatabase>(),
       ),
-      dependsOn: [UserCacheContract],
+      dependsOn: [Cache],
     )
     ..registerSingletonAsync<WorkoutsApi>(
       () async => WorkoutsApi(

@@ -15,7 +15,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final UserCacheContract cache;
+  final Cache cache;
   final LocalDatabase localDatabase;
 
   static const userCacheKey = '__user_cache_key__';

@@ -1,4 +1,4 @@
-abstract class UserCacheContract {
+abstract class Cache {
   Map<String, dynamic>? read({required String key});
 
   Future<void> write({
