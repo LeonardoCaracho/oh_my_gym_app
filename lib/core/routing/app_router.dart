@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
-import 'package:oh_my_gym_app/app/bloc/app_bloc.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
@@ -9,7 +8,7 @@ import 'package:oh_my_gym_app/features/settings/view/settings_page.dart';
 import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
 import 'package:oh_my_gym_app/features/workouts/view/workouts_page.dart';
 import 'package:oh_my_gym_app/features/workouts_history/workouts_history.dart';
-import 'package:workouts_api/workouts_api.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorWorkoutsKey =

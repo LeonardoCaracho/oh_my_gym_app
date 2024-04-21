@@ -1,5 +1,5 @@
 import 'package:oh_my_gym_app/core/core.dart';
-import 'package:workouts_api/workouts_api.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 final workoutMock = Workout(
   id: 'id',
@@ -10,7 +10,7 @@ final workoutMock = Workout(
 
 final exerciseMock = Exercise(id: 'id', name: 'name', sets: [exerciseSetMock]);
 
-final exerciseSetMock = ExerciseSet(reps: 1, weight: 10);
+final exerciseSetMock = Series(reps: 1, weight: 10, isDone: false);
 
 final workoutHistoryMock = WorkoutHistory(
   workout: workoutMock,

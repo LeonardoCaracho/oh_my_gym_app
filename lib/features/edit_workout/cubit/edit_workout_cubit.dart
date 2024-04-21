@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:workout_repository/workout_repository.dart';
-import 'package:workouts_api/workouts_api.dart';
 part 'edit_workout_state.dart';
 
 class EditWorkoutCubit extends Cubit<EditWorkoutState> {
@@ -60,7 +59,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     final exercises = [...state.workout.exercises];
     final exercise = exercises.firstWhere((e) => e.id == exerciseId);
 
-    exercise.sets.add(ExerciseSet.empty());
+    exercise.sets.add(Series.empty());
 
     emit(state.copyWith(workout: state.workout.copyWith(exercises: exercises)));
   }

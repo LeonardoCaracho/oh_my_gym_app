@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:history_repository/history_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:workout_repository/workout_repository.dart';
 

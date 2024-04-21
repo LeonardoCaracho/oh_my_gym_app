@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
-import 'package:workouts_api/workouts_api.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 Future<void> deleteConfirmationDialog(
   BuildContext context,

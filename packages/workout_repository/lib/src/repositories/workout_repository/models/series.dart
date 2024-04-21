@@ -7,6 +7,12 @@ class Series {
     this.prevWeight,
   });
 
+  factory Series.empty() => Series(
+        reps: 0,
+        weight: 0,
+        isDone: false,
+      );
+
   int? reps;
   double? weight;
   int? prevReps;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
-import 'package:workouts_api/workouts_api.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 class WorkoutsBody extends StatelessWidget {
   const WorkoutsBody({super.key});
@@ -91,26 +91,6 @@ class WorkoutsBody extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
-                    ),
-                  );
-                },
-              );
-
-              return SliverGrid.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.5,
-                ),
-                itemCount: state.workouts.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      left: 8,
-                      bottom: 8,
-                      right: index.isOdd ? 8 : 0,
-                    ),
-                    child: WorkoutCard(
-                      workout: state.workouts[index],
                     ),
                   );
                 },

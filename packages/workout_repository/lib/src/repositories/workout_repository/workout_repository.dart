@@ -1,6 +1,13 @@
 import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart' as api;
 
+abstract class WorkoutRepository {
+  Future<void> saveWorkout(Workout workout);
+  Future<List<Workout>> getWorkouts();
+  Future<void> updateWorkout(Workout workout);
+  Future<void> deleteWorkout(String docId);
+}
+
 class WorkoutRepositoryImpl implements WorkoutRepository {
   WorkoutRepositoryImpl({
     required this.workoutsApi,
