@@ -1,4 +1,4 @@
-import 'package:workouts_api/workouts_api.dart';
+import 'package:workout_repository/workout_repository.dart';
 
 abstract class WorkoutRepository {
   Future<void> saveWorkout(Workout workout);
