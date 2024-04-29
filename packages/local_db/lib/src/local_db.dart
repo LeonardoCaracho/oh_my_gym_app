@@ -3,9 +3,17 @@ import 'package:sqflite/sqflite.dart';
 
 abstract class LocalDatabase {
   Future<void> saveUser(UserModel user);
-  Future<void> saveWorkout(WorkoutModel workout);
+  Future<void> saveWorkout(
+    WorkoutModel workout,
+    List<ExerciseModel> exercises,
+  );
   Future<void> deleteWorkout(int workoutId);
-  Future<void> updateWorkout(WorkoutModel workout);
+  Future<void> updateWorkout(
+    WorkoutModel workout,
+    List<ExerciseModel> exercises,
+  );
+  Future<List<WorkoutModel>> getWorkouts(int userId);
+  Future<List<ExerciseModel>> getExercises(int workoutId);
 }
 
 class LocalDatabaseImpl implements LocalDatabase {
@@ -22,10 +30,13 @@ class LocalDatabaseImpl implements LocalDatabase {
   }
 
   @override
-  Future<void> saveWorkout(WorkoutModel workout) async {
+  Future<void> saveWorkout(
+    WorkoutModel workout,
+    List<ExerciseModel> exercises,
+  ) async {
     final workoutId = await database.insert('workout', workout.toMap());
 
-    for (ExerciseModel exercise in workout.exercises) {
+    for (ExerciseModel exercise in exercises) {
       exercise.workoutId = workoutId;
       final exerciseId = await database.insert('exercises', exercise.toMap());
       for (SeriesModel series in exercise.sets) {
@@ -41,11 +52,14 @@ class LocalDatabaseImpl implements LocalDatabase {
   }
 
   @override
-  Future<void> updateWorkout(WorkoutModel workout) async {
+  Future<void> updateWorkout(
+    WorkoutModel workout,
+    List<ExerciseModel> exercises,
+  ) async {
     await database.update('workout', workout.toMap(),
         where: 'id = ?', whereArgs: [workout.id]);
 
-    for (ExerciseModel exercise in workout.exercises) {
+    for (ExerciseModel exercise in exercises) {
       await database.update('exercises', exercise.toMap(),
           where: 'id = ?', whereArgs: [exercise.id]);
       for (SeriesModel series in exercise.sets) {
@@ -57,5 +71,40 @@ class LocalDatabaseImpl implements LocalDatabase {
         );
       }
     }
+  }
+
+  @override
+  Future<List<WorkoutModel>> getWorkouts(int userId) async {
+    final workoutsRaw = await database.query(
+      'workouts',
+      where: 'user_id = ?',
+      whereArgs: [userId],
+    );
+
+    return workoutsRaw.map((w) => WorkoutModel.fromJson(w)).toList();
+  }
+
+  @override
+  Future<List<ExerciseModel>> getExercises(int workoutId) async {
+    final exercisesRaw = await database.query(
+      'exercises',
+      where: 'workout_id = ?',
+      whereArgs: [workoutId],
+    );
+
+    final exercises =
+        exercisesRaw.map((e) => ExerciseModel.fromJson(e)).toList();
+
+    for (ExerciseModel exercise in exercises) {
+      exercise.sets = await _getSeries(exercise.id!);
+    }
+
+    return exercises;
+  }
+
+  Future<List<SeriesModel>> _getSeries(int exerciseId) async {
+    final seriesRaw = await database
+        .query('series', where: 'exercise_id = ?', whereArgs: [exerciseId]);
+    return seriesRaw.map((s) => SeriesModel.fromJson(s)).toList();
   }
 }

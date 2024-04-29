@@ -5,6 +5,7 @@ class Series {
     this.weight,
     this.prevReps,
     this.prevWeight,
+    this.id,
   });
 
   factory Series.empty() => Series(
@@ -13,6 +14,7 @@ class Series {
         isDone: false,
       );
 
+  int? id;
   int? reps;
   double? weight;
   int? prevReps;

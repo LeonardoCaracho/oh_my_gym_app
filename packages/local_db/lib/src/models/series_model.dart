@@ -26,4 +26,13 @@ class SeriesModel {
         'prevWeight': prevWeight,
         'isDone': isDone,
       };
+
+  SeriesModel.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        exerciseId = json['exerciseId'],
+        reps = json['reps'],
+        isDone = json['isDone'],
+        weight = json['weight'],
+        prevReps = json['prevReps'],
+        prevWeight = json['prevWeight'];
 }

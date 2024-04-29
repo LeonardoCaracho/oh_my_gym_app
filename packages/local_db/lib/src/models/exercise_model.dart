@@ -9,7 +9,7 @@ class ExerciseModel {
     this.observation,
   });
 
-  String? id;
+  int? id;
   int? workoutId;
   String? observation;
   String name;
@@ -21,4 +21,11 @@ class ExerciseModel {
         'name': name,
         'observation': observation,
       };
+
+  ExerciseModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        sets = [],
+        workoutId = json['workoutId'],
+        observation = json['observation'],
+        id = json['id'];
 }

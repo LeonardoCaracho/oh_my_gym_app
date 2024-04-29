@@ -1,20 +1,17 @@
-import 'package:uuid/uuid.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 class Exercise {
   Exercise({
-    required this.id,
     required this.name,
     required this.sets,
+    this.id,
     this.observation,
   });
 
   factory Exercise.empty({
-    String? id,
     String? name,
   }) =>
       Exercise(
-        id: id ?? const Uuid().v4(),
         name: name ?? '',
         observation: '',
         sets: [
@@ -26,7 +23,7 @@ class Exercise {
         ],
       );
 
-  String id;
+  int? id;
   String name;
   String? observation;
   List<Series> sets;

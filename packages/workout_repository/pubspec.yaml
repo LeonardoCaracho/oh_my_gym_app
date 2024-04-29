@@ -17,6 +17,9 @@ dependencies:
   firebase_core: ^2.14.0
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
+  local_db:
+    path: ../local_db
   uuid: ^3.0.7
   workouts_api:
     path: ../workouts_api
+  
