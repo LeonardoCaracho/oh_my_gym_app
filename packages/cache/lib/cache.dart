@@ -3,3 +3,4 @@ library cache;
 
 export 'src/cache.dart';
 export 'src/cache_impl.dart';
+export 'src/utils/utils.dart';

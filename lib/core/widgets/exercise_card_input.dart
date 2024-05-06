@@ -33,24 +33,19 @@ class _ExerciseCardInputState extends State<ExerciseCardInput> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      style: Theme.of(context).textTheme.bodyMedium,
       readOnly: widget.isReadOnly,
       controller: _controller,
       onChanged: widget.onChanged,
       minLines: 1,
       maxLines: widget.multiLine ? 3 : 1,
-      keyboardType:
-          widget.multiLine ? TextInputType.multiline : TextInputType.text,
+      textCapitalization: TextCapitalization.sentences,
+      keyboardType: widget.multiLine ? TextInputType.multiline : TextInputType.text,
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         isDense: true,
-
-        // enabledBorder: const UnderlineInputBorder(
-        //   borderSide: BorderSide(color: UIColors.white),
-        // ),
-        // focusedBorder: const UnderlineInputBorder(
-        //   borderSide: BorderSide(color: UIColors.white),
-        // ),
+        hintStyle: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }

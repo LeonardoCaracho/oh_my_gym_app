@@ -20,16 +20,14 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
   }
 
   void deleteExercise(int index) {
-    final exercises = [...state.workout.exercises]..removeAt(index);
+    final exercises = [...state.exercises]..removeAt(index);
     emit(
-      state.copyWith(
-        workout: state.workout.copyWith(exercises: exercises),
-      ),
+      state.copyWith(exercises: exercises),
     );
   }
 
   void reorderExercises(int oldIndex, int newIndex) {
-    final exercises = [...state.workout.exercises];
+    final exercises = [...state.exercises];
     var index = newIndex;
 
     if (oldIndex < index) {
@@ -41,35 +39,42 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
 
     emit(
       state.copyWith(
-        workout: state.workout.copyWith(exercises: exercises),
+        exercises: [],
+      ),
+    );
+    emit(
+      state.copyWith(
+        exercises: exercises,
       ),
     );
   }
 
   void addExercise() {
-    final exercises = state.workout.exercises
-      ..add(
-        Exercise.empty(),
-      );
-
-    emit(state.copyWith(workout: state.workout.copyWith(exercises: exercises)));
+    emit(
+      state.copyWith(
+        exercises: [...state.exercises, Exercise.empty()],
+      ),
+    );
   }
 
-  void addSet(String exerciseId) {
-    final exercises = [...state.workout.exercises];
-    final exercise = exercises.firstWhere((e) => e.id == exerciseId);
+  void addSet(int index) {
+    final exercises = [...state.exercises];
+    exercises.elementAt(index).sets.add(Series.empty());
 
-    exercise.sets.add(Series.empty());
-
-    emit(state.copyWith(workout: state.workout.copyWith(exercises: exercises)));
+    emit(
+      state.copyWith(exercises: []),
+    );
+    emit(
+      state.copyWith(exercises: exercises),
+    );
   }
 
-  void deleteSet(String exerciseId, int setIndex) {
-    final exercises = [...state.workout.exercises];
-
+  void deleteSet(int exerciseId, int setIndex) {
+    final exercises = [...state.exercises];
     exercises.firstWhere((e) => e.id == exerciseId).sets.removeAt(setIndex);
-
-    emit(state.copyWith(workout: state.workout.copyWith(exercises: exercises)));
+    emit(
+      state.copyWith(exercises: exercises),
+    );
   }
 
   Future<void> updateWorkout() async {
@@ -79,9 +84,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
           status: Status.loading,
         ),
       );
-
       await workoutsRepository.updateWorkout(state.workout);
-
       emit(
         state.copyWith(
           status: Status.success,
@@ -100,9 +103,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
   Future<void> saveWorkout() async {
     try {
       emit(state.copyWith(status: Status.loading));
-
-      await workoutsRepository.saveWorkout(state.workout);
-
+      await workoutsRepository.saveWorkout(state.workout, state.exercises);
       emit(state.copyWith(status: Status.success));
     } catch (e) {
       debugPrint('Error saving workout. $e');

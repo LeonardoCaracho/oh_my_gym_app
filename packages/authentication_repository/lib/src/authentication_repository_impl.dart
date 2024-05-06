@@ -18,8 +18,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final Cache cache;
   final LocalDatabase localDatabase;
 
-  static const userCacheKey = '__user_cache_key__';
-
   @override
   User get currentUser {
     final userMap = cache.read(key: userCacheKey);
@@ -31,18 +29,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     try {
       final googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;
-      final firebase_auth.AuthCredential credential =
-          firebase_auth.GoogleAuthProvider.credential(
+      final firebase_auth.AuthCredential credential = firebase_auth.GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
-      );
-
-      await localDatabase.saveUser(
-        UserModel(
-          id: googleUser.id,
-          email: googleUser.email,
-          name: googleUser.displayName ?? '',
-        ),
       );
 
       await _firebaseAuth.signInWithCredential(credential);
@@ -68,8 +57,21 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-      cache.write(key: userCacheKey, value: user.toJson());
+      if (firebaseUser == null) return User.empty;
+
+      final user = firebaseUser.toUser;
+
+      localDatabase.saveUser(
+        UserModel(
+          id: user.id,
+          email: user.email ?? '',
+          name: user.name ?? '',
+        ),
+      );
+
+      cache
+        ..write(key: userCacheKey, value: user.toJson())
+        ..writeString(key: userLoggedInCacheKey, value: user.id);
       return user;
     });
   }

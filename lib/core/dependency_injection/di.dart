@@ -7,11 +7,17 @@ import 'package:workout_repository/workout_repository.dart';
 import 'package:workouts_api/workouts_api.dart';
 
 const userBoxName = '__user_box__';
+const stringBoxName = '__string_box__';
 
 GetIt locator = GetIt.instance;
 
 Future<void> initLocator() async {
   locator
+    ..registerSingletonAsync<Box<String>>(() async {
+      await Hive.initFlutter();
+      final box = await Hive.openBox<String>(stringBoxName);
+      return box;
+    })
     ..registerSingletonAsync<Box<Map<dynamic, dynamic>>>(() async {
       await Hive.initFlutter();
       final box = await Hive.openBox<Map<dynamic, dynamic>>(userBoxName);
@@ -22,8 +28,14 @@ Future<void> initLocator() async {
       return LocalDatabaseImpl(database: db!);
     })
     ..registerSingletonAsync<Cache>(
-      () async => CacheImpl(userBox: locator<Box<Map<dynamic, dynamic>>>()),
-      dependsOn: [Box<Map<dynamic, dynamic>>],
+      () async => CacheImpl(
+        userBox: locator<Box<Map<dynamic, dynamic>>>(),
+        box: locator<Box<String>>(),
+      ),
+      dependsOn: [
+        Box<Map<dynamic, dynamic>>,
+        Box<String>,
+      ],
     )
     ..registerSingletonAsync<AuthenticationRepository>(
       () async => AuthenticationRepositoryImpl(
@@ -47,8 +59,9 @@ Future<void> initLocator() async {
     ..registerSingletonAsync<WorkoutRepository>(
       () async => WorkoutRepositoryImpl(
         localDatabase: locator<LocalDatabase>(),
+        cache: locator<Cache>(),
       ),
-      dependsOn: [WorkoutsApi],
+      dependsOn: [WorkoutsApi, Cache],
     )
     ..registerSingletonAsync<HistoryRepository>(
       () async => HistoryRepositoryImpl(),

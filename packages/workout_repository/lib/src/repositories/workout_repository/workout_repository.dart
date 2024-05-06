@@ -1,3 +1,4 @@
+import 'package:cache/cache.dart';
 import 'package:local_db/local_db.dart';
 import 'package:workout_repository/src/repositories/workout_repository/mappers/workout_mapper.dart';
 import 'package:workout_repository/workout_repository.dart';
@@ -12,21 +13,26 @@ abstract class WorkoutRepository {
 class WorkoutRepositoryImpl implements WorkoutRepository {
   WorkoutRepositoryImpl({
     required this.localDatabase,
+    required this.cache,
   });
 
   final LocalDatabase localDatabase;
+  final Cache cache;
 
   @override
   Future<void> saveWorkout(Workout workout, List<Exercise> exercises) async {
-    final workoutModelMapped = WorkoutMapper.toWorkoutModel(workout);
+    final userId = cache.readString(key: userLoggedInCacheKey) ?? '';
+
+    final workoutModelMapped = WorkoutMapper.toWorkoutModel(workout, userId);
     final exercisesModelMapped = WorkoutMapper.toExercisesModel(exercises);
     await localDatabase.saveWorkout(workoutModelMapped, exercisesModelMapped);
   }
 
   @override
   Future<List<Workout>> getWorkouts() async {
-    // final workouts = await localDatabase.getWorkouts(userId)
-    return [];
+    final userId = cache.readString(key: userLoggedInCacheKey) ?? '';
+    final workoutsModel = await localDatabase.getWorkouts(userId);
+    return workoutsModel.map(WorkoutMapper.toWorkout).toList();
   }
 
   @override

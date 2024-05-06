@@ -39,7 +39,8 @@ final themeData = ThemeData(
   ),
   navigationBarTheme: NavigationBarThemeData(
     indicatorColor: AppColors.primary,
-    backgroundColor: Colors.black,
+    backgroundColor: AppColors.backgroundSecondary,
+    elevation: 0,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
     labelTextStyle: MaterialStateProperty.resolveWith((state) {
       if (state.contains(MaterialState.selected)) {
@@ -52,7 +53,8 @@ final themeData = ThemeData(
 class AppColors {
   static Color get primary => const Color(0xFFF15E4D);
   static Color get secondary => Colors.white;
-  static Color get background => const Color.fromARGB(255, 14, 14, 14);
+  static Color get background => const Color.fromARGB(255, 0, 0, 0);
+  static Color get backgroundSecondary => const Color(0xFF191919);
   static Color get textColor => Colors.white;
   static Color get warning => Colors.red;
 }

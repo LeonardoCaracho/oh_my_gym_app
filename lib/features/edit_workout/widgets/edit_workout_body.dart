@@ -11,7 +11,7 @@ class EditWorkoutBody extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
         builder: (context, state) {
-          final exercises = state.workout.exercises;
+          final exercises = state.exercises;
 
           return CustomScrollView(
             slivers: [
@@ -28,15 +28,14 @@ class EditWorkoutBody extends StatelessWidget {
                             },
                           ),
                         ),
-                        if (state.workout.exercises.length >= 2)
+                        if (state.exercises.length >= 2)
                           SizedBox(
                             width: 60,
                             child: InkWell(
                               key: const Key('sorting_button'),
                               child: const Icon(Icons.swap_vert),
                               onTap: () {
-                                final editWorkoutCubit =
-                                    context.read<EditWorkoutCubit>();
+                                final editWorkoutCubit = context.read<EditWorkoutCubit>();
                                 showDialog<void>(
                                   context: context,
                                   builder: (context) {
@@ -55,7 +54,7 @@ class EditWorkoutBody extends StatelessWidget {
                 ),
               ),
               SliverList.builder(
-                itemCount: state.workout.exercises.length,
+                itemCount: state.exercises.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
                     direction: DismissDirection.endToStart,
@@ -77,21 +76,20 @@ class EditWorkoutBody extends StatelessWidget {
                             index,
                           );
                     },
-                    key: Key(exercises[index].id),
+                    key: Key(exercises[index].name),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: ExerciseCard(
                         index: index,
                         isEditMode: true,
                         exercise: exercises[index],
-                        onAddSet: () => context
-                            .read<EditWorkoutCubit>()
-                            .addSet(exercises[index].id),
-                        onDelete: (exerciseId, setIndex) =>
-                            context.read<EditWorkoutCubit>().deleteSet(
-                                  exerciseId,
-                                  setIndex,
-                                ),
+                        onAddSet: () => context.read<EditWorkoutCubit>().addSet(
+                              index,
+                            ),
+                        onDelete: (exerciseId, setIndex) => context.read<EditWorkoutCubit>().deleteSet(
+                              exerciseId,
+                              setIndex,
+                            ),
                       ),
                     ),
                   );
@@ -101,8 +99,7 @@ class EditWorkoutBody extends StatelessWidget {
                 child: DefaultButtonSmall(
                   text: 'Add Exercise',
                   icon: Icons.add,
-                  onPressed: () =>
-                      context.read<EditWorkoutCubit>().addExercise(),
+                  onPressed: () => context.read<EditWorkoutCubit>().addExercise(),
                 ),
               ),
             ],

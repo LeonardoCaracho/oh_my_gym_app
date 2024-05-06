@@ -82,12 +82,12 @@ class WorkoutsBody extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Exercises: ${state.workouts[index].exercises.length}',
+                          'Exercises: X',
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(width: 12),
                         Text(
-                          'Sets: ${_getTotalSets(state.workouts[index].exercises)}',
+                          'Sets: X',
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],

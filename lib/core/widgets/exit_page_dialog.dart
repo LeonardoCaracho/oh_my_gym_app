@@ -10,9 +10,12 @@ Future<bool> exitPageDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: AppColors.backgroundSecondary,
+        elevation: 0,
         title: Text(
           title,
           textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         content: Text(
           content,
@@ -23,14 +26,16 @@ Future<bool> exitPageDialog(
             children: [
               Expanded(
                 child: DefaultButtonSmall(
-                  text: 'CANCEL',
+                  btnColor: Colors.transparent,
+                  text: 'NO',
                   onPressed: () => Navigator.of(context).pop(false),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: DefaultButtonSmall(
-                  text: 'REVERT',
+                  text: 'YES',
+                  btnColor: Colors.transparent,
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },

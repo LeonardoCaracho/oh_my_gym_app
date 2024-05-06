@@ -5,8 +5,8 @@ class WorkoutModel {
     required this.name,
   });
 
-  final String? id;
-  final int userId;
+  final int? id;
+  final String userId;
   final String name;
 
   Map<String, dynamic> toMap() => {

@@ -9,9 +9,9 @@ abstract class WorkoutMapper {
     );
   }
 
-  static WorkoutModel toWorkoutModel(Workout workout) {
+  static WorkoutModel toWorkoutModel(Workout workout, String userId) {
     return WorkoutModel(
-      userId: 1,
+      userId: userId,
       name: workout.name,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 
 class ExerciseSetRowInput extends StatefulWidget {
   const ExerciseSetRowInput({
@@ -54,8 +55,6 @@ class _ExerciseSetRowInputState extends State<ExerciseSetRowInput> {
                 decimal: true,
               ),
         decoration: InputDecoration(
-          fillColor: const Color.fromARGB(82, 158, 158, 158),
-          filled: true,
           hintText: widget.hintText ?? '',
           isDense: true,
           hintStyle: Theme.of(context).textTheme.bodyMedium,

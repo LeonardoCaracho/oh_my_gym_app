@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 
 class SortingDialog extends StatelessWidget {
@@ -18,26 +19,33 @@ class SortingDialog extends StatelessWidget {
           builder: (context) {
             return BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
               builder: (context, state) {
-                final exercises = state.workout.exercises;
+                final exercises = state.exercises;
 
-                return SizedBox(
+                return Container(
                   height: 300,
                   width: 300,
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundSecondary,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                  ),
                   child: ReorderableListView.builder(
                     padding: EdgeInsets.zero,
                     onReorder: (oldIndex, newIndex) {
-                      context
-                          .read<EditWorkoutCubit>()
-                          .reorderExercises(oldIndex, newIndex);
+                      context.read<EditWorkoutCubit>().reorderExercises(
+                            oldIndex,
+                            newIndex,
+                          );
                     },
                     itemCount: exercises.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        key: UniqueKey(),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 8),
+                        key: Key(exercises[index].name),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                         title: Text(
                           exercises[index].name,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         leading: const Icon(
                           Icons.drag_handle_rounded,

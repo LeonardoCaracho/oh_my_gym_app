@@ -44,7 +44,7 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
   }
 
   void _updateSets() {
-    for (final exercise in state.workout!.exercises) {
+    for (final exercise in state.exercises!) {
       for (final set in exercise.sets) {
         set
           ..prevReps = set.reps

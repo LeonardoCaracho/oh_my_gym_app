@@ -31,16 +31,10 @@ class _WorkoutNameInputState extends State<WorkoutNameInput> {
       textCapitalization: TextCapitalization.sentences,
       controller: _controller,
       onChanged: widget.onChanged,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: 'Workout Name',
         isDense: true,
-
-        // enabledBorder: UnderlineInputBorder(
-        //   borderSide: BorderSide(color: UIColors.white),
-        // ),
-        // focusedBorder: UnderlineInputBorder(
-        //   borderSide: BorderSide(color: UIColors.white),
-        // ),
+        hintStyle: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }

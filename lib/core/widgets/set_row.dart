@@ -12,7 +12,7 @@ class SetRow extends StatefulWidget {
   });
 
   final Exercise exercise;
-  final void Function(String exerciseId, int setIndex)? onDelete;
+  final void Function(int exerciseId, int setIndex)? onDelete;
   final bool isEditMode;
 
   @override
@@ -35,7 +35,7 @@ class _SetRowState extends State<SetRow> {
       return Dismissible(
         direction: DismissDirection.endToStart,
         onDismissed: (direction) => widget.onDelete?.call(
-          widget.exercise.id,
+          widget.exercise.id!,
           sets.indexOf(set),
         ),
         background: Container(

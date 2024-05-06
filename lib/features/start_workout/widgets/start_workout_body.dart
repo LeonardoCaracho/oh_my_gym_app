@@ -5,16 +5,14 @@ import 'package:workout_repository/workout_repository.dart';
 
 class StartWorkoutBody extends StatelessWidget {
   const StartWorkoutBody({
-    required this.workout,
+    required this.exercises,
     super.key,
   });
 
-  final Workout workout;
+  final List<Exercise> exercises;
 
   @override
   Widget build(BuildContext context) {
-    final exercises = workout.exercises;
-
     return BlocBuilder<StartWorkoutCubit, StartWorkoutState>(
       builder: (context, state) {
         return Column(

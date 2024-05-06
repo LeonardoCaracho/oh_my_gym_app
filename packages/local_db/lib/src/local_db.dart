@@ -12,7 +12,7 @@ abstract class LocalDatabase {
     WorkoutModel workout,
     List<ExerciseModel> exercises,
   );
-  Future<List<WorkoutModel>> getWorkouts(int userId);
+  Future<List<WorkoutModel>> getWorkouts(String userId);
   Future<List<ExerciseModel>> getExercises(int workoutId);
 }
 
@@ -34,7 +34,7 @@ class LocalDatabaseImpl implements LocalDatabase {
     WorkoutModel workout,
     List<ExerciseModel> exercises,
   ) async {
-    final workoutId = await database.insert('workout', workout.toMap());
+    final workoutId = await database.insert('workouts', workout.toMap());
 
     for (ExerciseModel exercise in exercises) {
       exercise.workoutId = workoutId;
@@ -56,12 +56,10 @@ class LocalDatabaseImpl implements LocalDatabase {
     WorkoutModel workout,
     List<ExerciseModel> exercises,
   ) async {
-    await database.update('workout', workout.toMap(),
-        where: 'id = ?', whereArgs: [workout.id]);
+    await database.update('workout', workout.toMap(), where: 'id = ?', whereArgs: [workout.id]);
 
     for (ExerciseModel exercise in exercises) {
-      await database.update('exercises', exercise.toMap(),
-          where: 'id = ?', whereArgs: [exercise.id]);
+      await database.update('exercises', exercise.toMap(), where: 'id = ?', whereArgs: [exercise.id]);
       for (SeriesModel series in exercise.sets) {
         await database.update(
           'series',
@@ -74,10 +72,10 @@ class LocalDatabaseImpl implements LocalDatabase {
   }
 
   @override
-  Future<List<WorkoutModel>> getWorkouts(int userId) async {
+  Future<List<WorkoutModel>> getWorkouts(String userId) async {
     final workoutsRaw = await database.query(
       'workouts',
-      where: 'user_id = ?',
+      where: 'userId = ?',
       whereArgs: [userId],
     );
 
@@ -92,8 +90,7 @@ class LocalDatabaseImpl implements LocalDatabase {
       whereArgs: [workoutId],
     );
 
-    final exercises =
-        exercisesRaw.map((e) => ExerciseModel.fromJson(e)).toList();
+    final exercises = exercisesRaw.map((e) => ExerciseModel.fromJson(e)).toList();
 
     for (ExerciseModel exercise in exercises) {
       exercise.sets = await _getSeries(exercise.id!);
@@ -103,8 +100,7 @@ class LocalDatabaseImpl implements LocalDatabase {
   }
 
   Future<List<SeriesModel>> _getSeries(int exerciseId) async {
-    final seriesRaw = await database
-        .query('series', where: 'exercise_id = ?', whereArgs: [exerciseId]);
+    final seriesRaw = await database.query('series', where: 'exercise_id = ?', whereArgs: [exerciseId]);
     return seriesRaw.map((s) => SeriesModel.fromJson(s)).toList();
   }
 }

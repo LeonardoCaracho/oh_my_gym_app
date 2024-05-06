@@ -37,8 +37,16 @@ class StartWorkoutPage extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(title: const CommonHeader(title: 'WORKOUT STARTED')),
-          body: StartWorkoutView(
-            workout: workout,
+          body: Builder(
+            builder: (context) {
+              return BlocBuilder<StartWorkoutCubit, StartWorkoutState>(
+                builder: (context, state) {
+                  return StartWorkoutView(
+                    exercises: state.exercises ?? [],
+                  );
+                },
+              );
+            },
           ),
         ),
       ),
@@ -48,17 +56,17 @@ class StartWorkoutPage extends StatelessWidget {
 
 class StartWorkoutView extends StatelessWidget {
   const StartWorkoutView({
-    required this.workout,
+    required this.exercises,
     super.key,
   });
 
-  final Workout workout;
+  final List<Exercise> exercises;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: StartWorkoutBody(
-        workout: workout,
+        exercises: exercises,
       ),
     );
   }

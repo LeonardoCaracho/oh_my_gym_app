@@ -16,11 +16,13 @@ class ExerciseCard extends StatelessWidget {
   final bool isEditMode;
   final VoidCallback? onAddSet;
   final int? index;
-  final void Function(String exerciseId, int setIndex)? onDelete;
+  final void Function(int exerciseId, int setIndex)? onDelete;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
+      color: AppColors.backgroundSecondary,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
@@ -38,7 +40,7 @@ class ExerciseCard extends StatelessWidget {
         ),
         children: [
           SetRow(
-            key: Key(exercise.id),
+            key: Key(exercise.id.toString()),
             exercise: exercise,
             onDelete: onDelete,
             isEditMode: isEditMode,
@@ -50,6 +52,7 @@ class ExerciseCard extends StatelessWidget {
                 text: 'Add Set',
                 icon: Icons.add,
                 onPressed: onAddSet,
+                btnColor: AppColors.backgroundSecondary,
               ),
             ),
         ],

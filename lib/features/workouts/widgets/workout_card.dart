@@ -12,12 +12,17 @@ class WorkoutCard extends StatelessWidget {
   final Workout workout;
 
   String _getTotalSets() {
-    return workout.exercises
-        .fold(
-          0,
-          (previousValue, element) => previousValue + element.sets.length,
-        )
-        .toString();
+    // return workout.exercises
+    //     .fold(
+    //       0,
+    //       (previousValue, element) => previousValue + element.sets.length,
+    //     )
+    //     .toString();
+    return 'X';
+  }
+
+  String _getTotalExercises() {
+    return 'X';
   }
 
   @override
@@ -51,7 +56,7 @@ class WorkoutCard extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.lg),
               Text(
-                'Total Exercises: ${workout.exercises.length}',
+                'Total Exercises: ${_getTotalExercises()}',
               ),
               Text(
                 'Total Sets: ${_getTotalSets()}',

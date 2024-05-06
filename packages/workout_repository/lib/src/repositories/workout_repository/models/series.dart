@@ -1,4 +1,6 @@
-class Series {
+import 'package:equatable/equatable.dart';
+
+class Series extends Equatable {
   Series({
     required this.isDone,
     this.reps,
@@ -20,4 +22,7 @@ class Series {
   int? prevReps;
   double? prevWeight;
   bool isDone;
+
+  @override
+  List<Object?> get props => [isDone, reps, weight, prevReps, prevWeight, id];
 }

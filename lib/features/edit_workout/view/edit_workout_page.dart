@@ -38,14 +38,13 @@ class EditWorkoutPage extends StatelessWidget {
               ),
               leading: IconButton(
                 onPressed: () async {
-                  if (workout ==
-                      context.read<EditWorkoutCubit>().state.workout) {
+                  if (workout == context.read<EditWorkoutCubit>().state.workout) {
                     Navigator.of(context).pop();
                   } else {
                     final shouldPop = await exitPageDialog(
                       context,
-                      title: 'REVERT CHANGES',
-                      content: 'You will lost all the changes',
+                      title: 'DISCARD CHANGES',
+                      content: 'You will lost all the changes, sure you want to discard them?',
                     );
                     if (shouldPop) {
                       pop();
@@ -57,8 +56,7 @@ class EditWorkoutPage extends StatelessWidget {
               actions: [
                 if (isEditMode)
                   TextButton(
-                    onPressed: () =>
-                        context.read<EditWorkoutCubit>().updateWorkout(),
+                    onPressed: () => context.read<EditWorkoutCubit>().updateWorkout(),
                     child: Text(
                       'UPDATE',
                     ),
@@ -66,13 +64,10 @@ class EditWorkoutPage extends StatelessWidget {
                 else
                   BlocBuilder<EditWorkoutCubit, EditWorkoutState>(
                     builder: (context, state) {
-                      final hasExercises = state.workout.exercises.isNotEmpty;
+                      final hasExercises = state.exercises.isNotEmpty;
 
                       return TextButton(
-                        onPressed: hasExercises
-                            ? () =>
-                                context.read<EditWorkoutCubit>().saveWorkout()
-                            : null,
+                        onPressed: hasExercises ? () => context.read<EditWorkoutCubit>().saveWorkout() : null,
                         child: Text(
                           'SAVE',
                         ),

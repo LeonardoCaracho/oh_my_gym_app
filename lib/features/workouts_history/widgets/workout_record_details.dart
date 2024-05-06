@@ -35,11 +35,11 @@ class WorkoutRecordDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 4),
-            ...record.workout.exercises.map(
-              (exercise) => ExerciseDetails(
-                exercise: exercise,
-              ),
-            ),
+            // ...record.workout.exercises.map(
+            //   (exercise) => ExerciseDetails(
+            //     exercise: exercise,
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,11 +19,12 @@ class DatabaseProvider {
   }
 
   static initDatabase() async {
-    String path = join(await getDatabasesPath(), 'database.db');
-
+    final dbPath = await getDatabasesPath();
+    log(dbPath);
+    String path = join(dbPath, 'database.db');
     return await openDatabase(
       path,
-      version: 2,
+      version: 1,
       onCreate: _createDb,
     );
   }
@@ -41,7 +44,7 @@ class DatabaseProvider {
         userId INTEGER, 
         name TEXT, 
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
-      ),
+      )
     ''');
 
     await db.execute('''
@@ -51,7 +54,7 @@ class DatabaseProvider {
         name TEXT,
         observation TEXT, 
         FOREIGN KEY (workoutId) REFERENCES workouts(id) ON DELETE CASCADE
-      ),
+      )
     ''');
 
     await db.execute('''
@@ -64,7 +67,7 @@ class DatabaseProvider {
         prevWeight DOUBLE,
         isDone BOOLEAN,
         FOREIGN KEY (exerciseId) REFERENCES exercises(id) ON DELETE CASCADE
-      ),
+      )
     ''');
   }
 }
