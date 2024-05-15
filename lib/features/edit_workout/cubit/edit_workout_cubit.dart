@@ -84,7 +84,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
           status: Status.loading,
         ),
       );
-      await workoutsRepository.updateWorkout(state.workout);
+      await workoutsRepository.updateWorkout(state.workout, state.exercises);
       emit(
         state.copyWith(
           status: Status.success,
@@ -109,5 +109,11 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
       debugPrint('Error saving workout. $e');
       emit(state.copyWith(status: Status.failure));
     }
+  }
+
+  Future<void> loadExercises(int? workoutId) async {
+    if (workoutId == null) return;
+    final exercises = await workoutsRepository.getExercises(workoutId);
+    emit(state.copyWith(exercises: exercises));
   }
 }

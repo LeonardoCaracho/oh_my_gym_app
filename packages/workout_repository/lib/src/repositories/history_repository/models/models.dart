@@ -1,1 +1,1 @@
-export 'workout_history.dart';
+export 'workout_record.dart';

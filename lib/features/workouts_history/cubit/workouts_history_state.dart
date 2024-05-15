@@ -6,16 +6,16 @@ class WorkoutsHistoryState extends Equatable {
     this.status = Status.inital,
   });
 
-  final List<WorkoutHistory> records;
+  final List<WorkoutRecord> records;
   final Status status;
 
   @override
   List<Object> get props => [records, status];
 
   WorkoutsHistoryState copyWith({
-    List<WorkoutHistory>? records,
-    List<WorkoutHistory>? recordsGrouped,
-    List<WorkoutHistory>? recordsByWorkout,
+    List<WorkoutRecord>? records,
+    List<WorkoutRecord>? recordsGrouped,
+    List<WorkoutRecord>? recordsByWorkout,
     Status? status,
   }) {
     return WorkoutsHistoryState(

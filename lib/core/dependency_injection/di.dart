@@ -64,8 +64,11 @@ Future<void> initLocator() async {
       dependsOn: [WorkoutsApi, Cache],
     )
     ..registerSingletonAsync<HistoryRepository>(
-      () async => HistoryRepositoryImpl(),
-      dependsOn: [HistoryApi],
+      () async => HistoryRepositoryImpl(
+        cache: locator<Cache>(),
+        localDatabase: locator<LocalDatabase>(),
+      ),
+      dependsOn: [Cache, LocalDatabase],
     );
 
   await locator.allReady();

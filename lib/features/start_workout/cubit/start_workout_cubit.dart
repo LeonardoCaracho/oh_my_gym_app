@@ -15,8 +15,23 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
   final HistoryRepository historyRepository;
   final WorkoutRepository workoutsRepository;
 
-  FutureOr<void> startWorkout(Workout workout) {
-    emit(state.copyWith(workout: workout));
+  FutureOr<void> startWorkout(Workout workout) async {
+    try {
+      final exercises = await workoutsRepository.getExercises(workout.id!);
+      emit(
+        state.copyWith(
+          workout: workout,
+          exercises: exercises,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          exercises: [],
+          status: Status.failure,
+        ),
+      );
+    }
   }
 
   FutureOr<void> finishWorkout() async {
@@ -29,13 +44,14 @@ class StartWorkoutCubit extends Cubit<StartWorkoutState> {
 
       _updateSets();
 
-      final record = WorkoutHistory(
-        workout: state.workout!,
+      final record = WorkoutRecord(
+        name: state.workout!.name,
+        workoutId: state.workout!.id!,
         finishDate: DateTime.now(),
       );
 
-      await historyRepository.saveRecord(record);
-      await workoutsRepository.updateWorkout(state.workout!);
+      await historyRepository.saveRecord(record, state.exercises!);
+      await workoutsRepository.updateWorkout(state.workout!, state.exercises!);
 
       emit(state.copyWith(status: Status.success));
     } catch (e) {

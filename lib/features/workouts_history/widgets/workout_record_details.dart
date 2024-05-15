@@ -8,7 +8,7 @@ class WorkoutRecordDetails extends StatelessWidget {
     super.key,
   });
 
-  final WorkoutHistory record;
+  final WorkoutRecord record;
 
   String dateFormatter(DateTime date) {
     return DateFormat('yMMMMEEEEd').format(date);
@@ -27,7 +27,7 @@ class WorkoutRecordDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  record.workout.name,
+                  record.name,
                 ),
                 Text(
                   dateFormatter(record.finishDate),

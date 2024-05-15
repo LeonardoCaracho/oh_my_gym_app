@@ -31,7 +31,7 @@ class SeriesModel {
       : id = json['id'],
         exerciseId = json['exerciseId'],
         reps = json['reps'],
-        isDone = json['isDone'],
+        isDone = json['isDone'] == 0 ? false : true,
         weight = json['weight'],
         prevReps = json['prevReps'],
         prevWeight = json['prevWeight'];

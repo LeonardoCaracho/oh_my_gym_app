@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
+import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/edit_workout/view/edit_workout_page.dart';
+import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
 import 'package:oh_my_gym_app/features/workouts/workouts.dart';
 import 'package:workout_repository/workout_repository.dart';
 
@@ -20,18 +24,6 @@ class WorkoutsBody extends StatelessWidget {
             centerTitle: true,
             titlePadding: EdgeInsets.all(8),
             expandedTitleScale: 1,
-            // background: Padding(
-            //   padding: EdgeInsets.all(8),
-            //   child: Row(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text(
-            //         'Start a workout',
-            //       ),
-            //     ],
-            //   ),
-            // ),
             title: AddWorkoutCard(),
           ),
         ),
@@ -92,6 +84,44 @@ class WorkoutsBody extends StatelessWidget {
                         ),
                       ],
                     ),
+                    onTap: () async {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return FullScreenModal(
+                            workout: state.workouts[index],
+                          );
+                        },
+                      );
+
+                      // final shouldUpdate = await Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => EditWorkoutPage(workout: state.workouts[index]),
+                      //     fullscreenDialog: true,
+                      //   ),
+                      // );
+
+                      // final shouldUpdate = await context.pushNamed<bool>(
+                      //   RouteConstants.editWorkoutRouteName,
+                      //   extra: state.workouts[index],
+                      // );
+
+                      // if (shouldUpdate != null) {
+                      //   context.read<WorkoutsBloc>().add(const WorkoutsRequested());
+                      // }
+                      // final workoutsBloc = context.read<WorkoutsBloc>();
+                      // showModalBottomSheet<void>(
+                      //   context: context,
+                      //   builder: (context) {
+                      //     return BlocProvider.value(
+                      //       value: workoutsBloc,
+                      //       child: WorkoutOptionsBottomSheet(
+                      //         workout: state.workouts[index],
+                      //       ),
+                      //     );
+                      //   },
+                      // );
+                    },
                   );
                 },
               );
@@ -110,5 +140,22 @@ class WorkoutsBody extends StatelessWidget {
           (previousValue, element) => previousValue + element.sets.length,
         )
         .toString();
+  }
+}
+
+class FullScreenModal extends StatelessWidget {
+  const FullScreenModal({super.key, required this.workout});
+
+  final Workout workout;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      // Inflated with the device screen
+      insetPadding: EdgeInsets.all(0),
+      child: StartWorkoutPage(
+        workout: workout,
+      ),
+    );
   }
 }

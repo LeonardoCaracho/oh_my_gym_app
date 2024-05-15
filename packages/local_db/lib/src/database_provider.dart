@@ -26,11 +26,13 @@ class DatabaseProvider {
       path,
       version: 1,
       onCreate: _createDb,
+      onUpgrade: _updateDB,
     );
   }
 
   static Future<void> _createDb(Database db, int version) async {
-    await db.execute('''
+    await db.execute(
+        '''
       CREATE TABLE IF NOT EXISTS users (
         id TEXT PRIMARY KEY,
         name TEXT,
@@ -38,7 +40,8 @@ class DatabaseProvider {
       )
     ''');
 
-    await db.execute('''
+    await db.execute(
+        '''
       CREATE TABLE IF NOT EXISTS workouts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         userId INTEGER, 
@@ -47,7 +50,8 @@ class DatabaseProvider {
       )
     ''');
 
-    await db.execute('''
+    await db.execute(
+        '''
       CREATE TABLE IF NOT EXISTS exercises (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         workoutId INTEGER, 
@@ -57,7 +61,8 @@ class DatabaseProvider {
       )
     ''');
 
-    await db.execute('''
+    await db.execute(
+        '''
       CREATE TABLE IF NOT EXISTS series (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         exerciseId INTEGER, 
@@ -69,5 +74,44 @@ class DatabaseProvider {
         FOREIGN KEY (exerciseId) REFERENCES exercises(id) ON DELETE CASCADE
       )
     ''');
+
+    await db.execute(
+        '''
+      CREATE TABLE IF NOT EXISTS workouts_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        workoutId INTEGER,
+        userId INTEGER,
+        name TEXT,
+        finishDate DATETIME,
+        FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+      )
+    ''');
+
+    await db.execute(
+        '''
+      CREATE TABLE IF NOT EXISTS exercises_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        workoutId INTEGER, 
+        name TEXT,
+        observation TEXT, 
+        FOREIGN KEY (workoutId) REFERENCES workouts_records(id) ON DELETE CASCADE
+      )
+    ''');
+
+    await db.execute(
+        '''
+      CREATE TABLE IF NOT EXISTS series_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        exerciseId INTEGER, 
+        reps INTEGER, 
+        weight DOUBLE,
+        prevReps INTEGER,
+        prevWeight DOUBLE,
+        isDone BOOLEAN,
+        FOREIGN KEY (exerciseId) REFERENCES exercises_records(id) ON DELETE CASCADE
+      )
+    ''');
   }
+
+  static Future<void> _updateDB(Database db, int newVersion, int oldVersion) async {}
 }

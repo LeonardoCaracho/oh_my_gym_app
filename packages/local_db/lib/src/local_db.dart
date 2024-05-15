@@ -14,6 +14,18 @@ abstract class LocalDatabase {
   );
   Future<List<WorkoutModel>> getWorkouts(String userId);
   Future<List<ExerciseModel>> getExercises(int workoutId);
+
+  //History methods
+  Future<void> saveWorkoutRecord(
+    WorkoutRecordModel workout,
+    List<ExerciseModel> exercises,
+  );
+  Future<List<WorkoutRecordModel>> getWorkoutRecords(
+    String userId,
+  );
+  Future<List<ExerciseModel>> getExerciseRecord(
+    int workoutRecordId,
+  );
 }
 
 class LocalDatabaseImpl implements LocalDatabase {
@@ -48,7 +60,7 @@ class LocalDatabaseImpl implements LocalDatabase {
 
   @override
   Future<void> deleteWorkout(int workoutId) async {
-    await database.delete('workout', where: 'id = ?', whereArgs: [workoutId]);
+    await database.delete('workouts', where: 'id = ?', whereArgs: [workoutId]);
   }
 
   @override
@@ -56,17 +68,26 @@ class LocalDatabaseImpl implements LocalDatabase {
     WorkoutModel workout,
     List<ExerciseModel> exercises,
   ) async {
-    await database.update('workout', workout.toMap(), where: 'id = ?', whereArgs: [workout.id]);
+    await database.update('workouts', workout.toMap(), where: 'id = ?', whereArgs: [workout.id]);
 
     for (ExerciseModel exercise in exercises) {
-      await database.update('exercises', exercise.toMap(), where: 'id = ?', whereArgs: [exercise.id]);
+      int exerciseId;
+
+      if (exercise.id != null) {
+        exerciseId = exercise.id!;
+        await database.update('exercises', exercise.toMap(), where: 'id = ?', whereArgs: [exercise.id]);
+      } else {
+        exercise.workoutId = workout.id;
+        exerciseId = await database.insert('exercises', exercise.toMap());
+      }
+
       for (SeriesModel series in exercise.sets) {
-        await database.update(
-          'series',
-          series.toMap(),
-          where: 'id = ?',
-          whereArgs: [series.id],
-        );
+        if (series.id != null) {
+          await database.update('series', series.toMap(), where: 'id = ?', whereArgs: [series.id]);
+        } else {
+          series.exerciseId = exerciseId;
+          await database.insert('series', series.toMap());
+        }
       }
     }
   }
@@ -86,7 +107,7 @@ class LocalDatabaseImpl implements LocalDatabase {
   Future<List<ExerciseModel>> getExercises(int workoutId) async {
     final exercisesRaw = await database.query(
       'exercises',
-      where: 'workout_id = ?',
+      where: 'workoutId = ?',
       whereArgs: [workoutId],
     );
 
@@ -100,7 +121,48 @@ class LocalDatabaseImpl implements LocalDatabase {
   }
 
   Future<List<SeriesModel>> _getSeries(int exerciseId) async {
-    final seriesRaw = await database.query('series', where: 'exercise_id = ?', whereArgs: [exerciseId]);
+    final seriesRaw = await database.query('series', where: 'exerciseId = ?', whereArgs: [exerciseId]);
     return seriesRaw.map((s) => SeriesModel.fromJson(s)).toList();
+  }
+
+  @override
+  Future<void> saveWorkoutRecord(WorkoutRecordModel workout, List<ExerciseModel> exercises) async {
+    final workoutRecordId = await database.insert('workouts_records', workout.toMap());
+
+    for (ExerciseModel exercise in exercises) {
+      exercise.workoutId = workoutRecordId;
+      final exerciseId = await database.insert('exercises_records', exercise.toMap());
+      for (SeriesModel series in exercise.sets) {
+        series.exerciseId = exerciseId;
+        await database.insert('series_records', series.toMap());
+      }
+    }
+  }
+
+  @override
+  Future<List<ExerciseModel>> getExerciseRecord(int workoutRecordId) async {
+    final exercisesRaw = await database.query(
+      'exercises_records',
+      where: 'id = ?',
+      whereArgs: [workoutRecordId],
+    );
+
+    final exercises = exercisesRaw.map((e) => ExerciseModel.fromJson(e)).toList();
+
+    for (ExerciseModel exercise in exercises) {
+      exercise.sets = await _getSeries(exercise.id!);
+    }
+
+    return exercises;
+  }
+
+  @override
+  Future<List<WorkoutRecordModel>> getWorkoutRecords(String userId) async {
+    final workoutsRaw = await database.query(
+      'workouts_records',
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+    return workoutsRaw.map((w) => WorkoutRecordModel.fromJson(w)).toList();
   }
 }

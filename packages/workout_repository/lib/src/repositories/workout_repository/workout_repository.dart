@@ -1,13 +1,14 @@
 import 'package:cache/cache.dart';
 import 'package:local_db/local_db.dart';
-import 'package:workout_repository/src/repositories/workout_repository/mappers/workout_mapper.dart';
+import 'package:workout_repository/src/mappers/workout_mapper.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 abstract class WorkoutRepository {
   Future<void> saveWorkout(Workout workout, List<Exercise> exercises);
   Future<List<Workout>> getWorkouts();
-  Future<void> updateWorkout(Workout workout);
+  Future<void> updateWorkout(Workout workout, List<Exercise> exercises);
   Future<void> deleteWorkout(String docId);
+  Future<List<Exercise>> getExercises(int workoutId);
 }
 
 class WorkoutRepositoryImpl implements WorkoutRepository {
@@ -36,12 +37,24 @@ class WorkoutRepositoryImpl implements WorkoutRepository {
   }
 
   @override
-  Future<void> updateWorkout(Workout workout) async {
-    // await workoutsApi.updateWorkout(workout);
+  Future<void> updateWorkout(Workout workout, List<Exercise> exercises) async {
+    final userId = cache.readString(key: userLoggedInCacheKey) ?? '';
+    final workoutModelMapped = WorkoutMapper.toWorkoutModel(workout, userId);
+    final exercisesModelMapped = WorkoutMapper.toExercisesModel(
+      exercises,
+      workoutId: workout.id,
+    );
+    await localDatabase.updateWorkout(workoutModelMapped, exercisesModelMapped);
   }
 
   @override
   Future<void> deleteWorkout(String docId) async {
     // await workoutsApi.deleteWorkout(docId);
+  }
+
+  @override
+  Future<List<Exercise>> getExercises(int workoutId) async {
+    final exercises = await localDatabase.getExercises(workoutId);
+    return WorkoutMapper.toExercises(exercises);
   }
 }
