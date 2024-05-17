@@ -18,6 +18,7 @@ class WorkoutRecordModel {
         'workoutId': workoutId,
         'userId': userId,
         'name': name,
+        'finishDate': finishDate.toIso8601String(),
       };
 
   WorkoutRecordModel.fromJson(Map<String, dynamic> json)
@@ -25,5 +26,5 @@ class WorkoutRecordModel {
         workoutId = json['workoutId'],
         name = json['name'],
         userId = json['userId'],
-        finishDate = json['finish date'];
+        finishDate = DateTime.parse(json['finishDate']);
 }

@@ -26,6 +26,12 @@ abstract class LocalDatabase {
   Future<List<ExerciseModel>> getExerciseRecord(
     int workoutRecordId,
   );
+
+  //Exercise type methods
+  Future<void> saveExerciseType(ExerciseTypeModel exerciseTypeModel);
+  Future<List<ExerciseTypeModel>> getExerciseTypes(String userId);
+  Future<void> deleteExerciseType(int id);
+  Future<void> updateExerciseType(ExerciseTypeModel exerciseTypeModel);
 }
 
 class LocalDatabaseImpl implements LocalDatabase {
@@ -164,5 +170,43 @@ class LocalDatabaseImpl implements LocalDatabase {
       whereArgs: [userId],
     );
     return workoutsRaw.map((w) => WorkoutRecordModel.fromJson(w)).toList();
+  }
+
+  @override
+  Future<void> deleteExerciseType(int id) async {
+    await database.delete(
+      'exercise_types',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  @override
+  Future<List<ExerciseTypeModel>> getExerciseTypes(String userId) async {
+    final exerciseTypes = await database.query(
+      'exercise_types',
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+
+    return exerciseTypes.map((e) => ExerciseTypeModel.fromJson(e)).toList();
+  }
+
+  @override
+  Future<void> saveExerciseType(ExerciseTypeModel exerciseTypeModel) async {
+    await database.insert(
+      'exercise_types',
+      exerciseTypeModel.toJson(),
+    );
+  }
+
+  @override
+  Future<void> updateExerciseType(ExerciseTypeModel exerciseTypeModel) async {
+    await database.update(
+      'exercise_types',
+      exerciseTypeModel.toJson(),
+      where: 'id = ?',
+      whereArgs: [exerciseTypeModel.id],
+    );
   }
 }

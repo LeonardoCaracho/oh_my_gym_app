@@ -44,7 +44,7 @@ class DatabaseProvider {
         '''
       CREATE TABLE IF NOT EXISTS workouts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        userId INTEGER, 
+        userId TEXT, 
         name TEXT, 
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
       )
@@ -80,7 +80,7 @@ class DatabaseProvider {
       CREATE TABLE IF NOT EXISTS workouts_records (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         workoutId INTEGER,
-        userId INTEGER,
+        userId TEXT,
         name TEXT,
         finishDate DATETIME,
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
@@ -109,6 +109,19 @@ class DatabaseProvider {
         prevWeight DOUBLE,
         isDone BOOLEAN,
         FOREIGN KEY (exerciseId) REFERENCES exercises_records(id) ON DELETE CASCADE
+      )
+    ''');
+
+    await db.execute(
+        '''
+      CREATE TABLE IF NOT EXISTS exercise_types (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        userId TEXT, 
+        musclePrimary TEXT, 
+        muscleSecondary TEXT,
+        name TEXT,
+        type TEXT,
+        FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
       )
     ''');
   }

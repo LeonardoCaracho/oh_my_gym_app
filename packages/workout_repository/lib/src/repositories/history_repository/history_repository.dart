@@ -23,7 +23,10 @@ class HistoryRepositoryImpl extends HistoryRepository {
 
   @override
   Future<List<WorkoutRecord>> getRecords() async {
-    return [];
+    final userId = cache.readString(key: userLoggedInCacheKey) ?? '';
+    final recordsModel = await localDatabase.getWorkoutRecords(userId);
+    final records = recordsModel.map(WorkoutMapper.toWorkoutRecord).toList();
+    return records;
   }
 
   @override
