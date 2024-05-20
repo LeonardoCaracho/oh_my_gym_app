@@ -24,58 +24,95 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: MediaQuery.of(context).size.height / 4,
+      height: MediaQuery.of(context).size.height / 5,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
       child: Column(
         children: [
-          Text(
-            workout.name,
-          ),
-          const SizedBox(height: 8),
-          DefaultButton(
-            text: 'START',
-            icon: Icons.play_arrow,
-            onPressed: () {
-              closeBottomSheet();
-              context.goNamed(
-                RouteConstants.startWorkoutRouteName,
-                extra: workout,
-              );
-            },
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: DefaultButton(
-                  text: 'DELETE',
-                  icon: Icons.delete,
-                  onPressed: () {
-                    closeBottomSheet();
-                    deleteConfirmationDialog(
-                      context,
-                      workout,
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: DefaultButton(
-                  text: 'EDIT',
-                  icon: Icons.edit_document,
-                  onPressed: () async {
-                    closeBottomSheet();
-                    final shouldUpdate = await context.pushNamed<bool>(
-                      RouteConstants.editWorkoutRouteName,
-                      extra: workout,
-                    );
+          Expanded(
+            child: ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: ListTile.divideTiles(
+                context: context,
+                color: AppColors.background,
+                tiles: [
+                  ListTile(
+                    dense: true,
+                    title: Text(
+                      'START',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    trailing: Icon(
+                      Icons.play_arrow,
+                      color: AppColors.primary,
+                    ),
+                    tileColor: AppColors.backgroundSecondary,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(14),
+                        topLeft: Radius.circular(14),
+                      ),
+                    ),
+                    onTap: () {
+                      closeBottomSheet();
+                      context.goNamed(
+                        RouteConstants.startWorkoutRouteName,
+                        extra: workout,
+                      );
+                    },
+                  ),
+                  ListTile(
+                    dense: true,
+                    title: Text(
+                      'EDIT',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    trailing: Icon(
+                      Icons.edit_document,
+                      color: AppColors.primary,
+                    ),
+                    tileColor: AppColors.backgroundSecondary,
+                    onTap: () async {
+                      closeBottomSheet();
+                      final shouldUpdate = await context.pushNamed<bool>(
+                        RouteConstants.editWorkoutRouteName,
+                        extra: workout,
+                      );
 
-                    if (shouldUpdate ?? false) {
-                      updateWorkouts();
-                    }
-                  },
-                ),
-              ),
-            ],
+                      if (shouldUpdate ?? false) {
+                        updateWorkouts();
+                      }
+                    },
+                  ),
+                  ListTile(
+                    dense: true,
+                    title: Text(
+                      'DELETE',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    trailing: Icon(
+                      Icons.delete,
+                      color: AppColors.primary,
+                    ),
+                    tileColor: AppColors.backgroundSecondary,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(14),
+                        bottomLeft: Radius.circular(14),
+                      ),
+                    ),
+                    onTap: () async {
+                      closeBottomSheet();
+                      await deleteConfirmationDialog(
+                        context,
+                        workout,
+                      );
+                    },
+                  ),
+                ],
+              ).toList(),
+            ),
           ),
         ],
       ),

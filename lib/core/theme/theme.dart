@@ -31,6 +31,11 @@ final themeData = ThemeData(
       color: Colors.white,
       fontWeight: FontWeight.bold,
     ),
+    titleSmall: TextStyle(
+      fontSize: 14,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
     bodyMedium: TextStyle(fontSize: 12, color: Colors.white),
   ),
