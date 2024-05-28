@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 
-Future<bool> exitPageDialog(
+Future<bool> confirmationDialog(
   BuildContext context, {
   String title = '',
   String content = '',
@@ -10,6 +10,11 @@ Future<bool> exitPageDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        buttonPadding: const EdgeInsets.all(8),
+        shape: const BeveledRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
         backgroundColor: AppColors.backgroundSecondary,
         elevation: 0,
         title: Text(

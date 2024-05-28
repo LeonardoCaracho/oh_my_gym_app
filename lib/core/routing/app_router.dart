@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:oh_my_gym_app/app/app.dart';
 import 'package:oh_my_gym_app/core/core.dart';
 import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
+import 'package:oh_my_gym_app/features/exercises/exercises.dart';
 import 'package:oh_my_gym_app/features/login/login.dart';
 import 'package:oh_my_gym_app/features/settings/view/settings_page.dart';
 import 'package:oh_my_gym_app/features/start_workout/start_workout.dart';
@@ -11,14 +12,10 @@ import 'package:oh_my_gym_app/features/workouts_history/workouts_history.dart';
 import 'package:workout_repository/workout_repository.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorWorkoutsKey =
-    GlobalKey<NavigatorState>(debugLabel: 'workouts');
-final _shellNavigatorExercisesKey =
-    GlobalKey<NavigatorState>(debugLabel: 'exercises');
-final _shellNavigatorPerformanceKey =
-    GlobalKey<NavigatorState>(debugLabel: 'performance');
-final _shellNavigatorSettingsKey =
-    GlobalKey<NavigatorState>(debugLabel: 'settings');
+final _shellNavigatorWorkoutsKey = GlobalKey<NavigatorState>(debugLabel: 'workouts');
+final _shellNavigatorExercisesKey = GlobalKey<NavigatorState>(debugLabel: 'exercises');
+final _shellNavigatorPerformanceKey = GlobalKey<NavigatorState>(debugLabel: 'performance');
+final _shellNavigatorSettingsKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
 
 class AppRouter {
   factory AppRouter(BuildContext context) {
@@ -115,7 +112,7 @@ class AppRouter {
                   name: RouteConstants.exercisesRouteName,
                   path: RouteConstants.exercisesRoute,
                   builder: (context, state) {
-                    return const SettingsPage();
+                    return const ExercisesView();
                   },
                 ),
               ],

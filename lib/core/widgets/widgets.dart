@@ -1,10 +1,10 @@
 export 'common_header.dart';
+export 'confirmation_dialog.dart';
 export 'default_button.dart';
 export 'default_button_small.dart';
 export 'exercise_card.dart';
 export 'exercise_card_header.dart';
 export 'exercise_card_input.dart';
 export 'exercise_set_row_input.dart';
-export 'exit_page_dialog.dart';
 export 'loading_button.dart';
 export 'set_row.dart';

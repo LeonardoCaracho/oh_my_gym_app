@@ -25,11 +25,10 @@ class StartWorkoutPage extends StatelessWidget {
       )..startWorkout(workout),
       child: PopScope(
         onPopInvoked: (onPopInvoked) async {
-          final shouldPop = await exitPageDialog(
+          final shouldPop = await confirmationDialog(
             context,
             title: 'EXIT WORKOUT',
-            content:
-                'You will lost all your data, do you really want to leave?',
+            content: 'You will lost all your data, do you really want to leave?',
           );
           if (shouldPop) {
             pop();

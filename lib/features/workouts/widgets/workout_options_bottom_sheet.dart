@@ -18,6 +18,14 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
       context.read<WorkoutsBloc>().add(const WorkoutsRequested());
     }
 
+    void deleteWorkout() {
+      context.read<WorkoutsBloc>().add(
+            WorkoutRemoved(
+              workout: workout,
+            ),
+          );
+    }
+
     void closeBottomSheet() {
       Navigator.pop(context);
     }
@@ -103,11 +111,16 @@ class WorkoutOptionsBottomSheet extends StatelessWidget {
                       ),
                     ),
                     onTap: () async {
-                      closeBottomSheet();
-                      await deleteConfirmationDialog(
+                      final shouldDelete = await confirmationDialog(
                         context,
-                        workout,
+                        title: workout.name,
+                        content: 'DO YOU REALLY WANT TO DELETE THIS WORKOUT?',
                       );
+
+                      if (shouldDelete) {
+                        deleteWorkout();
+                      }
+                      closeBottomSheet();
                     },
                   ),
                 ],

@@ -7,8 +7,7 @@ part 'workouts_event.dart';
 part 'workouts_state.dart';
 
 class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
-  WorkoutsBloc({required this.workoutsRepository})
-      : super(const WorkoutsInitial()) {
+  WorkoutsBloc({required this.workoutsRepository}) : super(const WorkoutsInitial()) {
     on<WorkoutsRequested>(_onWorkoutsRequestedEvent);
     on<WorkoutRemoved>(_onWorkoutRemovedEvent);
   }
@@ -32,7 +31,7 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
   ) async {
     try {
       emit(const WorkoutRemoveIsLoading());
-      await workoutsRepository.deleteWorkout(event.workout.docId ?? '');
+      await workoutsRepository.deleteWorkout(event.workout.id ?? 0);
       await _fetchWorkouts(emit);
     } catch (e) {
       emit(const WorkoutsIsLoadFailure());

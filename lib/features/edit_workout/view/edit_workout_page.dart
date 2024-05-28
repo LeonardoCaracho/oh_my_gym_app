@@ -38,10 +38,10 @@ class EditWorkoutPage extends StatelessWidget {
               ),
               leading: IconButton(
                 onPressed: () async {
-                  if (workout == context.read<EditWorkoutCubit>().state.workout) {
+                  if (!context.read<EditWorkoutCubit>().state.hasChanges) {
                     Navigator.of(context).pop();
                   } else {
-                    final shouldPop = await exitPageDialog(
+                    final shouldPop = await confirmationDialog(
                       context,
                       title: 'DISCARD CHANGES',
                       content: 'You will lost all the changes, sure you want to discard them?',

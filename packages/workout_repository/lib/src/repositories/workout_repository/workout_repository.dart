@@ -7,7 +7,7 @@ abstract class WorkoutRepository {
   Future<void> saveWorkout(Workout workout, List<Exercise> exercises);
   Future<List<Workout>> getWorkouts();
   Future<void> updateWorkout(Workout workout, List<Exercise> exercises);
-  Future<void> deleteWorkout(String docId);
+  Future<void> deleteWorkout(int id);
   Future<List<Exercise>> getExercises(int workoutId);
 }
 
@@ -48,8 +48,8 @@ class WorkoutRepositoryImpl implements WorkoutRepository {
   }
 
   @override
-  Future<void> deleteWorkout(String docId) async {
-    // await workoutsApi.deleteWorkout(docId);
+  Future<void> deleteWorkout(int id) async {
+    await localDatabase.deleteWorkout(id);
   }
 
   @override

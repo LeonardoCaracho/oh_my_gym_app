@@ -16,13 +16,16 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
   final WorkoutRepository workoutsRepository;
 
   void updateName(String name) {
-    emit(state.copyWith(workout: state.workout.copyWith(name: name)));
+    emit(state.copyWith(
+      workout: state.workout.copyWith(name: name),
+      hasChanges: true,
+    ));
   }
 
   void deleteExercise(int index) {
     final exercises = [...state.exercises]..removeAt(index);
     emit(
-      state.copyWith(exercises: exercises),
+      state.copyWith(exercises: exercises, hasChanges: true),
     );
   }
 
@@ -45,6 +48,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     emit(
       state.copyWith(
         exercises: exercises,
+        hasChanges: true,
       ),
     );
   }
@@ -53,6 +57,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     emit(
       state.copyWith(
         exercises: [...state.exercises, Exercise.empty()],
+        hasChanges: true,
       ),
     );
   }
@@ -65,7 +70,10 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
       state.copyWith(exercises: []),
     );
     emit(
-      state.copyWith(exercises: exercises),
+      state.copyWith(
+        exercises: exercises,
+        hasChanges: true,
+      ),
     );
   }
 
@@ -73,7 +81,7 @@ class EditWorkoutCubit extends Cubit<EditWorkoutState> {
     final exercises = [...state.exercises];
     exercises.firstWhere((e) => e.id == exerciseId).sets.removeAt(setIndex);
     emit(
-      state.copyWith(exercises: exercises),
+      state.copyWith(exercises: exercises, hasChanges: true),
     );
   }
 

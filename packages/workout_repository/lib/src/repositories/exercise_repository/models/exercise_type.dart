@@ -6,12 +6,12 @@ part 'exercise_type.g.dart';
 @JsonSerializable()
 class ExerciseType {
   ExerciseType({
-    this.id,
     required this.userId,
     required this.musclePrimary,
-    this.muscleSecondary,
-    required this.name,
     required this.type,
+    required this.name,
+    this.muscleSecondary,
+    this.id,
   });
 
   final int? id;
@@ -48,6 +48,49 @@ enum Muscle {
 }
 
 extension MuscleX on Muscle {
+  String displayName() {
+    switch (this) {
+      case Muscle.abdominals:
+        return 'Abdominals';
+      case Muscle.abductors:
+        return 'Abductors';
+      case Muscle.adductors:
+        return 'Adductors';
+      case Muscle.biceps:
+        return 'Biceps';
+      case Muscle.calves:
+        return 'Calves';
+      case Muscle.cardio:
+        return 'Cardio';
+      case Muscle.chest:
+        return 'Chest';
+      case Muscle.forearms:
+        return 'Forearms';
+      case Muscle.fullBody:
+        return 'Full body';
+      case Muscle.glutes:
+        return 'Glutes';
+      case Muscle.hamstrings:
+        return 'Harmstrings';
+      case Muscle.lats:
+        return 'Lats';
+      case Muscle.lowerBack:
+        return 'Lower back';
+      case Muscle.neck:
+        return 'Neck';
+      case Muscle.quadriceps:
+        return 'Quadriceps';
+      case Muscle.shoulders:
+        return 'Shoulders';
+      case Muscle.traps:
+        return 'Traps';
+      case Muscle.triceps:
+        return 'Triceps';
+      case Muscle.upperBack:
+        return 'Upper back';
+    }
+  }
+
   MuscleModel convertToMuscleModel() {
     switch (this) {
       case Muscle.abdominals:
@@ -100,6 +143,19 @@ enum Type {
 }
 
 extension TypeX on Type {
+  String displayName() {
+    switch (this) {
+      case Type.assistedBodyWeight:
+        return 'Assisted body weight';
+      case Type.bodyweight:
+        return 'Body weight';
+      case Type.duration:
+        return 'Duration';
+      case Type.weightAndReps:
+        return 'Weight and reps';
+    }
+  }
+
   TypeModel convertToTypeModel() {
     switch (this) {
       case Type.assistedBodyWeight:
