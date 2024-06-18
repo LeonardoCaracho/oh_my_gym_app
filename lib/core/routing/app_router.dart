@@ -112,7 +112,7 @@ class AppRouter {
                   name: RouteConstants.exercisesRouteName,
                   path: RouteConstants.exercisesRoute,
                   builder: (context, state) {
-                    return const ExercisesView();
+                    return const ExercisesPage();
                   },
                 ),
               ],

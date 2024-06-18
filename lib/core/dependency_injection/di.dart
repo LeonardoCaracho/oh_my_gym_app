@@ -42,7 +42,7 @@ Future<void> initLocator() async {
         cache: locator<Cache>(),
         localDatabase: locator<LocalDatabase>(),
       ),
-      dependsOn: [Cache],
+      dependsOn: [Cache, LocalDatabase],
     )
     ..registerSingletonAsync<WorkoutsApi>(
       () async => WorkoutsApi(
@@ -61,10 +61,17 @@ Future<void> initLocator() async {
         localDatabase: locator<LocalDatabase>(),
         cache: locator<Cache>(),
       ),
-      dependsOn: [WorkoutsApi, Cache],
+      dependsOn: [WorkoutsApi, Cache, LocalDatabase],
     )
     ..registerSingletonAsync<HistoryRepository>(
       () async => HistoryRepositoryImpl(
+        cache: locator<Cache>(),
+        localDatabase: locator<LocalDatabase>(),
+      ),
+      dependsOn: [Cache, LocalDatabase],
+    )
+    ..registerSingletonAsync<ExercisesRepository>(
+      () async => ExerciseRepositoryImpl(
         cache: locator<Cache>(),
         localDatabase: locator<LocalDatabase>(),
       ),

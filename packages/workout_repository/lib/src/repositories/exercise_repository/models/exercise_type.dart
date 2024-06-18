@@ -6,16 +6,16 @@ part 'exercise_type.g.dart';
 @JsonSerializable()
 class ExerciseType {
   ExerciseType({
-    required this.userId,
     required this.musclePrimary,
     required this.type,
     required this.name,
+    this.userId,
     this.muscleSecondary,
     this.id,
   });
 
   final int? id;
-  final String userId;
+  final String? userId;
   final Muscle musclePrimary;
   final List<Muscle>? muscleSecondary;
   final String name;

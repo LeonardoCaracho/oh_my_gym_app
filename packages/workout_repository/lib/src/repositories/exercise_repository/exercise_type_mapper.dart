@@ -1,10 +1,10 @@
 import 'package:local_db/local_db.dart';
 import 'package:workout_repository/workout_repository.dart';
 
-ExerciseTypeModel mapExerciseTypeToModel(ExerciseType model) {
+ExerciseTypeModel mapExerciseTypeToModel(ExerciseType model, {String? userId}) {
   return ExerciseTypeModel(
     id: model.id,
-    userId: model.userId,
+    userId: (userId ?? model.userId) ?? '',
     musclePrimary: model.musclePrimary.convertToMuscleModel(),
     muscleSecondary: model.muscleSecondary?.map((m) => m.convertToMuscleModel()).toList(),
     name: model.name,

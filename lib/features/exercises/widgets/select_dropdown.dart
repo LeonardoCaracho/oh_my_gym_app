@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/exercises/models/dropdown_option.dart';
 
 class SelectDropdown<T> extends StatefulWidget {
   const SelectDropdown({
@@ -10,18 +11,18 @@ class SelectDropdown<T> extends StatefulWidget {
   });
 
   final String placeholder;
-  final List<T> options;
-  final ValueChanged<T?> onChanged;
+  final List<DropdownOption<T>> options;
+  final ValueChanged<DropdownOption<T>?> onChanged;
 
   @override
   _SelectDropdownState createState() => _SelectDropdownState<T>();
 }
 
 class _SelectDropdownState<T> extends State<SelectDropdown<T>> {
-  T? _selectedValue;
+  DropdownOption<T>? _selectedValue;
 
   Future<void> _showSelectDialog() async {
-    final selectedValue = await showDialog<T>(
+    final selectedValue = await showDialog<DropdownOption<T>>(
       context: context,
       builder: (BuildContext context) {
         return SelectDialog(
@@ -53,7 +54,7 @@ class _SelectDropdownState<T> extends State<SelectDropdown<T>> {
               contentPadding: EdgeInsets.zero,
             ),
             child: Text(
-              _selectedValue == null ? widget.placeholder : _selectedValue.toString(),
+              _selectedValue == null ? widget.placeholder : _selectedValue!.title,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
@@ -71,7 +72,7 @@ class SelectDialog<T> extends StatelessWidget {
   });
 
   final T? initialSelectedValue;
-  final List<T> options;
+  final List<DropdownOption<T>> options;
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +83,10 @@ class SelectDialog<T> extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 32),
           child: ListBody(
             children: [
-              ...options.map((T option) {
+              ...options.map((DropdownOption<T> option) {
                 return ListTile(
                   title: Text(
-                    option.toString(),
+                    option.title,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   onTap: () {

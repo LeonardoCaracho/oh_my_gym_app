@@ -4,7 +4,7 @@ import 'package:workout_repository/src/repositories/exercise_repository/exercise
 import 'package:workout_repository/workout_repository.dart';
 
 abstract class ExercisesRepository {
-  Future<void> save();
+  Future<void> save(ExerciseType exerciseType);
   Future<List<ExerciseType>> get();
   Future<void> update(ExerciseType exerciseType);
   Future<void> delete(int id);
@@ -29,14 +29,19 @@ class ExerciseRepositoryImpl extends ExercisesRepository {
   }
 
   @override
-  Future<void> save() {
-    // TODO: implement save
-    throw UnimplementedError();
+  Future<void> save(ExerciseType exerciseType) async {
+    try {
+      final userId = cache.readString(key: userLoggedInCacheKey) ?? '';
+      final exerciseTypeModel = mapExerciseTypeToModel(exerciseType, userId: userId);
+      await localDatabase.saveExerciseType(exerciseTypeModel);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> update(ExerciseType exerciseType) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(ExerciseType exerciseType) async {
+    final exerciseTypeModel = mapExerciseTypeToModel(exerciseType);
+    await localDatabase.updateExerciseType(exerciseTypeModel);
   }
 }

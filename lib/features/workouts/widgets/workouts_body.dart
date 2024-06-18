@@ -14,7 +14,6 @@ class WorkoutsBody extends StatelessWidget {
           snap: true,
           floating: true,
           centerTitle: false,
-          // expandedHeight: 120,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
             titlePadding: EdgeInsets.all(8),

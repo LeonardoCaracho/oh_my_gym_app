@@ -183,20 +183,26 @@ class LocalDatabaseImpl implements LocalDatabase {
 
   @override
   Future<List<ExerciseTypeModel>> getExerciseTypes(String userId) async {
-    final exerciseTypes = await database.query(
+    var exerciseTypes = await database.query(
       'exercise_types',
       where: 'userId = ?',
       whereArgs: [userId],
     );
 
-    return exerciseTypes.map((e) => ExerciseTypeModel.fromJson(e)).toList();
+    return exerciseTypes.map((e) {
+      final modifiedMap = Map<String, dynamic>.from(e);
+      modifiedMap['muscleSecondary'] = e['muscleSecondary'] != "" ? (e['muscleSecondary'] as dynamic).split(',') : [];
+      return ExerciseTypeModel.fromJson(modifiedMap);
+    }).toList();
   }
 
   @override
   Future<void> saveExerciseType(ExerciseTypeModel exerciseTypeModel) async {
+    final exerciseTypeJson = exerciseTypeModel.toJson();
+    exerciseTypeJson['muscleSecondary'] = (exerciseTypeJson['muscleSecondary'] as List<String>).join(',');
     await database.insert(
       'exercise_types',
-      exerciseTypeModel.toJson(),
+      exerciseTypeJson,
     );
   }
 

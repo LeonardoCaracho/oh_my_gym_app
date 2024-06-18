@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oh_my_gym_app/core/core.dart';
+import 'package:oh_my_gym_app/features/edit_workout/edit_workout.dart';
 import 'package:oh_my_gym_app/features/exercises/exercises.dart';
 import 'package:workout_repository/workout_repository.dart';
 
@@ -13,10 +14,19 @@ class CreateExerciseBottomSheet extends StatefulWidget {
 }
 
 class _CreateExerciseBottomSheetState extends State<CreateExerciseBottomSheet> {
-  List<Muscle> selected = [];
+  List<Muscle> secondaryMuscles = [];
+  Muscle? muscle;
+  Type? type;
+  String name = '';
+
+  bool checkIfExerciseIsValid() {
+    return muscle != null && type != null && name.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final exercisesTypeBloc = context.read<ExerciseTypeBloc>();
+
     return Container(
       padding: const EdgeInsets.all(16),
       height: MediaQuery.of(context).size.height / 3.5,
@@ -43,33 +53,62 @@ class _CreateExerciseBottomSheetState extends State<CreateExerciseBottomSheet> {
                 'New exercise',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              Icon(
-                Icons.check,
-                color: AppColors.primary,
+              InkWell(
+                onTap: checkIfExerciseIsValid()
+                    ? () {
+                        exercisesTypeBloc.add(
+                          ExerciseTypeCreated(
+                            exercise: ExerciseTypeCreate(
+                              name: name,
+                              muscle: muscle!,
+                              secondaryMuscle: secondaryMuscles,
+                              type: type!,
+                            ),
+                          ),
+                        );
+
+                        Navigator.pop(context);
+                      }
+                    : null,
+                child: Icon(
+                  Icons.check,
+                  color: checkIfExerciseIsValid() ? AppColors.primary : Colors.grey,
+                ),
               ),
             ],
           ),
-          const ExerciseCardInput(
+          ExerciseCardInput(
             hintText: 'Name',
-          ),
-          SelectDropdown<String>(
-            placeholder: 'Muscle',
-            options: Muscle.values.map((e) => e.displayName()).toList(),
             onChanged: (value) {
-              print(value ?? '');
+              setState(() {
+                name = value;
+              });
+            },
+          ),
+          SelectDropdown<Muscle>(
+            placeholder: 'Muscle',
+            options: Muscle.values.map((e) => DropdownOption<Muscle>(value: e, title: e.displayName())).toList(),
+            onChanged: (value) {
+              setState(() {
+                muscle = value?.value;
+              });
             },
           ),
           MultiSelectDropdown(
             hint: 'Secondary muscles',
             onChanged: (value) {
-              print(value?.join('-'));
+              setState(() {
+                secondaryMuscles = value ?? [];
+              });
             },
           ),
-          SelectDropdown<String>(
+          SelectDropdown<Type>(
             placeholder: 'Type',
-            options: Type.values.map((e) => e.displayName()).toList(),
+            options: Type.values.map((e) => DropdownOption<Type>(value: e, title: e.displayName())).toList(),
             onChanged: (value) {
-              print(value ?? '');
+              setState(() {
+                type = value?.value;
+              });
             },
           ),
         ],
